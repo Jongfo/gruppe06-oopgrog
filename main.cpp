@@ -10,9 +10,9 @@ const int MAXTEKST = 100;
 //Funksjon deklaration
 char les(); //Leser in en kommand
 //Vi bør ha en les til som ser om det er en char, en tekst eller et nr
-int les(const char* txt, int min, int max); //Teks til bruker og mellom hvilkne tall bruker kan taste
-void les(const char* txt, char*& t);//Text til bruker, og hvor teksten skal hen
-//void les(std::ifstream &inn, char*& t);
+int les(const char* txt, int min, int max); //Tekst til bruker og mellom hvilkne tall bruker kan taste
+void les(const char* txt, char*& t);//Tekst til bruker, og hvor teksten skal hen
+//void les(std::ifstream &inn, char*& t); //Brukes til å lese in i pointer fra fil 
 void skrivMeny();
 void valgMeny();
 
@@ -42,17 +42,17 @@ void les(const char* txt, char*& t)
 {
 	std::cout << txt << std::endl;
 	char temp[MAXTEKST];//Lager midlertidig char-array
-	std::cin.getline(temp, MAXTEKST);//Legger addresen in i temp
-	t = new char[strlen(temp) + 1];//Gjør temp akkurat addresen langt
-	strcpy(t, temp); //Setter addresen lik temp
+	std::cin.getline(temp, MAXTEKST);//Bruker skriver inn i temp
+	t = new char[strlen(temp) + 1];//Gjør t akkurat temp langt
+	strcpy(t, temp); //Kopierer temp over til t
 }
 /*
 void les(std::ifstream &inn, char*& t) 
 {
 	char temp[MAXTEKST];//Lager midlertidig char-array
-	inn.getline(temp, MAXTEKST);//Legger addresen in i temp
-	t = new char[strlen(temp) + 1];//Gjør temp akkurat addresen langt
-	strcpy(t, temp); //Setter addresen lik temp
+	inn.getline(temp, MAXTEKST);//henter fra filen inn i temp
+	t = new char[strlen(temp) + 1];//Gjør t akkurat temp langt
+	strcpy(t, temp); //Kopierer temp over til t
 }*/
 void skrivMeny()
 { 
