@@ -5,14 +5,10 @@
 #include <iostream>
 #include "ListTool2B.h"
 #include "ConstEnum.h"
-
-
+#include "RobustIO.h"
+//Globale Variabler
+RobustIO t;
 //Funksjon deklaration
-char les(); //Leser in en kommand
-//Vi bør ha en hjelp til som ser om det er en char, en tekst eller et nr
-int les(const char* utskrift, int min, int max); //Tekst til bruker og mellom hvilkne tall bruker kan taste
-void les(const char* utskrift, char*& intast);  //skriv ut til skjermen, leser inn tekst fra bruker
-//void les(std::ifstream &inn, char*& t); //Brukes til å lese inn i pointer fra fil 
 void skrivMeny();
 void valgMeny();
 
@@ -21,40 +17,6 @@ int main()
 	skrivMeny();
 	valgMeny();
 }
-char les() 
-{
-	char ch;
-	std::cout << "\n\nKommando: ";
-	std::cin >> ch; std::cin.ignore();
-	return (toupper(ch));
-}
-int les(const char* utskrift, int min, int max)
-{
-	int tall;
-	do 
-	{
-		std::cout << '\t' << utskrift << " (" << min << '-' << max << "): ";
-		std::cin >> tall; std::cin.ignore();
-	} while (tall < min || tall > max);
-	return tall;
-}
-void les(const char* utskrift, char*& intast)
-{
-	std::cout << utskrift << std::endl;
-	char temp[MAXTEKST];//Lager midlertidig char-array
-	std::cin.getline(temp, MAXTEKST);//Bruker skriver inn i temp
-	intast = new char[strlen(temp) + 1];//Gjør t akkurat temp langt
-	strcpy(intast, temp); //Kopierer temp over til t
-}
-/*
-void les(std::ifstream &inn, char*& t) 
-{
-	char temp[MAXTEKST];//Lager midlertidig char-array
-	inn.getline(temp, MAXTEKST);//henter fra filen inn i temp
-	t = new char[strlen(temp) + 1];//Gjør t akkurat temp langt
-	strcpy(t, temp); //Kopierer temp over til t
-}
-*/
 
 void skrivMeny()
 { 
@@ -75,7 +37,7 @@ void skrivMeny()
 
 void valgMeny() 
 {
-	char kommando = les(); // Leser brukerens ›nske/valg.
+	char kommando = t.lesInTilStor(); // Leser brukerens ›nske/valg.
 	while (kommando != 'Q') 
 	{
 		switch (kommando) 
@@ -93,6 +55,6 @@ void valgMeny()
 		case 'C': break;
 		default: skrivMeny(); break; //Skriver meny
 		}
-		kommando = les(); // Leser brukerens ønske/valg.
+		kommando = t.lesInTilStor(); // Leser brukerens ønske/valg.
 	};
 }

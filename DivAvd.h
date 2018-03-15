@@ -3,13 +3,14 @@
 #include "ListTool2B.h"
 #include "Lag.h"
 #include "Resultat.h"
+#include "ConstEnum.h"
 
 class DivAvd : TextElement
 {
 private:
 	int antLag;
-	Lag* lag[30];
-	Resultat* resultat[30][30];
+	Lag* lag[MAXLAG];
+	Resultat* resultat[MAXLAG][MAXLAG];
 
 public:
 	DivAvd(char* navn);
