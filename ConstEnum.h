@@ -1,3 +1,5 @@
+#pragma once
+
 enum Tabelltype
 {
 	// TODO: Legg til tabelltypane
