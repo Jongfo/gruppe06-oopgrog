@@ -1,0 +1,5 @@
+Int Antall_Idretter
+Char* Navn_på_Idrett_1
+Tabeltype Tabel_Type_1
+Char* Navn_på_Idrett_2
+Tabeltype Tabel_Type_2

@@ -1,0 +1,9 @@
+Int Antall_Spillere
+Int ID_På_Spiller_1
+Int Nr_På_Drakt_1
+Char* Navn_På_Spiller_1
+Char* Spillers_Adresse_1
+Int ID_På_Spiller_2
+Int Nr_På_Drakt_2
+Char* Navn_På_Spiller_2
+Char* Spillers_Adresse_2
