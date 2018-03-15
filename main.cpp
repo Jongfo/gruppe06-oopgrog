@@ -1,16 +1,25 @@
-#ifdef _MSC_VER
-#define _CRT_SECURE_NO_WARNINGS
-#endif 
 
-#include <iostream>
-#include "ListTool2B.h"
+//#include <iostream>
 #include "ConstEnum.h"
+#include "DivAvd.h"
+#include "Idrett.h"
+#include "Idrettene.h"
+#include "Lag.h"
+#include "ListTool2B.h"
+#include "Resultat.h"
 #include "RobustIO.h"
+#include "Spiller.h"
+#include "Spillere.h"
+
 //Globale Variabler
 RobustIO t;
+Spillere spillere;
+Idrettene idrettene;
 //Funksjon deklaration
 void skrivMeny();
 void valgMeny();
+void nySID();
+void charNrTekst();
 
 int main()
 {
@@ -42,9 +51,9 @@ void valgMeny()
 	{
 		switch (kommando) 
 		{
-		case 'S': break; 
+		case 'S': charNrTekst(); break;
 		case 'I': break; 
-		case 'N': break; 
+		case 'N': nySID();  break;
 		case 'F': break; 
 		case 'L': break; 
 		case 'K': break; 
@@ -57,4 +66,40 @@ void valgMeny()
 		}
 		kommando = t.lesInTilStor(); // Leser brukerens ønske/valg.
 	};
+}
+void nySID()
+{
+	char k = t.lesInTilStor();
+	switch (k)
+	{
+	case 'S': spillere.nySpiller(); break;
+	case 'I': break;
+	case 'D': break;
+	default:
+		std::cout << "Ugyldig kommando";
+		break;
+	}
+}
+
+void charNrTekst()
+{
+	char temp[MAXTEKST];//Lager midlertidig char-array
+	std::cin.getline(temp, MAXTEKST);//henter input fra bruker
+	if (atoi(temp)) 
+	{
+		spillere.visSpiller(atoi(temp));
+	}
+	else if (strlen(temp) > 1)
+	{
+		spillere.visSpiller(temp);
+		std::cout << "Inside strlen > 1\n\n";
+	}
+	else if (temp[0] == 'A' || temp[0] == 'a') {
+		spillere.visSpiller();
+	}
+	else 
+	{
+		std::cout << "\n\nUgyldig kommando";
+	}
+
 }

@@ -4,6 +4,9 @@
 #endif 
 #include <iostream>
 #include <fstream>
+#include <cstring>          //  strcpy, strlen, strncmp
+#include  <cstdlib>          //  ctoi
+#include "ConstEnum.h"
 class RobustIO
 {
 public:

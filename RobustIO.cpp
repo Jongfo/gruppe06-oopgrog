@@ -1,5 +1,4 @@
 #include "RobustIO.h"
-#include "ConstEnum.h"
 
 
 void RobustIO::lesInnICharPointer(const char* utskrift, char*& intast)

@@ -10,5 +10,9 @@ private:
 
 public:
     Spillere();
+	void nySpiller();
+	void visSpiller();
+	void visSpiller(char* s);
+	void visSpiller(int nr);
     ~Spillere();
 };
