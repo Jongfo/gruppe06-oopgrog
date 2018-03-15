@@ -1,0 +1,20 @@
+Int Antall_Idretter
+Int Antall_Divisjoner_I_En_Idrett_1
+Char* Navn_På_Divisjonen_1
+Int Antall_Lag_I_Divisjonen_1
+Char* Navnet_til_Laget_1_1
+Char* Post_Adressen_til_Laget_1_1
+Int Antall_Spillere_På_Laget_1_1
+Char* Navnet_til_Laget_1_2
+Char* Post_Adressen_til_Laget_1_2
+Int Antall_Spillere_På_Laget_1_2
+				//mellomrommet bare for å lettere lese
+Int Antall_Divisjoner_I_En_Idrett_2
+Char* Navn_På_Divisjonen_2
+Int Antall_Lag_I_Divisjonen_2
+Char* Navnet_til_Laget_2_1
+Char* Post_Adressen_til_Laget_2_1
+Int Antall_Spillere_På_Laget_2_1
+Char* Navnet_til_Laget_2_2
+Char* Post_Adressen_til_Laget_2_2
+Int Antall_Spillere_På_Laget_2_2
