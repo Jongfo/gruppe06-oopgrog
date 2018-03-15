@@ -4,13 +4,7 @@
 
 #include <iostream>
 #include "ListTool2B.h"
-//#include <iostream>
-//Globale Variable HUSK Å FLYTT CONSTENE TIL FILEN DE SKAL TIL
-const int MAXTEKST = 100;	//MAX tekst lengden
-const int MAXSPILLERE = 50;
-const int MAXLAG = 30;
-const int MATRISE = 10; //Til Resultat liste
-const int DATOLEN = 9;	//Dato lengden
+#include "ConstEnum.h"
 
 
 //Funksjon deklaration
