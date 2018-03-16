@@ -11,9 +11,8 @@ Spillere::Spillere()
 }
 void Spillere::lesFraFil(std::ifstream & inn)
 {
-	int n;
-	inn >> n;
-	for (int i = 0; i < n; i++) {
+	inn >> sisteNr;
+	for (int i = 0; i < sisteNr; i++) {
 		int num;
 		inn >> num; inn.ignore();
 		Spiller* temp = new Spiller(inn, num);

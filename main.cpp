@@ -29,7 +29,7 @@ void skrivMeny()
 { 
 	std::cout << "\n\nFLGENDE KOMMANDOER ER TILGJENGELIGE:";
 	std::cout << "\n\tS og A | nr | navn - (S)kriver (A)lle spillern eller alle med nr/navn";
-	std::cout << "\n\tI og A | navn - (S)kriver (A)lle idrettene eller idretten med navn";
+	std::cout << "\n\tI og A | navn - skr(I)ver (A)lle idrettene eller idretten med navn";
 	std::cout << "\n\tN og S | I | D - (N)y (S)piller,(I)drett eller (D)ivisjon/avdeling";
 	std::cout << "\n\tF og S | I | D - (F)jern (S)piller,(I)drett eller (D)ivisjon/avdeling";
 	std::cout << "\n\tL - Skriv termin(L)iste for en gitt divisjon/avdeling til skjerm eller fil";
@@ -104,7 +104,7 @@ void charNrTekst() //Kan flytte denne inn i spillere å gjøre som frode
 }
 void lesFraFil() 
 {
-	std::ifstream inn("gruppe06-ooprog/SPILLERE.DTA");
+	std::ifstream inn("SPILLERE.DTA");
 	if (inn) 
 	{
 		spillere.lesFraFil(inn);
