@@ -13,6 +13,7 @@ private:
 public:
 	Spiller();
     Spiller(int nr);
+	Spiller(std::ifstream& inn, int num);
 	virtual void display();
 	int spillerNr();
 	bool sameNavn(char* n);

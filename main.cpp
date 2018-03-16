@@ -20,9 +20,12 @@ void skrivMeny();
 void valgMeny();
 void nySID();
 void charNrTekst();
+void lesFraFil();
+
 
 int main()
 {
+	lesFraFil();
 	skrivMeny();
 	valgMeny();
 }
@@ -101,5 +104,16 @@ void charNrTekst()
 	{
 		std::cout << "\n\nUgyldig kommando";
 	}
-
+}
+void lesFraFil() 
+{
+	std::ifstream inn("gruppe06-ooprog/SPILLERE.DTA");
+	if (inn) 
+	{
+		spillere.lesInn(inn);
+	}
+	else 
+	{
+		std::cout << "Finner ikke SPILLERE.DTA\n";
+	}
 }
