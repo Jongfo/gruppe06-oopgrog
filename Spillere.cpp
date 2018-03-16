@@ -2,13 +2,13 @@
 #include "Spiller.h"
 #include "RobustIO.h"
 
-extern RobustIO t;
+extern RobustIO robustIO;
 
 Spillere::Spillere()
 {
     spillere = new List(Sorted);
 }
-void Spillere::lesInn(std::ifstream & inn)
+void Spillere::lesFraFil(std::ifstream & inn)
 {
 	int n;
 	inn >> n;

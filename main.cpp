@@ -7,7 +7,7 @@
 #include "Spillere.h"
 
 //Globale Variabler
-RobustIO t;
+RobustIO robustIO;
 Spillere spillere;
 Idrettene idrettene;
 //Funksjon deklaration
@@ -44,7 +44,7 @@ void skrivMeny()
 
 void valgMeny() 
 {
-	char kommando = t.lesInTilStor(); // Leser brukerens ›nske/valg.
+	char kommando = robustIO.lesInTilStor(); // Leser brukerens ›nske/valg.
 	while (kommando != 'Q') 
 	{
 		switch (kommando) 
@@ -62,12 +62,12 @@ void valgMeny()
 		case 'C': break;
 		default: skrivMeny(); break; //Skriver meny
 		}
-		kommando = t.lesInTilStor(); // Leser brukerens ønske/valg.
+		kommando = robustIO.lesInTilStor(); // Leser brukerens ønske/valg.
 	};
 }
 void nySID()
 {
-	char k = t.lesInTilStor();
+	char k = robustIO.lesInTilStor();
 	switch (k)
 	{
 	case 'S': spillere.nySpiller(); break;
@@ -105,7 +105,7 @@ void lesFraFil()
 	std::ifstream inn("gruppe06-ooprog/SPILLERE.DTA");
 	if (inn) 
 	{
-		spillere.lesInn(inn);
+		spillere.lesFraFil(inn);
 	}
 	else 
 	{

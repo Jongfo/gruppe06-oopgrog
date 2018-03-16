@@ -11,7 +11,7 @@ private:
 
 public:
     Spillere();
-	void lesInn(std::ifstream & inn);
+	void lesFraFil(std::ifstream & inn);
 	void nySpiller();
 	void visSpiller();
 	void visSpiller(char* s);
