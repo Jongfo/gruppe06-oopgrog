@@ -2,3 +2,5 @@
 void nySID();
 void visSpiller();
 void lesFraFil();
+void skrivMeny();
+void valgMeny();
