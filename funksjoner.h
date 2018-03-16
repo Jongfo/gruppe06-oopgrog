@@ -1,4 +1,4 @@
 #pragma once
 void nySID();
-void charNrTekst();
+void visSpiller();
 void lesFraFil();

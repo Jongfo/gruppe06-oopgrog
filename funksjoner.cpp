@@ -6,6 +6,7 @@ extern RobustIO rIO;
 extern Spillere spillere;
 extern Idrettene idrettene;
 
+// legg til ny spelar, idrett, divisjon
 void nySID()
 {
 	char k = rIO.lesInTilStor();
@@ -21,11 +22,12 @@ void nySID()
 	}
 }
 
-void charNrTekst() //Kan flytte denne inn i spillere å gjøre som frode
+// Viser ein spelar
+void visSpiller() //Kan flytte denne inn i spillere å gjøre som frode
 {
-	char temp[MAXTEKST];//Lager midlertidig char-array
-	std::cin.getline(temp, MAXTEKST);//henter input fra bruker
-	temp[0] = toupper(temp[0]); //Første bokstav skal være stor uansett
+	char temp[MAXTEKST];				//Lager midlertidig char-array
+	std::cin.getline(temp, MAXTEKST);	//henter input fra bruker
+	temp[0] = toupper(temp[0]);			//Første bokstav skal være stor uansett
 	if (atoi(temp))
 	{
 		spillere.visSpiller(atoi(temp));
@@ -43,6 +45,7 @@ void charNrTekst() //Kan flytte denne inn i spillere å gjøre som frode
 	}
 }
 
+// les all data frå fil
 void lesFraFil()
 {
 	std::ifstream inn("gruppe06-ooprog/SPILLERE.DTA");
