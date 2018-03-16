@@ -85,6 +85,7 @@ void charNrTekst()
 {
 	char temp[MAXTEKST];//Lager midlertidig char-array
 	std::cin.getline(temp, MAXTEKST);//henter input fra bruker
+	temp[0] = toupper(temp[0]);
 	if (atoi(temp)) 
 	{
 		spillere.visSpiller(atoi(temp));
@@ -92,9 +93,8 @@ void charNrTekst()
 	else if (strlen(temp) > 1)
 	{
 		spillere.visSpiller(temp);
-		std::cout << "Inside strlen > 1\n\n";
 	}
-	else if (temp[0] == 'A' || temp[0] == 'a') {
+	else if (temp[0] == 'A') {
 		spillere.visSpiller();
 	}
 	else 
