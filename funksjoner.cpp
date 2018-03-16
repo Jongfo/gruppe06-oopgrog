@@ -9,7 +9,7 @@ extern Idrettene idrettene;
 // legg til ny spelar, idrett, divisjon
 void nySID()
 {
-	char k = rIO.lesInTilStor();
+	char k = rIO.lesInnTilStor();
 
 	switch (k)
 	{
@@ -59,7 +59,7 @@ void lesFraFil()
 	}
 }
 
-
+// viser menyen til brukaren
 void skrivMeny()
 {
 	std::cout << "\n\nFLGENDE KOMMANDOER ER TILGJENGELIGE:";
@@ -77,9 +77,10 @@ void skrivMeny()
 	std::cout << "\n\tQ = Quit/Avslutt";
 }
 
+// handterar kommando-input
 void valgMeny()
 {
-	char kommando = rIO.lesInTilStor(); // Leser brukerens ›nske/valg.
+	char kommando = rIO.lesInnTilStor(); // Leser brukerens ›nske/valg.
 
 	while (kommando != 'Q')
 	{
@@ -98,6 +99,6 @@ void valgMeny()
 		case 'C': break;
 		default: skrivMeny(); break; //Skriver meny
 		}
-		kommando = rIO.lesInTilStor(); // Leser brukerens ønske/valg.
+		kommando = rIO.lesInnTilStor(); // Leser brukerens ønske/valg.
 	};
 }
