@@ -21,8 +21,7 @@ void Spillere::lesFraFil(std::ifstream & inn)
 }
 void Spillere::nySpiller()
 {
-	Spiller* temp = new Spiller(++sisteNr);
-	spillere->add(temp);
+	spillere->add(new Spiller(++sisteNr));
 }
 void  Spillere::visSpiller() 
 {
@@ -38,7 +37,7 @@ void  Spillere::visSpiller(char* s)
 	for (int i = 1; i <= spillere->noOfElements(); i++) 
 	{
 		Spiller* temp = (Spiller*)spillere->removeNo(i);
-		if (temp->sameNavn(s)) 
+		if (temp->sammeNavn(s)) 
 		{
 			temp->display();
 		}

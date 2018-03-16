@@ -6,13 +6,13 @@ Spiller::Spiller()
 }
 Spiller::Spiller(int nr) : NumElement(nr)
 {
-	t.lesInnICharPointer("Navn paa spiller?", navn);
-	t.lesInnICharPointer("Adressen til spiller?", adresse);
+	robustIO.lesInnICharPointer("Navn paa spiller?", navn);
+	robustIO.lesInnICharPointer("Adressen til spiller?", adresse);
 }
 Spiller::Spiller(std::ifstream& inn, int num) : NumElement(num)
 {
-		t.lesCharPointerFraFil(inn, navn);
-		t.lesCharPointerFraFil(inn, adresse);
+		robustIO.lesCharPointerFraFil(inn, navn);
+		robustIO.lesCharPointerFraFil(inn, adresse);
 }
 void Spiller::display() 
 {
@@ -24,7 +24,7 @@ int Spiller::spillerNr()
 {
 	return number;
 }
-bool Spiller::sameNavn(char* n) {
+bool Spiller::sammeNavn(char* n) {
 	if (!strcmp(n, navn)) {
 		return true;
 	}
