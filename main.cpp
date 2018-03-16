@@ -1,14 +1,9 @@
 
 //#include <iostream>
 #include "ConstEnum.h"
-#include "DivAvd.h"
-#include "Idrett.h"
 #include "Idrettene.h"
-#include "Lag.h"
 #include "ListTool2B.h"
-#include "Resultat.h"
 #include "RobustIO.h"
-#include "Spiller.h"
 #include "Spillere.h"
 
 //Globale Variabler
@@ -33,23 +28,24 @@ int main()
 void skrivMeny()
 { 
 	std::cout << "\n\nFLGENDE KOMMANDOER ER TILGJENGELIGE:";
-	std::cout << "\t\nS og A | nr | navn - (S)kriver (A)lle spillern eller alle med nr/navn";
-	std::cout << "\t\nI og A | navn - (S)kriver (A)lle idrettene eller idretten med navn";
-	std::cout << "\t\nN og S | I | D - (N)y (S)piller,(I)drett eller (D)ivisjon/avdeling";
-	std::cout << "\t\nF og S | I | D - (F)jern (S)piller,(I)drett eller (D)ivisjon/avdeling";
-	std::cout << "\t\nL - Skriv termin(L)iste for en gitt divisjon/avdeling til skjerm eller fil";
-	std::cout << "\t\nK - Skriv alle Kampene en gitt dato for en hel idrett eller en divisjon/avdeling til skjerm eller fil";
-	std::cout << "\t\nT - Skriv (T)abell for en hel idrett eller en divisjon/avdeling til skjerm eller fil";
-	std::cout << "\t\nR - Lese (R)esultatliste inn fra fil";
-	std::cout << "\t\nD - (D)ata om alle spillerne på et lag";
-	std::cout << "\t\nE - (E)ndre/redigere spillerne på et lag";
-	std::cout << "\t\nC - Skriv 10-på-topp liste av topps(C)orerne for en gitt divisjon/avdeling eller et gitt lag til skjerm eller fil";
-	std::cout << "\t\nQ = Quit/Avslutt";
+	std::cout << "\n\tS og A | nr | navn - (S)kriver (A)lle spillern eller alle med nr/navn";
+	std::cout << "\n\tI og A | navn - (S)kriver (A)lle idrettene eller idretten med navn";
+	std::cout << "\n\tN og S | I | D - (N)y (S)piller,(I)drett eller (D)ivisjon/avdeling";
+	std::cout << "\n\tF og S | I | D - (F)jern (S)piller,(I)drett eller (D)ivisjon/avdeling";
+	std::cout << "\n\tL - Skriv termin(L)iste for en gitt divisjon/avdeling til skjerm eller fil";
+	std::cout << "\n\tK - Skriv alle Kampene en gitt dato for en hel idrett eller en divisjon/avdeling til skjerm eller fil";
+	std::cout << "\n\tT - Skriv (T)abell for en hel idrett eller en divisjon/avdeling til skjerm eller fil";
+	std::cout << "\n\tR - Lese (R)esultatliste inn fra fil";
+	std::cout << "\n\tD - (D)ata om alle spillerne på et lag";
+	std::cout << "\n\tE - (E)ndre/redigere spillerne på et lag";
+	std::cout << "\n\tC - Skriv 10-på-topp liste av topps(C)orerne for en gitt divisjon/avdeling eller et gitt lag til skjerm eller fil";
+	std::cout << "\n\tQ = Quit/Avslutt";
 }
 
 void valgMeny() 
 {
 	char kommando = rIO.lesInTilStor(); // Leser brukerens ›nske/valg.
+
 	while (kommando != 'Q') 
 	{
 		switch (kommando) 
@@ -73,6 +69,7 @@ void valgMeny()
 void nySID()
 {
 	char k = rIO.lesInTilStor();
+
 	switch (k)
 	{
 	case 'S': spillere.nySpiller(); break;
@@ -110,7 +107,7 @@ void lesFraFil()
 	std::ifstream inn("gruppe06-ooprog/SPILLERE.DTA");
 	if (inn) 
 	{
-		spillere.lesInn(inn);
+		spillere.lesFraFil(inn);
 	}
 	else 
 	{

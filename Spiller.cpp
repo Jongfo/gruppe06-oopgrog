@@ -13,6 +13,7 @@ Spiller::Spiller(std::ifstream& inn, int num) : NumElement(num)
 {
 	rIO.lesCharPointerFraFil(inn, navn);
 	rIO.lesCharPointerFraFil(inn, adresse);
+
 }
 void Spiller::display() 
 {
@@ -24,7 +25,7 @@ int Spiller::spillerNr()
 {
 	return number;
 }
-bool Spiller::sameNavn(char* n) {
+bool Spiller::sammeNavn(char* n) {
 	if (!strcmp(n, navn)) {
 		return true;
 	}

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "ConstEnum.h"
+
 class Resultat
 {
 private:
@@ -7,8 +9,8 @@ private:
 	int hjemmemaal;
 	int bortemaal;
 	bool normalTid;
-	int bortescorere[50];
-	int hjemmescorere[50];
+	int bortescorere[MAXSPILLERE];
+	int hjemmescorere[MAXSPILLERE];
 public:
 	Resultat();
 };

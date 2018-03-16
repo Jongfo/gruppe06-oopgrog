@@ -2,8 +2,8 @@
 #include "ListTool2B.h"
 #include "RobustIO.h"
 
-
 extern RobustIO rIO;
+
 
 class Spiller : public NumElement
 {
@@ -16,6 +16,6 @@ public:
 	Spiller(std::ifstream& inn, int num);
 	virtual void display();
 	int spillerNr();
-	bool sameNavn(char* n);
+	bool sammeNavn(char* n);
     ~Spiller();
 };
