@@ -54,7 +54,7 @@ int RobustIO::tall(char* t, const int MIN, const int MAX)
 	return tall;
 }
 
-char RobustIO::lesInTilStor()
+char RobustIO::lesInnTilStor()
 {
 	char ch;
 	std::cout << "\n\nKommando: ";
