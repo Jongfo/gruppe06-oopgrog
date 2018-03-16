@@ -10,5 +10,7 @@ private:
 public:
 	Idrettene();
 	void nyIdrett();
+	void visIdrett();
+	void visIdrett(char* s);
 	~Idrettene();
 };

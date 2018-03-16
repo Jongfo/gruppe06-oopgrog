@@ -1,6 +1,7 @@
 #include "RobustIO.h"
 #include "Spillere.h"
 #include "Idrettene.h"
+#include "funksjoner.h"
 
 extern RobustIO rIO;
 extern Spillere spillere;
@@ -22,7 +23,7 @@ void nySID()
 	}
 }
 
-// Viser ein spelar
+// Viser ein spelar eller alle spelarar
 void visSpiller() //Kan flytte denne inn i spillere å gjøre som frode
 {
 	char temp[MAXTEKST];				//Lager midlertidig char-array
@@ -38,6 +39,25 @@ void visSpiller() //Kan flytte denne inn i spillere å gjøre som frode
 	}
 	else if (temp[0] == 'A') {
 		spillere.visSpiller();
+	}
+	else
+	{
+		std::cout << "\n\nUgyldig kommando";
+	}
+}
+
+// viser ein eller alle idrettar
+void visIdrett()
+{
+	char temp[MAXTEKST];				//Lager midlertidig char-array
+	std::cin.getline(temp, MAXTEKST);	//henter input fra bruker
+	temp[0] = toupper(temp[0]);			//Første bokstav skal være stor uansett
+	if (strlen(temp) > 1)
+	{
+		idrettene.visIdrett(temp);
+	}
+	else if (temp[0] == 'A') {
+		idrettene.visIdrett();
 	}
 	else
 	{
@@ -86,9 +106,9 @@ void valgMeny()
 	{
 		switch (kommando)
 		{
-		case 'S': visSpiller(); break;
-		case 'I': break;
-		case 'N': nySID();  break;
+		case 'S': visSpiller();	break;
+		case 'I': visIdrett();	break;
+		case 'N': nySID();		break;
 		case 'F': break;
 		case 'L': break;
 		case 'K': break;

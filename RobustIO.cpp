@@ -1,5 +1,13 @@
 #include "RobustIO.h"
 
+const int ANTTABELLTYPER = 3;
+
+// inneheld namna på tabelltypane
+const char* TABELLTYPER[ANTTABELLTYPER] = {
+	"2-1-0",
+	"3-1-0",
+	"3-2-1-0"
+};
 
 void RobustIO::lesInnICharPointer(const char* utskrift, char*& intast)
 {
@@ -30,6 +38,27 @@ char* RobustIO::lesNyAdr(char* t)
 {
 	// TODO
 	return nullptr;
+}
+
+// handterar innlesing av tabelltype
+char* RobustIO::lesTabelltype(const char* t)
+{
+	while (true)
+	{
+		char* tabelltype;
+		lesInnICharPointer(t, tabelltype);
+
+		for (int i = 0; i < ANTTABELLTYPER; i++)
+		{
+			if (!strcmp(tabelltype, TABELLTYPER[i]))
+			{
+				// gyldig tabelltype
+				return tabelltype;
+			}
+		}
+
+		delete[] tabelltype;
+	}
 }
 
 bool RobustIO::okNavn(char* s)

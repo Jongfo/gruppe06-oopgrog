@@ -26,3 +26,20 @@ void Idrettene::nyIdrett()
 		std::cout << "En idrett med dette navnet fins allerede!\n";
 	}
 }
+
+// viser alle idrettar
+void Idrettene::visIdrett()
+{
+	for (int i = 1; i <= idretter->noOfElements(); i++)
+	{
+		Idrett* idrett = (Idrett*)idretter->removeNo(i);
+		idrett->display();
+		idretter->add((TextElement*)idrett);
+	}
+}
+
+// viser idrett med namn s
+void Idrettene::visIdrett(char* s)
+{
+
+}

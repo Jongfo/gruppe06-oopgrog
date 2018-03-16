@@ -9,9 +9,10 @@ class Idrett : TextElement
 {
 private:
 	List * divisjoner;
-	Tabelltype tabelltype;
+	char* tabelltype;
 
 public:
 	Idrett(char* navn);
+	void display();
 	~Idrett();
 };
