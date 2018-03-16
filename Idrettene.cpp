@@ -8,7 +8,7 @@ void Idrettene::nyIdrett()
 {
 	char* t;
 	rIO.lesInnICharPointer("Navn paa Idrett?", t);
-	idretter->add((TextElement*)new Idrett(t));
+	idretter->add((TextElement*)(new Idrett(t)));
 }
 Idrettene::~Idrettene()
 {

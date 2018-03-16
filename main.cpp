@@ -28,10 +28,10 @@ int main()
 void skrivMeny()
 { 
 	std::cout << "\n\nFLGENDE KOMMANDOER ER TILGJENGELIGE:";
-	std::cout << "\n\tS og A | nr | navn - (S)kriver (A)lle spillern eller alle med nr/navn";
-	std::cout << "\n\tI og A | navn - skr(I)ver (A)lle idrettene eller idretten med navn";
-	std::cout << "\n\tN og S | I | D - (N)y (S)piller,(I)drett eller (D)ivisjon/avdeling";
-	std::cout << "\n\tF og S | I | D - (F)jern (S)piller,(I)drett eller (D)ivisjon/avdeling";
+	std::cout << "\n\tS A | nr | navn - (S)kriver (A)lle spillern eller alle med nr/navn";
+	std::cout << "\n\tI A | navn - skr(I)ver (A)lle idrettene eller idretten med navn";
+	std::cout << "\n\tN S | I | D - (N)y (S)piller,(I)drett eller (D)ivisjon/avdeling";
+	std::cout << "\n\tF S | I | D - (F)jern (S)piller,(I)drett eller (D)ivisjon/avdeling";
 	std::cout << "\n\tL - Skriv termin(L)iste for en gitt divisjon/avdeling til skjerm eller fil";
 	std::cout << "\n\tK - Skriv alle Kampene en gitt dato for en hel idrett eller en divisjon/avdeling til skjerm eller fil";
 	std::cout << "\n\tT - Skriv (T)abell for en hel idrett eller en divisjon/avdeling til skjerm eller fil";

@@ -4,10 +4,10 @@ DivAvd::DivAvd(char* navn) : TextElement(navn)
 {
 	antLag = 0;
 
-	DivAvd::nyttLag();
+	DivAvd::nyeLag();
 }
 
-void DivAvd::nyttLag() 
+void DivAvd::nyeLag() 
 {
 	char t[] = "Hvor mange lag oensker du aa legge til?";
 	int l = rIO.tall(t, 1, MAXLAG - antLag);
