@@ -14,7 +14,7 @@ Idrettene idrettene;
 void skrivMeny();
 void valgMeny();
 void nySID();
-void charNrTekst();
+void visSpiller();
 void lesFraFil();
 
 
@@ -50,7 +50,7 @@ void valgMeny()
 	{
 		switch (kommando) 
 		{
-		case 'S': charNrTekst(); break;
+		case 'S': visSpiller(); break;
 		case 'I': break; 
 		case 'N': nySID();  break;
 		case 'F': break; 
