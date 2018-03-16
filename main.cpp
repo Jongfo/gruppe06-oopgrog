@@ -10,7 +10,8 @@
 RobustIO rIO;
 Spillere spillere;
 Idrettene idrettene;
-//Funksjon deklaration
+
+//Funksjon deklarasjoner
 void skrivMeny();
 void valgMeny();
 void nySID();
