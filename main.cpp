@@ -15,9 +15,12 @@ void skrivMeny();
 void valgMeny();
 void nySID();
 void charNrTekst();
+void lesFraFil();
+
 
 int main()
 {
+	lesFraFil();
 	skrivMeny();
 	valgMeny();
 }
@@ -80,6 +83,7 @@ void charNrTekst()
 {
 	char temp[MAXTEKST];//Lager midlertidig char-array
 	std::cin.getline(temp, MAXTEKST);//henter input fra bruker
+	temp[0] = toupper(temp[0]);
 	if (atoi(temp)) 
 	{
 		spillere.visSpiller(atoi(temp));
@@ -87,14 +91,24 @@ void charNrTekst()
 	else if (strlen(temp) > 1)
 	{
 		spillere.visSpiller(temp);
-		std::cout << "Inside strlen > 1\n\n";
 	}
-	else if (temp[0] == 'A' || temp[0] == 'a') {
+	else if (temp[0] == 'A') {
 		spillere.visSpiller();
 	}
 	else 
 	{
 		std::cout << "\n\nUgyldig kommando";
 	}
-
+}
+void lesFraFil() 
+{
+	std::ifstream inn("gruppe06-ooprog/SPILLERE.DTA");
+	if (inn) 
+	{
+		spillere.lesInn(inn);
+	}
+	else 
+	{
+		std::cout << "Finner ikke SPILLERE.DTA\n";
+	}
 }

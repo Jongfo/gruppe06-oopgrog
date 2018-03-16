@@ -6,6 +6,10 @@ void RobustIO::lesInnICharPointer(const char* utskrift, char*& intast)
 	std::cout << utskrift << std::endl;
 	char temp[MAXTEKST];//Lager midlertidig char-array
 	std::cin.getline(temp, MAXTEKST);//Bruker skriver inn i temp
+	while (strlen(temp) <= 1) {
+		std::cout << "For kort\n";
+		std::cin.getline(temp, MAXTEKST);//Bruker skriver inn i temp
+	}
 	intast = new char[strlen(temp) + 1];//Gjør t akkurat temp langt
 	strcpy(intast, temp); //Kopierer temp over til t
 }

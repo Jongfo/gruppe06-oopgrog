@@ -1,5 +1,6 @@
 #pragma once
 
+#include "RobustIO.h"
 #include "ListTool2B.h"
 
 class Spillere
@@ -10,6 +11,7 @@ private:
 
 public:
     Spillere();
+	void lesInn(std::ifstream & inn);
 	void nySpiller();
 	void visSpiller();
 	void visSpiller(char* s);

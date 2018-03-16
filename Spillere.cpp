@@ -8,6 +8,17 @@ Spillere::Spillere()
 {
     spillere = new List(Sorted);
 }
+void Spillere::lesInn(std::ifstream & inn)
+{
+	int n;
+	inn >> n;
+	for (int i = 0; i < n; i++) {
+		int num;
+		inn >> num; inn.ignore();
+		Spiller* temp = new Spiller(inn, num);
+		spillere->add(temp);
+	}
+}
 void Spillere::nySpiller()
 {
 	Spiller* temp = new Spiller(++sisteNr);
