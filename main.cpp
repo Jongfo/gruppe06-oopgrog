@@ -13,4 +13,6 @@ int main()
 	lesFraFil();
 	skrivMeny();
 	valgMeny();
+
+    return 0;
 }
