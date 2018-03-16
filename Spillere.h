@@ -1,7 +1,9 @@
 #pragma once
 
 #include "RobustIO.h"
-#include "ListTool2B.h"
+#include "Spiller.h"
+
+extern RobustIO rIO;
 
 class Spillere
 {

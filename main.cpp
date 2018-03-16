@@ -12,7 +12,7 @@
 #include "Spillere.h"
 
 //Globale Variabler
-RobustIO t;
+RobustIO rIO;
 Spillere spillere;
 Idrettene idrettene;
 //Funksjon deklaration
@@ -49,7 +49,7 @@ void skrivMeny()
 
 void valgMeny() 
 {
-	char kommando = t.lesInTilStor(); // Leser brukerens ›nske/valg.
+	char kommando = rIO.lesInTilStor(); // Leser brukerens ›nske/valg.
 	while (kommando != 'Q') 
 	{
 		switch (kommando) 
@@ -67,16 +67,16 @@ void valgMeny()
 		case 'C': break;
 		default: skrivMeny(); break; //Skriver meny
 		}
-		kommando = t.lesInTilStor(); // Leser brukerens ønske/valg.
+		kommando = rIO.lesInTilStor(); // Leser brukerens ønske/valg.
 	};
 }
 void nySID()
 {
-	char k = t.lesInTilStor();
+	char k = rIO.lesInTilStor();
 	switch (k)
 	{
 	case 'S': spillere.nySpiller(); break;
-	case 'I': break;
+	case 'I': idrettene.nyIdrett(); break;
 	case 'D': break;
 	default:
 		std::cout << "Ugyldig kommando";
@@ -84,11 +84,11 @@ void nySID()
 	}
 }
 
-void charNrTekst()
+void charNrTekst() //Kan flytte denne inn i spillere å gjøre som frode
 {
 	char temp[MAXTEKST];//Lager midlertidig char-array
 	std::cin.getline(temp, MAXTEKST);//henter input fra bruker
-	temp[0] = toupper(temp[0]);
+	temp[0] = toupper(temp[0]); //Første bokstav skal være stor uansett
 	if (atoi(temp)) 
 	{
 		spillere.visSpiller(atoi(temp));

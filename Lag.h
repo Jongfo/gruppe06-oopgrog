@@ -1,5 +1,7 @@
 #pragma once
 
+#include "RobustIO.h"
+extern RobustIO rIO;
 class Lag
 {
 private:

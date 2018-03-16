@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ListTool2B.h"
+#include "Idrett.h"
 
 class Idrettene
 {
@@ -9,5 +9,6 @@ private:
 
 public:
 	Idrettene();
+	void nyIdrett();
 	~Idrettene();
 };

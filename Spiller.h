@@ -3,7 +3,7 @@
 #include "RobustIO.h"
 
 
-extern RobustIO t;
+extern RobustIO rIO;
 
 class Spiller : public NumElement
 {

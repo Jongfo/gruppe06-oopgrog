@@ -1,8 +1,4 @@
 #include "Spillere.h"
-#include "Spiller.h"
-#include "RobustIO.h"
-
-extern RobustIO t;
 
 Spillere::Spillere()
 {

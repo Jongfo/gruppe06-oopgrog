@@ -6,13 +6,13 @@ Spiller::Spiller()
 }
 Spiller::Spiller(int nr) : NumElement(nr)
 {
-	t.lesInnICharPointer("Navn paa spiller?", navn);
-	t.lesInnICharPointer("Adressen til spiller?", adresse);
+	rIO.lesInnICharPointer("Navn paa spiller?", navn);
+	rIO.lesInnICharPointer("Adressen til spiller?", adresse);
 }
 Spiller::Spiller(std::ifstream& inn, int num) : NumElement(num)
 {
-		t.lesCharPointerFraFil(inn, navn);
-		t.lesCharPointerFraFil(inn, adresse);
+	rIO.lesCharPointerFraFil(inn, navn);
+	rIO.lesCharPointerFraFil(inn, adresse);
 }
 void Spiller::display() 
 {
