@@ -6,7 +6,8 @@ DivAvd::DivAvd(char* navn) : TextElement(navn)
 	DivAvd::nyeLag();
 }
 
-// legg til 0 eller fleire nye lag
+// legg til 0 eller fleire nye lag, og hvis det gjør legg til det laget
+//TODO Vinne om lageet finnes fra før
 void DivAvd::nyeLag() 
 {
 	char t[] = "Hvor mange lag oensker du aa legge til?";
