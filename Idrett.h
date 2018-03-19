@@ -15,5 +15,6 @@ public:
 	Idrett(char* navn);
 	void nyDivisjon();
 	void display();
+	DivAvd* getDivAvd(char* s);
 	~Idrett();
 };

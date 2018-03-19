@@ -43,6 +43,19 @@ bool Lag::spillerILag(int n)
 	return false;
 }
 
+char* Lag::getNavn()
+{
+	return navn;
+}
+
+void Lag::displaySpillere()
+{
+	for (int i = 0; i < antSpillere; i++)
+	{
+		spillere.visSpiller(spillerNr[i]);
+	}
+}
+
 void Lag::display()
 {
 	std::cout << "Lag: " << navn << '\n'

@@ -55,6 +55,22 @@ void Idrettene::visIdrett()
 	}
 }
 
+// returnerer idrett med eit gitt namn
+Idrett* Idrettene::getIdrett(char* s)
+{
+	if (idretter->inList(s))
+	{
+		Idrett* idrett = (Idrett*)idretter->remove(s);
+		idretter->add((TextElement*)idrett);
+		return idrett;
+	}
+	else
+	{
+		std::cout << "Idrett eksisterer ikke.\n";
+		return nullptr;
+	}
+}
+
 // viser idrett med namn s
 void Idrettene::visIdrett(char* s)
 {

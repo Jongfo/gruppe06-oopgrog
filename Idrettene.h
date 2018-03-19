@@ -13,5 +13,6 @@ public:
 	void nyDivisjon();
 	void visIdrett();
 	void visIdrett(char* s);
+	Idrett* getIdrett(char* s);
 	~Idrettene();
 };

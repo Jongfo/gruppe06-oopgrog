@@ -23,6 +23,22 @@ Idrett::~Idrett()
 	delete divisjoner;
 }
 
+// returnerer div/avd med namn s
+DivAvd* Idrett::getDivAvd(char* s)
+{
+	if (divisjoner->inList(s))
+	{
+		DivAvd* divisjon = (DivAvd*)divisjoner->remove(s);
+		divisjoner->add((TextElement*)divisjon);
+		return divisjon;
+	}
+	else
+	{
+		std::cout << "Divisjon/Avdeling eksisterer ikke.\n";
+		return nullptr;
+	}
+}
+
 void Idrett::display()
 {
 	std::cout << text << '\n'

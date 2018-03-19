@@ -16,5 +16,6 @@ public:
 	DivAvd(char* navn);
 	void nyeLag();
 	void display();
+	Lag* getLag(char* s);
 	~DivAvd();
 };

@@ -16,5 +16,7 @@ public:
 	Lag();
 	~Lag();
 	bool spillerILag(int n);
+	char* getNavn();
+	void displaySpillere();
 	void display();
 };

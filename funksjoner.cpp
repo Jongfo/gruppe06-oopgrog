@@ -97,6 +97,46 @@ void skrivMeny()
 	std::cout << "\n\tQ = Quit/Avslutt";
 }
 
+// skriv data om alle spelarar på eit lag
+void skrivSpillerePaaLag()
+{
+	// les inn namn paa idrett
+	char* idrettNavn;
+	rIO.lesInnICharPointer("Idrett", idrettNavn);
+	Idrett* idrett = idrettene.getIdrett(idrettNavn);
+	if (idrett != nullptr)
+	{
+		// les namn paa div/avd
+		char* divNavn;
+		rIO.lesInnICharPointer("Divisjon/Avdeling", divNavn);
+		DivAvd* divisjon = idrett->getDivAvd(divNavn);
+		if (divisjon != nullptr)
+		{
+			// les inn namn paa lag
+			char* lagNavn;
+			rIO.lesInnICharPointer("Lag", lagNavn);
+			Lag* lag = divisjon->getLag(lagNavn);
+			if (lag != nullptr)
+			{
+				lag->displaySpillere();
+			}
+			else
+			{
+				std::cout << "Lag fins ikke.\n";
+			}
+		}
+		else
+		{
+			std::cout << "Divisjon/Avdeling fins ikke.\n";
+		}
+	}
+	else
+	{
+		std::cout << "Idrett fins ikke.\n";
+	}
+
+}
+
 // handterar kommando-input
 void valgMeny()
 {
@@ -114,7 +154,7 @@ void valgMeny()
 		case 'K': break;
 		case 'T': break;
 		case 'R': break;
-		case 'D': break;
+		case 'D': skrivSpillerePaaLag(); break;
 		case 'E': break;
 		case 'C': break;
 		default: skrivMeny(); break; //Skriver meny

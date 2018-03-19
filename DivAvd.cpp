@@ -33,6 +33,20 @@ DivAvd::~DivAvd()
 	}
 }
 
+// returnerer eit lag i divisjonen
+Lag* DivAvd::getLag(char* s)
+{
+	for (int i = 0; i < antLag; i++)
+	{
+		if (lag[i]->getNavn())
+		{
+			return lag[i];
+		}
+	}
+
+	return nullptr;
+}
+
 void DivAvd::display()
 {
 	std::cout << text << ":\n"
