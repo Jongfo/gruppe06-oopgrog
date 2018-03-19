@@ -13,6 +13,7 @@ private:
 
 public:
 	Idrett(char* navn);
+	Idrett(std::ifstream&inn,char* navn);
 	void nyDivisjon();
 	void display();
 	~Idrett();

@@ -13,7 +13,7 @@ private:
 
 public:
     Spillere();
-	void lesFraFil(std::ifstream & inn);
+	void lesSpillereFraFil();
 	void nySpiller();
 	void visSpiller();
 	void visSpiller(char* s);
