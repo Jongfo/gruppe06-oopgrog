@@ -8,6 +8,7 @@ extern RobustIO rIO;
 class Spiller : public NumElement
 {
 private:
+    //int spillerNR er lagret som NumElement::number.
     char* navn;
     char* adresse;
 public:
