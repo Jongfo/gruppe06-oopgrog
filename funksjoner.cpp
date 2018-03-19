@@ -75,10 +75,16 @@ void lesFraFil()
 // Endrer data om spillere på et lag.
 void redigerSpillere()
 {
-
+    char* idrettNavn, * divNavn, * lagNavn;
     // rIO.finnidrett
+    rIO.lesInnICharPointer("skriv inn navn paa idrett.", idrettNavn);
     // rIO.finnDivisjon
+    rIO.lesInnICharPointer("skriv inn navn paa divisjon/avdeling.", divNavn);
     // rIO.finnLag
+    rIO.lesInnICharPointer("skriv inn navn paa lag.", lagNavn);
+
+    
+
 }
 
 
