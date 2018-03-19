@@ -8,7 +8,7 @@ Int Antall_Spillere_På_Laget_1_1
 Char* Navnet_til_Laget_1_2
 Char* Post_Adressen_til_Laget_1_2
 Int Antall_Spillere_På_Laget_1_2
-				//mellomrommet bare for å lettere lese
+				//mellomrommet bare for å lese lettere
 Int Antall_Divisjoner_I_En_Idrett_2
 Char* Navn_På_Divisjonen_2
 Int Antall_Lag_I_Divisjonen_2
