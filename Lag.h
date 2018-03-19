@@ -11,9 +11,10 @@ private:
 	char* navn;             //Navn på leget
 	char* postadresse;      //Adressen til laget
 	int antSpillere;        //Antall spillere i laget
-	int spillere[MAXSPILLERE];  //ID til spillere
+	int spillerNr[MAXSPILLERE];  //ID til spillere
 public:
 	Lag();
 	~Lag();
+	bool spillerILag(int n);
 	void display();
 };
