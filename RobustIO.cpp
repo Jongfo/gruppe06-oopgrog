@@ -71,15 +71,36 @@ bool RobustIO::finnesTabellen(char* tabelltype)
 	return false;
 }
 
+// returnerer true dersom berre bokstavar, mellomrom, bindestrek
 bool RobustIO::okNavn(char* s)
 {
-	// TODO
+	int len = strlen(s);
+	for (int i = 0; i < len; i++)
+	{
+		if (!((s[i] >= 'A' && s[i] <= 'Z') ||
+			(s[i] >= 'a' && s[i] <= 'z') ||
+			s[i] == '-' || s[i] == ' '))
+		{
+			return false;
+		}
+	}
 	return true;
 }
 
+// returnerer true dersom inneheld berre bokstavar, mellomrom, bindestrek og tal
 bool RobustIO::okAdr(char* s)
 {
-	// TODO
+	int len = strlen(s);
+	for (int i = 0; i < len; i++)
+	{
+		if (!((s[i] >= 'A' && s[i] <= 'Z') ||
+			  (s[i] >= 'a' && s[i] <= 'z') ||
+			  (s[i] >= '0' && s[i] <= '9') ||
+			   s[i] == '-' || s[i] == ' '))
+		{
+			return false;
+		}
+	}
 	return true;
 }
 
