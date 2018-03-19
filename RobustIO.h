@@ -12,8 +12,8 @@ class RobustIO
 public:
 	void  lesInnICharPointer(const char* utskrift, char*& inntast); //skriv ut til skjermen, leser inn tekst fra bruker
 	void  lesCharPointerFraFil(std::ifstream &inn, char*& t); //Brukes til å lese inn i pointer fra fil 
-	char* lesNyttNavn(char* t);
-	char* lesNyAdr(char* t);
+	char* lesNyttNavn(const char* t);
+	char* lesNyAdr(const char* t);
 	char* lesTabelltype(const char* t);
 	bool  finnesTabellen(char* tabelltype);
 	bool  okNavn(char* s);

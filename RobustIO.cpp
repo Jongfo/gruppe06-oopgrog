@@ -29,16 +29,37 @@ void RobustIO::lesCharPointerFraFil(std::ifstream &inn, char*& t)
 	t = new char[strlen(temp) + 1];//Gjør t akkurat temp langt
 	strcpy(t, temp); //Kopierer temp over til t
 }
-char* RobustIO::lesNyttNavn(char* t)
+
+// les inn eit gyldig namn
+char* RobustIO::lesNyttNavn(const char* t)
 {
-	// TODO
-	return nullptr;
+	char* nyttNavn;
+	do
+	{
+		lesInnICharPointer(t, nyttNavn);
+		if (!okNavn(nyttNavn))
+		{
+			std::cout << "Ugyldig navn\n";
+			delete[] nyttNavn;
+		}
+	} while (nyttNavn == nullptr);
+	return nyttNavn;
 }
 
-char* RobustIO::lesNyAdr(char* t)
+// les inn ein gyldig adresse
+char* RobustIO::lesNyAdr(const char* t)
 {
-	// TODO
-	return nullptr;
+	char* nyAdr;
+	do
+	{
+		lesInnICharPointer(t, nyAdr);
+		if (!okAdr(nyAdr))
+		{
+			std::cout << "Ugyldig adresse\n";
+			delete[] nyAdr;
+		}
+	} while (nyAdr == nullptr);
+	return nyAdr;
 }
 
 // handterar innlesing av tabelltype
@@ -83,6 +104,7 @@ bool RobustIO::okNavn(char* s)
 		{
 			return false;
 		}
+		// TODO: sjekk at ting ikkje står heilt jalla
 	}
 	return true;
 }
