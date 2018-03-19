@@ -17,9 +17,9 @@ Spiller::Spiller(std::ifstream& inn, int num) : NumElement(num)
 }
 void Spiller::display() 
 {
-	std::cout << number << std::endl;
-	std::cout << navn << std::endl;
-	std::cout << adresse << std::endl;
+	std::cout << "ID: " << number << std::endl;
+	std::cout << "Navn: " <<navn << std::endl;
+	std::cout << "Adressen: " <<adresse << std::endl;
 }
 int Spiller::spillerNr() 
 {
