@@ -76,7 +76,7 @@ bool RobustIO::okAdr(char* s)
 	return true;
 }
 
-int RobustIO::tall(const char* t, const int MIN, const int MAX)
+int RobustIO::lesTall(const char* t, const int MIN, const int MAX)
 {
 	int tall;
 	do {

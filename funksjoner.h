@@ -5,4 +5,4 @@ void visIdrett();
 void lesFraFil();
 void skrivMeny();
 void valgMeny();
-void redigerSpiller();
+void redigerSpillere();
