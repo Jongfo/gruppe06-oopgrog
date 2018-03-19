@@ -24,6 +24,18 @@ Lag::Lag()
 		spillerNr[antSpillere++] = nr;
 	}
 }
+Lag::Lag(std::ifstream& inn) 
+{
+	rIO.lesCharPointerFraFil(inn, navn);
+	rIO.lesCharPointerFraFil(inn, postadresse);
+	int spillerePaaLaget; inn >> spillerePaaLaget;
+	for (int i = 0; i < spillerePaaLaget; i++)
+	{
+		int nr; inn >> nr;
+		spillerNr[antSpillere++] = nr;
+	}
+	
+}
 
 Lag::~Lag()
 {

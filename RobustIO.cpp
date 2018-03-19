@@ -1,9 +1,10 @@
 #include "RobustIO.h"
 
-const int ANTTABELLTYPER = 3;
+const int ANTTABELLTYPER = 4;
 
 // inneheld namna på tabelltypane
 const char* TABELLTYPER[ANTTABELLTYPER] = {
+	"DOES NOT EXIST",
 	"2-1-0",
 	"3-1-0",
 	"3-2-1-0"
@@ -47,21 +48,27 @@ char* RobustIO::lesTabelltype(const char* t)
 	{
 		char* tabelltype;
 		lesInnICharPointer(t, tabelltype);
-		return lesTabelltypeFraFil(tabelltype);
+		if (finnesTabellen(tabelltype)) 
+		{
+			return tabelltype;
+		}
+		else 
+		{
+			return nullptr;
+		}
 	}
 }
-char* RobustIO::lesTabelltypeFraFil(char* tabelltype) 
+bool RobustIO::finnesTabellen(char* tabelltype) 
 {
 	for (int i = 0; i < ANTTABELLTYPER; i++) 
 	{
 		if (!strcmp(tabelltype, TABELLTYPER[i])) 
 		{
 			// gyldig tabelltype
-			return tabelltype;
+			return true;
 		}
 	}
-	std::cout << "\nFinner ikke tabeltypen\n";
-	delete[] tabelltype;
+	return false;
 }
 
 bool RobustIO::okNavn(char* s)
