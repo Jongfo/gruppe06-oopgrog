@@ -3,12 +3,21 @@
 Idrett::Idrett(char* navn) : TextElement(navn)
 {
 	divisjoner = new List(Sorted);
+	nyDivisjon();
+	tabelltype = rIO.lesTabelltype("Tabelltype: ");
+	
+}
+void Idrett::nyDivisjon() {
 	char* t;
 	rIO.lesInnICharPointer("Navn paa Divisjon/Avdeling?", t);
-	tabelltype = rIO.lesTabelltype("Tabelltype: ");
-	divisjoner->add((TextElement*)new DivAvd(t)); 
+	if (!divisjoner->inList(t)) {
+		divisjoner->add((TextElement*)new DivAvd(t));
+	}
+	else
+	{
+		std::cout << "Denne divisjonen finner allerede i listen"
+	}
 }
-
 Idrett::~Idrett()
 {
 	delete divisjoner;

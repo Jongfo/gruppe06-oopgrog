@@ -16,7 +16,7 @@ void nySID()
 	{
 	case 'S': spillere.nySpiller(); break;
 	case 'I': idrettene.nyIdrett(); break;
-	case 'D': break;
+	case 'D': idrettene.nyDivisjon(); break;
 	default:
 		std::cout << "Ugyldig kommando";
 		break;
