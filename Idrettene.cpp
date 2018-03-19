@@ -26,6 +26,7 @@ void Idrettene::nyIdrett()
 		std::cout << "En idrett med dette navnet fins allerede!\n";
 	}
 }
+
 void Idrettene::nyDivisjon() 
 {
 	char* t;
@@ -35,7 +36,7 @@ void Idrettene::nyDivisjon()
 	if (idretter->inList(t)) {
 		Idrett* temp = (Idrett*)idretter->remove(t);
 		temp->nyDivisjon();
-		idretter->add((TextElement*)t);
+		idretter->add((TextElement*)temp);
 		
 	}
 	else {
