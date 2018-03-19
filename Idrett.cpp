@@ -1,9 +1,9 @@
 #include "Idrett.h"
 Idrett::Idrett(char* navn) : TextElement(navn)
 {
+	tabelltype = rIO.lesTabelltype("Tabelltype: ");
 	divisjoner = new List(Sorted);
 	nyDivisjon();
-	tabelltype = rIO.lesTabelltype("Tabelltype: ");
 	
 }
 Idrett::Idrett(std::ifstream&inn, char* navn) : TextElement(navn) 
