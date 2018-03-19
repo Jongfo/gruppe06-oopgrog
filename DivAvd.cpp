@@ -20,3 +20,13 @@ void DivAvd::nyeLag()
 DivAvd::~DivAvd()
 {
 }
+
+void DivAvd::display()
+{
+	std::cout << text << ":\n"
+		<< "Antall lag: " << antLag << '\n';
+	for (int i = 0; i < antLag; i++)
+	{
+		lag[i]->display();
+	}
+}

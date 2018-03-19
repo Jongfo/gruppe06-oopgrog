@@ -15,4 +15,5 @@ private:
 public:
 	Lag();
 	~Lag();
+	void display();
 };

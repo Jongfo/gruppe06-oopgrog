@@ -41,5 +41,12 @@ void Idrettene::visIdrett()
 // viser idrett med namn s
 void Idrettene::visIdrett(char* s)
 {
-
+	if (idretter->inList(s))
+	{
+		idretter->displayElement(s);
+	}
+	else
+	{
+		std::cout << "Idrett eksisterer ikke.\n";
+	}
 }

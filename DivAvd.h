@@ -15,5 +15,6 @@ private:
 public:
 	DivAvd(char* navn);
 	void nyeLag();
+	void display();
 	~DivAvd();
 };

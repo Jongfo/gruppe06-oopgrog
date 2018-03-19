@@ -8,7 +8,7 @@ extern RobustIO rIO;
 class Idrett : TextElement
 {
 private:
-	List * divisjoner;
+	List* divisjoner;
 	char* tabelltype;
 
 public:
