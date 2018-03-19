@@ -79,6 +79,16 @@ void lesFraFil()
 	}
 }
 
+// Endrer data om spillere på et lag.
+void redigerSpillere()
+{
+
+    // rIO.finnidrett
+    // rIO.finnDivisjon
+    // rIO.finnLag
+}
+
+
 // viser menyen til brukaren
 void skrivMeny()
 {

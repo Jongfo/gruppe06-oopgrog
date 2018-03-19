@@ -17,7 +17,7 @@ public:
 	char* lesTabelltype(const char* t);
 	bool  okNavn(char* s);
 	bool  okAdr(char* s); 
-	int   tall(const char* t, const int MIN, const int MAX); //Tekst til bruker og mellom hvilkne tall bruker kan taste
+	int   lesTall(const char* t, const int MIN, const int MAX); //Tekst til bruker og mellom hvilkne tall bruker kan taste
 	char  lesInnTilStor();//Leser in en kommand/Gjør til stor bokstav
 	char* strip(char* s);
 };
