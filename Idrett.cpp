@@ -26,5 +26,7 @@ Idrett::~Idrett()
 void Idrett::display()
 {
 	std::cout << text << '\n'
-		<< "Tabelltype: " << tabelltype << '\n';
+		<< "Tabelltype: " << tabelltype << '\n'
+		<< "Antall divisjoner: " << divisjoner->noOfElements() << '\n';
+	divisjoner->displayList();
 }

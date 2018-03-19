@@ -19,4 +19,25 @@ void DivAvd::nyeLag()
 
 DivAvd::~DivAvd()
 {
+	for (int i = 0; i < MAXLAG; i++)
+	{
+		delete lag[i];
+	}
+	for (int i = 0; i < MAXLAG; i++)
+	{
+		for (int j = 0; j < MAXLAG; j++)
+		{
+			delete resultat[i][j];
+		}
+	}
+}
+
+void DivAvd::display()
+{
+	std::cout << text << ":\n"
+		<< "Antall lag: " << antLag << '\n';
+	for (int i = 0; i < antLag; i++)
+	{
+		lag[i]->display();
+	}
 }
