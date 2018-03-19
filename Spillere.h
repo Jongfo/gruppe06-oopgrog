@@ -8,12 +8,12 @@ extern RobustIO rIO;
 class Spillere
 {
 private:
-    int sisteNr;
-    List* spillere;
+    int sisteNr;        //Antall spillere(?)
+    List* spillere;     //Liste med spillere(sorted)
 
 public:
     Spillere();
-	void lesFraFil(std::ifstream & inn);
+	void lesSpillereFraFil();
 	void nySpiller();
 	void visSpiller();
 	void visSpiller(char* s);

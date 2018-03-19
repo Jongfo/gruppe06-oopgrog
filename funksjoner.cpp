@@ -68,16 +68,19 @@ void visIdrett()
 // les all data frå fil
 void lesFraFil()
 {
-	std::ifstream inn("gruppe06-ooprog/SPILLERE.DTA");
-	if (inn)
-	{
-		spillere.lesFraFil(inn);
-	}
-	else
-	{
-		std::cout << "Finner ikke SPILLERE.DTA\n";
-	}
+	spillere.lesSpillereFraFil();
+	idrettene.lesInnIdrettFraFil();
 }
+
+// Endrer data om spillere på et lag.
+void redigerSpillere()
+{
+
+    // rIO.finnidrett
+    // rIO.finnDivisjon
+    // rIO.finnLag
+}
+
 
 // viser menyen til brukaren
 void skrivMeny()

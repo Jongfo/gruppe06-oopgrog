@@ -9,15 +9,22 @@ Spillere::Spillere()
 {
     spillere = new List(Sorted);
 }
-void Spillere::lesFraFil(std::ifstream & inn)
+void Spillere::lesSpillereFraFil()
 {
-	inn >> sisteNr;
-	for (int i = 0; i < sisteNr; i++) {
-		int num;
-		inn >> num; inn.ignore();
-		Spiller* temp = new Spiller(inn, num);
-		spillere->add(temp);
+	std::ifstream inn("gruppe06-ooprog/SPILLERE.DTA");
+	if (inn) {
+		inn >> sisteNr;
+		for (int i = 0; i < sisteNr; i++) {
+			int num;
+			inn >> num; inn.ignore();
+			Spiller* temp = new Spiller(inn, num);
+			spillere->add(temp);
+		}
 	}
+	else {
+		std::cout << "Finner ikke SPILLERE.DTA\n";
+	}
+	
 }
 void Spillere::nySpiller()
 {
