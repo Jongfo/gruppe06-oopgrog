@@ -18,5 +18,6 @@ public:
 	void visSpiller();
 	void visSpiller(char* s);
 	void visSpiller(int nr);
+	int getSisteNr();
     ~Spillere();
 };

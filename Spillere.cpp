@@ -55,6 +55,12 @@ void  Spillere::visSpiller(int nr)
 		spillere->add(temp);
 	}
 }
+
+int Spillere::getSisteNr()
+{
+	return sisteNr;
+}
+
 Spillere::~Spillere()
 {
     delete spillere;
