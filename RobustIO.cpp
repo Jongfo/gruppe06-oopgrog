@@ -47,18 +47,21 @@ char* RobustIO::lesTabelltype(const char* t)
 	{
 		char* tabelltype;
 		lesInnICharPointer(t, tabelltype);
-
-		for (int i = 0; i < ANTTABELLTYPER; i++)
-		{
-			if (!strcmp(tabelltype, TABELLTYPER[i]))
-			{
-				// gyldig tabelltype
-				return tabelltype;
-			}
-		}
-
-		delete[] tabelltype;
+		return lesTabelltypeFraFil(tabelltype);
 	}
+}
+char* RobustIO::lesTabelltypeFraFil(char* tabelltype) 
+{
+	for (int i = 0; i < ANTTABELLTYPER; i++) 
+	{
+		if (!strcmp(tabelltype, TABELLTYPER[i])) 
+		{
+			// gyldig tabelltype
+			return tabelltype;
+		}
+	}
+	std::cout << "\nFinner ikke tabeltypen\n";
+	delete[] tabelltype;
 }
 
 bool RobustIO::okNavn(char* s)

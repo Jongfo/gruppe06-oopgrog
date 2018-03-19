@@ -67,3 +67,19 @@ void Idrettene::visIdrett(char* s)
 		std::cout << "Idrett eksisterer ikke.\n";
 	}
 }
+void Idrettene::LesInnIdrettFraFil() 
+{
+	std::ifstream inn("gruppe06-ooprog/IDRETTENE.DTA");
+	if (inn) 
+	{
+		int n; inn >> n; inn.ignore();
+		for (size_t i = 0; i < n; i++) {
+			char* t; rIO.lesCharPointerFraFil(inn, t);
+			idretter->add((TextElement*)(new Idrett(inn,t)));
+		}
+	}
+	else 
+	{
+		std::cout << "Finner ikke IDRETTENE.DTA";
+	}
+}

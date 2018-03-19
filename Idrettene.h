@@ -1,6 +1,9 @@
 #pragma once
 
 #include "Idrett.h"
+#include "RobustIO.h"
+
+extern RobustIO rIO;
 
 class Idrettene
 {
@@ -13,5 +16,6 @@ public:
 	void nyDivisjon();
 	void visIdrett();
 	void visIdrett(char* s);
+	void LesInnIdrettFraFil();
 	~Idrettene();
 };
