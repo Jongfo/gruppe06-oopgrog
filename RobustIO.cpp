@@ -83,7 +83,7 @@ bool RobustIO::okAdr(char* s)
 	return true;
 }
 
-int RobustIO::tall(const char* t, const int MIN, const int MAX)
+int RobustIO::lesTall(const char* t, const int MIN, const int MAX)
 {
 	int tall;
 	do {
@@ -101,8 +101,22 @@ char RobustIO::lesInnTilStor()
 	return (toupper(ch));
 }
 
+// tek vekk blanke paa starten og slutten av teksta
 char* RobustIO::strip(char* s)
 {
-	// TODO
-	return nullptr;
+	// strip fraa start
+	while (s[0] == ' ')
+	{
+		// flytt alt ned
+		for (int i = 0; i < strlen(s); i++)
+		{
+			s[i] = s[i + 1];
+		}
+	}
+	// strip fraa enden
+	while (s[strlen(s) - 1] == ' ')
+	{
+		s[strlen(s) - 1] = s[strlen(s)];
+	}
+	return s;
 }

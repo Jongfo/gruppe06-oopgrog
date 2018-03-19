@@ -16,5 +16,6 @@ public:
 	Idrett(std::ifstream&inn,char* navn);
 	void nyDivisjon();
 	void display();
+	DivAvd* getDivAvd(char* s);
 	~Idrett();
 };

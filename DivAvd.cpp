@@ -19,9 +19,8 @@ DivAvd::DivAvd(std::ifstream& inn, char* navn) : TextElement(navn) {
 void DivAvd::nyeLag() 
 {
 	char t[] = "Hvor mange lag oensker du aa legge til?";
-	int l = rIO.tall(t, 0, MAXLAG - antLag);
-	for (int i = antLag; i < antLag + l; i++)
-	{
+	int l = rIO.lesTall(t, 0, MAXLAG - antLag);
+	for (int i = antLag; i < antLag + l; i++) {
 		lag[i] = new Lag();
 	}
 	antLag += l;
@@ -40,6 +39,20 @@ DivAvd::~DivAvd()
 			delete resultat[i][j];
 		}
 	}
+}
+
+// returnerer eit lag i divisjonen
+Lag* DivAvd::getLag(char* s)
+{
+	for (int i = 0; i < antLag; i++)
+	{
+		if (lag[i]->getNavn())
+		{
+			return lag[i];
+		}
+	}
+
+	return nullptr;
 }
 
 void DivAvd::display()
