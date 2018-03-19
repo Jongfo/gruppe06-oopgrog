@@ -14,6 +14,7 @@ private:
 public:
 	Idrett(char* navn);
 	Idrett(std::ifstream&inn,char* navn);
+    void endreSpillere(char* idrettNavn, char* divNavn, char* lagNavn);
 	void nyDivisjon();
 	void display();
 	DivAvd* getDivAvd(char* s);

@@ -12,13 +12,13 @@ class RobustIO
 public:
 	void  lesInnICharPointer(const char* utskrift, char*& inntast); //skriv ut til skjermen, leser inn tekst fra bruker
 	void  lesCharPointerFraFil(std::ifstream &inn, char*& t); //Brukes til å lese inn i pointer fra fil 
-	char* lesNyttNavn(char* t);
-	char* lesNyAdr(char* t);
+	char* lesNyttNavn(const char* t);
+	char* lesNyAdr(const char* t);
 	char* lesTabelltype(const char* t);
 	bool  finnesTabellen(char* tabelltype);
 	bool  okNavn(char* s);
 	bool  okAdr(char* s); 
 	int   lesTall(const char* t, const int MIN, const int MAX); //Tekst til bruker og mellom hvilkne tall bruker kan taste
-	char  lesInnTilStor();//Leser in en kommand/Gjør til stor bokstav
-	char* strip(char* s);
+	char  lesInnTilStor();  //Leser in en kommand/Gjør til stor bokstav
+	char* strip(char* s);   // Fjerner blanke fra s og returnerer det
 };
