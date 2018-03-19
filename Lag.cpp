@@ -6,7 +6,7 @@ extern Spillere spillere;
 Lag::Lag()
 {
 	rIO.lesInnICharPointer("Navn paa lag?", navn);
-	rIO.lesInnICharPointer("Adresse til laget?", postadresse);
+	postadresse = rIO.lesNyAdr("Postadressa til laget?");
 	int spillereAaLeggeTil = rIO.lesTall("Antall spillere på laget", 0,
 									  std::min(spillere.getSisteNr(), MAXLAG));
 

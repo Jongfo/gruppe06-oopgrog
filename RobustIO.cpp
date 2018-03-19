@@ -41,6 +41,7 @@ char* RobustIO::lesNyttNavn(const char* t)
 		{
 			std::cout << "Ugyldig navn\n";
 			delete[] nyttNavn;
+			nyttNavn = nullptr;
 		}
 	} while (nyttNavn == nullptr);
 	return nyttNavn;
@@ -57,6 +58,7 @@ char* RobustIO::lesNyAdr(const char* t)
 		{
 			std::cout << "Ugyldig adresse\n";
 			delete[] nyAdr;
+			nyAdr = nullptr;
 		}
 	} while (nyAdr == nullptr);
 	return nyAdr;
