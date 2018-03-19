@@ -1,9 +1,10 @@
 #include "RobustIO.h"
 
-const int ANTTABELLTYPER = 3;
+const int ANTTABELLTYPER = 4;
 
 // inneheld namna på tabelltypane
 const char* TABELLTYPER[ANTTABELLTYPER] = {
+	"DOES NOT EXIST",
 	"2-1-0",
 	"3-1-0",
 	"3-2-1-0"
@@ -28,16 +29,37 @@ void RobustIO::lesCharPointerFraFil(std::ifstream &inn, char*& t)
 	t = new char[strlen(temp) + 1];//Gjør t akkurat temp langt
 	strcpy(t, temp); //Kopierer temp over til t
 }
-char* RobustIO::lesNyttNavn(char* t)
+
+// les inn eit gyldig namn
+char* RobustIO::lesNyttNavn(const char* t)
 {
-	// TODO
-	return nullptr;
+	char* nyttNavn;
+	do
+	{
+		lesInnICharPointer(t, nyttNavn);
+		if (!okNavn(nyttNavn))
+		{
+			std::cout << "Ugyldig navn\n";
+			delete[] nyttNavn;
+		}
+	} while (nyttNavn == nullptr);
+	return nyttNavn;
 }
 
-char* RobustIO::lesNyAdr(char* t)
+// les inn ein gyldig adresse
+char* RobustIO::lesNyAdr(const char* t)
 {
-	// TODO
-	return nullptr;
+	char* nyAdr;
+	do
+	{
+		lesInnICharPointer(t, nyAdr);
+		if (!okAdr(nyAdr))
+		{
+			std::cout << "Ugyldig adresse\n";
+			delete[] nyAdr;
+		}
+	} while (nyAdr == nullptr);
+	return nyAdr;
 }
 
 // handterar innlesing av tabelltype
@@ -47,32 +69,60 @@ char* RobustIO::lesTabelltype(const char* t)
 	{
 		char* tabelltype;
 		lesInnICharPointer(t, tabelltype);
-		return lesTabelltypeFraFil(tabelltype);
+		if (finnesTabellen(tabelltype)) 
+		{
+			return tabelltype;
+		}
+		else 
+		{
+			return nullptr;
+		}
 	}
 }
-char* RobustIO::lesTabelltypeFraFil(char* tabelltype) 
+bool RobustIO::finnesTabellen(char* tabelltype) 
 {
 	for (int i = 0; i < ANTTABELLTYPER; i++) 
 	{
 		if (!strcmp(tabelltype, TABELLTYPER[i])) 
 		{
 			// gyldig tabelltype
-			return tabelltype;
+			return true;
 		}
 	}
-	std::cout << "\nFinner ikke tabeltypen\n";
-	delete[] tabelltype;
+	return false;
 }
 
+// returnerer true dersom berre bokstavar, mellomrom, bindestrek
 bool RobustIO::okNavn(char* s)
 {
-	// TODO
+	int len = strlen(s);
+	for (int i = 0; i < len; i++)
+	{
+		if (!((s[i] >= 'A' && s[i] <= 'Z') ||
+			(s[i] >= 'a' && s[i] <= 'z') ||
+			s[i] == '-' || s[i] == ' '))
+		{
+			return false;
+		}
+		// TODO: sjekk at ting ikkje står heilt jalla
+	}
 	return true;
 }
 
+// returnerer true dersom inneheld berre bokstavar, mellomrom, bindestrek og tal
 bool RobustIO::okAdr(char* s)
 {
-	// TODO
+	int len = strlen(s);
+	for (int i = 0; i < len; i++)
+	{
+		if (!((s[i] >= 'A' && s[i] <= 'Z') ||
+			  (s[i] >= 'a' && s[i] <= 'z') ||
+			  (s[i] >= '0' && s[i] <= '9') ||
+			   s[i] == '-' || s[i] == ' '))
+		{
+			return false;
+		}
+	}
 	return true;
 }
 
@@ -94,8 +144,22 @@ char RobustIO::lesInnTilStor()
 	return (toupper(ch));
 }
 
+// tek vekk blanke paa starten og slutten av teksta
 char* RobustIO::strip(char* s)
 {
-	// TODO
-	return nullptr;
+	// strip fraa start
+	while (s[0] == ' ')
+	{
+		// flytt alt ned
+		for (int i = 0; i < strlen(s); i++)
+		{
+			s[i] = s[i + 1];
+		}
+	}
+	// strip fraa enden
+	while (s[strlen(s) - 1] == ' ')
+	{
+		s[strlen(s) - 1] = s[strlen(s)];
+	}
+	return s;
 }

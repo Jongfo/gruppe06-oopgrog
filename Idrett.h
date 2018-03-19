@@ -17,5 +17,6 @@ public:
     void endreSpillere(char* idrettNavn, char* divNavn, char* lagNavn);
 	void nyDivisjon();
 	void display();
+	DivAvd* getDivAvd(char* s);
 	~Idrett();
 };

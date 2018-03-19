@@ -14,7 +14,10 @@ private:
 	int spillerNr[MAXSPILLERE];  //ID til spillere
 public:
 	Lag();
+	Lag(std::ifstream& inn);
 	~Lag();
 	bool spillerILag(int n);
+	char* getNavn();
+	void displaySpillere();
 	void display();
 };

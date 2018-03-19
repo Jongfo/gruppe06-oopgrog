@@ -6,6 +6,14 @@ DivAvd::DivAvd(char* navn) : TextElement(navn)
 	DivAvd::nyeLag();
 }
 
+DivAvd::DivAvd(std::ifstream& inn, char* navn) : TextElement(navn) {
+	inn >> antLag; inn.ignore();
+	for (int i = 0; i < antLag; i++) 
+	{
+		lag[i] = new Lag(inn);
+	}
+}
+
 // legg til 0 eller fleire nye lag, og hvis det gjør legg til det laget
 //TODO Vinne om lageet finnes fra før
 void DivAvd::nyeLag() 
@@ -31,6 +39,20 @@ DivAvd::~DivAvd()
 			delete resultat[i][j];
 		}
 	}
+}
+
+// returnerer eit lag i divisjonen
+Lag* DivAvd::getLag(char* s)
+{
+	for (int i = 0; i < antLag; i++)
+	{
+		if (lag[i]->getNavn())
+		{
+			return lag[i];
+		}
+	}
+
+	return nullptr;
 }
 
 void DivAvd::display()

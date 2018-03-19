@@ -14,7 +14,9 @@ private:
 
 public:
 	DivAvd(char* navn);
+	DivAvd(std::ifstream& inn, char* navn);
 	void nyeLag();
 	void display();
+	Lag* getLag(char* s);
 	~DivAvd();
 };

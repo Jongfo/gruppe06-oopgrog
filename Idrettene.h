@@ -16,6 +16,7 @@ public:
 	void nyDivisjon();
 	void visIdrett();
 	void visIdrett(char* s);
-	void LesInnIdrettFraFil();
+	Idrett* getIdrett(char* s);
+	void lesInnIdrettFraFil();
 	~Idrettene();
 };
