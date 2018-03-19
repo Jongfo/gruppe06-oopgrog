@@ -7,7 +7,7 @@ Lag::Lag()
 {
 	rIO.lesInnICharPointer("Navn paa lag?", navn);
 	rIO.lesInnICharPointer("Adresse til laget?", postadresse);
-	int spillereAaLeggeTil = rIO.tall("Antall spillere på laget", 0,
+	int spillereAaLeggeTil = rIO.lesTall("Antall spillere på laget", 0,
 									  std::min(spillere.getSisteNr(), MAXLAG));
 
 	for (int i = 0; i < spillereAaLeggeTil; i++)
@@ -15,7 +15,7 @@ Lag::Lag()
 		int nr;	// nr som brukaren tastar inn
 		do
 		{
-			nr = rIO.tall("Nr til spiller", 1, spillere.getSisteNr());
+			nr = rIO.lesTall("Nr til spiller", 1, spillere.getSisteNr());
 			if (spillerILag(nr))
 			{
 				std::cout << "\nFins allerede i laget.\n";
