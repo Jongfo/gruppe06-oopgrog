@@ -13,10 +13,7 @@ Idrett::Idrett(std::ifstream&inn, char* navn) : TextElement(navn)
 	rIO.lesCharPointerFraFil(inn, tabelltype);
 	tabelltype = rIO.lesTabelltypeFraFil(tabelltype);
 	divisjoner = new List(Sorted);
-	/*
-	HER LESER VI INN NY_DIV.DTA
-	char *t; rIO.lesCharPointerFraFil(inn, t);
-	*/
+	//std::ifstream innDiv("gruppe06-ooprog/NY_DIV.DTA")
 }
 void Idrett::nyDivisjon() {
 	char* t;
