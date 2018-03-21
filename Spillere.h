@@ -14,6 +14,7 @@ private:
 public:
     Spillere();
 	void lesSpillereFraFil();
+	void skrivTilFil();
 	void nySpiller();
 	void visSpiller();
 	void visSpiller(char* s);

@@ -15,6 +15,7 @@ public:
 	Spiller();
     Spiller(int nr);
 	Spiller(std::ifstream& inn, int num);
+	void skrivTilFil(std::ofstream& ut);
 	virtual void display();
 	int spillerNr();
 	bool sammeNavn(char* n);

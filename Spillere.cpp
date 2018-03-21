@@ -26,10 +26,27 @@ void Spillere::lesSpillereFraFil()
 	}
 	
 }
+
+// skriv data om alle spelarane til fil
+void Spillere::skrivTilFil()
+{
+	std::ofstream utfil("gruppe06-ooprog/SPILLERE.DTA");
+
+	utfil << sisteNr << '\n';
+
+	for (int i = 1; i <= sisteNr; i++)
+	{
+		Spiller* spiller = (Spiller*)spillere->removeNo(i);
+		spillere->add(spiller);
+		spiller->skrivTilFil(utfil);
+	}
+}
+
 void Spillere::nySpiller()
 {
 	spillere->add(new Spiller(++sisteNr));
 }
+
 void  Spillere::visSpiller() 
 {
 	for (int i = 1; i <= spillere->noOfElements(); i++) 
@@ -39,6 +56,7 @@ void  Spillere::visSpiller()
 		spillere->add(temp);
 	}
 }
+
 void  Spillere::visSpiller(char* s) 
 {
 	for (int i = 1; i <= spillere->noOfElements(); i++) 

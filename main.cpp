@@ -14,5 +14,5 @@ int main()
 	skrivMeny();
 	valgMeny();
 
-    return 0;
+	spillere.skrivTilFil();
 }
