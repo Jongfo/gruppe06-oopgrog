@@ -7,8 +7,8 @@ Spiller::Spiller()
 
 Spiller::Spiller(int nr) : NumElement(nr)
 {
-	rIO.lesInnICharPointer("Navn paa spiller?", navn);
-	rIO.lesInnICharPointer("Adressen til spiller?", adresse);
+	navn = rIO.lesNyttNavn("Navn paa spiller?");
+	adresse = rIO.lesNyAdr("Adressen til spiller?");
 }
 
 Spiller::Spiller(std::ifstream& inn, int num) : NumElement(num)
