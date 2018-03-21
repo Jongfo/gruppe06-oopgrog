@@ -18,5 +18,6 @@ public:
 	void visIdrett(char* s);
 	Idrett* getIdrett(char* s);
 	void lesInnIdrettFraFil();
+	void skrivTilFil();
 	~Idrettene();
 };

@@ -34,7 +34,7 @@ void Spillere::skrivTilFil()
 
 	utfil << sisteNr << '\n';
 
-	for (int i = 1; i <= sisteNr; i++)
+	for (int i = 1; i <= spillere->noOfElements(); i++)
 	{
 		Spiller* spiller = (Spiller*)spillere->removeNo(i);
 		spillere->add(spiller);

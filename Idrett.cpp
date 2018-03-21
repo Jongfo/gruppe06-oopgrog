@@ -41,6 +41,13 @@ Idrett::Idrett(std::ifstream&inn, char* navn) : TextElement(navn)
 		std::cout << "\nFinner ikke NY_DIV.DTA";
 	}
 }
+
+void Idrett::skrivTilFil(std::ofstream& ut)
+{
+	ut  << text << '\n'
+		<< tabelltype << '\n';
+}
+
 void Idrett::nyDivisjon() {
 	char* t;
 	rIO.lesInnICharPointer("Navn paa Divisjon/Avdeling?", t);
@@ -52,6 +59,7 @@ void Idrett::nyDivisjon() {
 		std::cout << "Denne divisjonen finner allerede i listen";
 	}
 }
+
 Idrett::~Idrett()
 {
 	delete divisjoner;

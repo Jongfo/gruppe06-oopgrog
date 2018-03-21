@@ -15,4 +15,5 @@ int main()
 	valgMeny();
 
 	spillere.skrivTilFil();
+	idrettene.skrivTilFil();
 }

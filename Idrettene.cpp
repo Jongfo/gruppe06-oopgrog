@@ -83,6 +83,7 @@ void Idrettene::visIdrett(char* s)
 		std::cout << "Idrett eksisterer ikke.\n";
 	}
 }
+
 void Idrettene::lesInnIdrettFraFil()
 {
 	std::ifstream inn("gruppe06-ooprog/IDRETTENE.DTA");
@@ -97,5 +98,20 @@ void Idrettene::lesInnIdrettFraFil()
 	else 
 	{
 		std::cout << "Finner ikke IDRETTENE.DTA";
+	}
+}
+
+// skriv alle idrettane til fil
+void Idrettene::skrivTilFil()
+{
+	std::ofstream utfil("gruppe06-ooprog/IDRETTENE.DTA");
+
+	utfil << idretter->noOfElements() << '\n';
+
+	for (int i = 1; i <= idretter->noOfElements(); i++)
+	{
+		Idrett* idrett = (Idrett*)idretter->removeNo(i);
+		idretter->add((TextElement*)idrett);
+		idrett->skrivTilFil(utfil);
 	}
 }
