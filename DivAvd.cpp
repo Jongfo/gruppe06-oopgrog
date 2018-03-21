@@ -6,11 +6,26 @@ DivAvd::DivAvd(char* navn) : TextElement(navn)
 	DivAvd::nyeLag();
 }
 
-DivAvd::DivAvd(std::ifstream& inn, char* navn) : TextElement(navn) {
+DivAvd::DivAvd(std::ifstream& inn, char* navn) : TextElement(navn)
+{
 	inn >> antLag; inn.ignore();
 	for (int i = 0; i < antLag; i++) 
 	{
 		lag[i] = new Lag(inn);
+	}
+}
+
+// skriv data om divisjon/avdeling til fil
+void DivAvd::skrivTilFil(std::ofstream& ut)
+{
+	// skriv data
+	ut << text << '\n'
+		<< antLag << '\n';
+
+	// skriv laga
+	for (int i = 0; i < antLag; i++)
+	{
+		lag[i]->skrivTilFil(ut);
 	}
 }
 

@@ -16,6 +16,7 @@ public:
 	Lag();
 	Lag(std::ifstream& inn);
 	~Lag();
+	void skrivTilFil(std::ofstream& ut);
 	bool spillerILag(int n);
 	char* getNavn();
 	void displaySpillere();

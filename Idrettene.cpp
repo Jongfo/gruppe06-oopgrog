@@ -101,17 +101,19 @@ void Idrettene::lesInnIdrettFraFil()
 	}
 }
 
-// skriv alle idrettane til fil
+// skriv alle idrettane og divisjomame til fil
 void Idrettene::skrivTilFil()
 {
-	std::ofstream utfil("gruppe06-ooprog/IDRETTENE.DTA");
+	std::ofstream idrettFil("gruppe06-ooprog/IDRETTENE.DTA");
+	std::ofstream divAvdFil("gruppe06-ooprog/NY_DIV.DTA");
 
-	utfil << idretter->noOfElements() << '\n';
-
+	idrettFil << idretter->noOfElements() << '\n';
+	
 	for (int i = 1; i <= idretter->noOfElements(); i++)
 	{
 		Idrett* idrett = (Idrett*)idretter->removeNo(i);
 		idretter->add((TextElement*)idrett);
-		idrett->skrivTilFil(utfil);
+		idrett->skrivTilFil(idrettFil, divAvdFil);
 	}
+	
 }

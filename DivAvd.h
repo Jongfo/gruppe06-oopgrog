@@ -15,6 +15,7 @@ private:
 public:
 	DivAvd(char* navn);
 	DivAvd(std::ifstream& inn, char* navn);
+	void skrivTilFil(std::ofstream& ut);
 	void nyeLag();
 	void display();
 	Lag* getLag(char* s);

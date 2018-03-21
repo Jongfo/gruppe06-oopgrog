@@ -42,16 +42,31 @@ Idrett::Idrett(std::ifstream&inn, char* navn) : TextElement(navn)
 	}
 }
 
-void Idrett::skrivTilFil(std::ofstream& ut)
+// skriv data om idrett og divisjonar til fil
+void Idrett::skrivTilFil(std::ofstream& idrettFil, std::ofstream& divAvdFil)
 {
-	ut  << text << '\n'
-		<< tabelltype << '\n';
+	// skriv data
+	idrettFil << text << '\n'
+			  << tabelltype << '\n';
+
+	divAvdFil << text << '\n'
+			  << divisjoner->noOfElements() << '\n';
+	
+	// skriv divisjonar
+	for (int i = 1; i <= divisjoner->noOfElements(); i++)
+	{
+		DivAvd* divisjon = (DivAvd*)divisjoner->removeNo(i);
+		divisjoner->add((TextElement*)divisjon);
+		divisjon->skrivTilFil(divAvdFil);
+	}
 }
 
-void Idrett::nyDivisjon() {
+void Idrett::nyDivisjon()
+{
 	char* t;
 	rIO.lesInnICharPointer("Navn paa Divisjon/Avdeling?", t);
-	if (!divisjoner->inList(t)) {
+	if (!divisjoner->inList(t))
+	{
 		divisjoner->add((TextElement*)new DivAvd(t));
 	}
 	else

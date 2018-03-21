@@ -39,7 +39,23 @@ Lag::Lag(std::ifstream& inn)
 
 Lag::~Lag()
 {
+	delete[] navn;
+	delete[] postadresse;
+}
 
+// skriv info om laget til fil
+void Lag::skrivTilFil(std::ofstream& ut)
+{
+	ut << navn << '\n'
+		<< postadresse << '\n'
+		<< antSpillere << '\n';
+
+	for (int i = 0; i < antSpillere; i++)
+	{
+		ut << spillerNr[i] << ' ';
+	}
+
+	ut << '\n';
 }
 
 // returner true dersom spiller n finst i lager.
