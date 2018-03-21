@@ -79,3 +79,12 @@ void DivAvd::display()
 		lag[i]->display();
 	}
 }
+
+// fjernar spillerNr n frå alle lag i divisjonen
+void DivAvd::fjernSpillerNr(int n)
+{
+	for (int i = 0; i < antLag; i++)
+	{
+		lag[i]->fjernSpillerNr(n);
+	}
+}

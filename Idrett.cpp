@@ -103,3 +103,14 @@ void Idrett::display()
 		<< "Antall divisjoner: " << divisjoner->noOfElements() << '\n';
 	divisjoner->displayList();
 }
+
+// fjernar spillerNr n frå alle lag i alle divisjonane
+void Idrett::fjernSpillerNr(int n)
+{
+	for (int i = 1; i <= divisjoner->noOfElements(); i++)
+	{
+		DivAvd* divisjon = (DivAvd*)divisjoner->removeNo(i);
+		divisjon->fjernSpillerNr(n);
+		divisjoner->add((TextElement*)divisjon);
+	}
+}

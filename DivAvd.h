@@ -19,5 +19,6 @@ public:
 	void nyeLag();
 	void display();
 	Lag* getLag(char* s);
+	void fjernSpillerNr(int n);
 	~DivAvd();
 };

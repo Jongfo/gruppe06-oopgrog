@@ -90,3 +90,23 @@ void Lag::display()
 		<< "Adresse: " << postadresse << '\n'
 		<< "Antall spillere: " << antSpillere << '\n';
 }
+
+// fjernar spillerNr n frå lag
+void Lag::fjernSpillerNr(int n)
+{
+	for (int i = 0; i < antSpillere; i++)
+	{
+		if (spillerNr[i] == n)
+		{
+			spillerNr[i] = 0;
+
+			// flytt alle over ned
+			for (int j = i; j < antSpillere; j++)
+			{
+				spillerNr[j] = spillerNr[j + 1];
+			}
+			spillerNr[antSpillere - 1] = 0;
+			break;
+		}
+	}
+}

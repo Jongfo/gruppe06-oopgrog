@@ -1,9 +1,10 @@
 #include "Spillere.h"
 #include "Spiller.h"
+#include "Idrettene.h"
 #include "RobustIO.h"
 
 extern RobustIO rIO;
-
+extern Idrettene idrettene;
 
 Spillere::Spillere()
 {
@@ -44,7 +45,34 @@ void Spillere::skrivTilFil()
 
 void Spillere::nySpiller()
 {
-	spillere->add(new Spiller(++sisteNr));
+	int n;
+	// finn fyrste ledige spelarnummer
+	for (int i = 1; i <= sisteNr + 1; i++)
+	{
+		// "tom" plass i lista
+		if (!spillere->inList(i))
+		{
+			n = i;
+			break;
+		}
+
+		// alt er fyllt frå før
+		if (i == sisteNr + 1)
+		{
+			n = ++sisteNr;
+		}
+	}
+
+	spillere->add(new Spiller(n));
+}
+
+void Spillere::fjernSpiller()
+{
+	int n = rIO.lesTall("Spillerens nummer?", 1, sisteNr);
+	Spiller* spiller = (Spiller*)spillere->removeNo(n);
+	delete spiller;
+
+	idrettene.fjernSpillerNr(n);
 }
 
 void  Spillere::visSpiller() 

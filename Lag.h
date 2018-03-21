@@ -21,4 +21,5 @@ public:
 	char* getNavn();
 	void displaySpillere();
 	void display();
+	void fjernSpillerNr(int n);
 };

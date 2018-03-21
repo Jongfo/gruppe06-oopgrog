@@ -19,5 +19,6 @@ public:
 	Idrett* getIdrett(char* s);
 	void lesInnIdrettFraFil();
 	void skrivTilFil();
+	void fjernSpillerNr(int n);
 	~Idrettene();
 };

@@ -16,6 +16,7 @@ public:
 	void lesSpillereFraFil();
 	void skrivTilFil();
 	void nySpiller();
+	void fjernSpiller();
 	void visSpiller();
 	void visSpiller(char* s);
 	void visSpiller(int nr);

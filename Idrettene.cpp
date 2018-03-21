@@ -117,3 +117,15 @@ void Idrettene::skrivTilFil()
 	}
 	
 }
+
+// fjernar spelarar med nr n frå alle lag i alle idrettane
+void Idrettene::fjernSpillerNr(int n)
+{
+	// gå gjennom alle idrettar
+	for (int i = 1; i <= idretter->noOfElements(); i++)
+	{
+		Idrett* idrett = (Idrett*)idretter->removeNo(i);
+		idrett->fjernSpillerNr(n);
+		idretter->add((TextElement*)idrett);
+	}
+}

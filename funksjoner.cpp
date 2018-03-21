@@ -14,9 +14,25 @@ void nySID()
 
 	switch (k)
 	{
-	case 'S': spillere.nySpiller(); break;
-	case 'I': idrettene.nyIdrett(); break;
+	case 'S': spillere.nySpiller();   break;
+	case 'I': idrettene.nyIdrett();	  break;
 	case 'D': idrettene.nyDivisjon(); break;
+	default:
+		std::cout << "Ugyldig kommando";
+		break;
+	}
+}
+
+// fjern spelar, idrett eller div/avd
+void fjernSID()
+{
+	char k = rIO.lesInnTilStor();
+
+	switch (k)
+	{
+	case 'S': spillere.fjernSpiller(); break;
+	// TODO: case 'I': idrettene.fjernIdrett(); break;
+	// TODO: case 'D': idrettene.fjernDivAvd(); break;
 	default:
 		std::cout << "Ugyldig kommando";
 		break;
@@ -158,7 +174,7 @@ void valgMeny()
 		case 'S': visSpiller();	break;
 		case 'I': visIdrett();	break;
 		case 'N': nySID();		break;
-		case 'F': break;
+		case 'F': fjernSID();	break;
 		case 'L': break;
 		case 'K': break;
 		case 'T': break;
