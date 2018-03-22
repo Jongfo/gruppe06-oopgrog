@@ -1,0 +1,1 @@
+Å lese fra NY_DIV.DTA fungerer kun med 1 divisjon, når du legger til en annen klarer den kun å lese den første divisjonen i lista. når den leser in divisjon nr 2 leser den in kun en blank. Min orginal tanke om hva feilen var at vi manglet en .ignore(), men den klarer fordiom å lese flere lag, som er det siste den også leser før den begynner på neste divisjon
