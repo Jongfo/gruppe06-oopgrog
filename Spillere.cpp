@@ -52,18 +52,16 @@ void Spillere::nySpiller()
 		// "tom" plass i lista
 		if (!spillere->inList(i))
 		{
-			n = i;
-			break;
+			n = i ;
 		}
-
 		// alt er fyllt frå før
-		if (i == sisteNr + 1)
+		else if (i == sisteNr + 1)
 		{
-			n = ++sisteNr;
+			n = sisteNr;
 		}
 	}
-
 	spillere->add(new Spiller(n));
+	sisteNr++;
 }
 
 void Spillere::fjernSpiller()
