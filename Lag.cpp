@@ -34,6 +34,7 @@ Lag::Lag(std::ifstream& inn)
 		int nr; inn >> nr;
 		spillerNr[antSpillere++] = nr;
 	}
+	inn.ignore();
 	
 }
 
