@@ -13,16 +13,32 @@ Spillere::Spillere()
 void Spillere::lesSpillereFraFil()
 {
 	std::ifstream inn("gruppe06-ooprog/SPILLERE.DTA");
-	if (inn) {
+	if (inn)
+	{
 		inn >> sisteNr;
-		for (int i = 0; i < sisteNr; i++) {
+		while (inn.good())
+		{
+			int num;
+			inn >> num;
+			inn.ignore();
+			if (!inn.fail())
+			{
+				Spiller* spiller = new Spiller(inn, num);
+				spillere->add(spiller);
+			}
+		}
+		/*
+		for (int i = 0; i < sisteNr; i++)
+		{
 			int num;
 			inn >> num; inn.ignore();
 			Spiller* temp = new Spiller(inn, num);
 			spillere->add(temp);
 		}
+		*/
 	}
-	else {
+	else
+	{
 		std::cout << "Finner ikke SPILLERE.DTA\n";
 	}
 	
@@ -45,30 +61,25 @@ void Spillere::skrivTilFil()
 
 void Spillere::nySpiller()
 {
-	int n;
-	// finn fyrste ledige spelarnummer
-	for (int i = 1; i <= sisteNr + 1; i++)
-	{
-		// "tom" plass i lista
-		if (!spillere->inList(i))
-		{
-			n = i ;
-		}
-		// alt er fyllt frå før
-		else if (i == sisteNr + 1)
-		{
-			n = sisteNr;
-		}
-	}
-	spillere->add(new Spiller(n));
-	sisteNr++;
+	spillere->add(new Spiller(++sisteNr));
 }
 
+// fjernar ein spelar fraa lista
 void Spillere::fjernSpiller()
 {
 	int n = rIO.lesTall("Spillerens nummer?", 1, sisteNr);
-	Spiller* spiller = (Spiller*)spillere->removeNo(n);
-	delete spiller;
+	for (int i = 1; i <= spillere->noOfElements(); i++)
+	{
+		Spiller* spiller = (Spiller*)spillere->removeNo(i);
+		if (spiller->spillerNr() == n)
+		{
+			delete spiller;
+		}
+		else
+		{
+			spillere->add(spiller);
+		}
+	}
 
 	idrettene.fjernSpillerNr(n);
 }
