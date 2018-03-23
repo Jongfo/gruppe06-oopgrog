@@ -55,6 +55,15 @@ void Idrettene::visIdrett()
 	}
 }
 
+// spør om namn paa og returnerar idrett
+Idrett* Idrettene::getIdrett()
+{
+	char* idrettNavn;
+	rIO.lesInnICharPointer("Idrett", idrettNavn);
+	Idrett* idrett = getIdrett(idrettNavn);
+	return idrett;
+}
+
 // returnerer idrett med eit gitt namn
 Idrett* Idrettene::getIdrett(char* s)
 {
@@ -66,6 +75,7 @@ Idrett* Idrettene::getIdrett(char* s)
 	}
 	else
 	{
+		std::cout << "Idrett fins ikke!\n";
 		return nullptr;
 	}
 }
@@ -140,8 +150,10 @@ void Idrettene::fjernIdrett()
 		Idrett* idrett = (Idrett*)idretter->remove(idrettNavn);
 		delete idrett;
 	}
-	else
-	{
-		std::cout << "Idrett fins ikke!\n";
-	}
+}
+
+// fjernar ein divisjon/avdeling
+void Idrettene::fjernDivAvd()
+{
+	// TODO: fyll inn
 }

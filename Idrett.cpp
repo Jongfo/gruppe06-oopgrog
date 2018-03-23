@@ -80,6 +80,16 @@ Idrett::~Idrett()
 	delete divisjoner;
 }
 
+// les namn paa og returnerer div/avd
+DivAvd* Idrett::getDivAvd()
+{
+	// les namn paa div/avd
+	char* divNavn;
+	rIO.lesInnICharPointer("Divisjon/Avdeling", divNavn);
+	DivAvd* divisjon = getDivAvd(divNavn);
+	return divisjon;
+}
+
 // returnerer div/avd med namn s
 DivAvd* Idrett::getDivAvd(char* s)
 {

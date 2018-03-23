@@ -18,6 +18,7 @@ public:
 	void skrivTilFil(std::ofstream& ut);
 	void nyeLag();
 	void display();
+	Lag* getLag();
 	Lag* getLag(char* s);
 	void fjernSpillerNr(int n);
 	~DivAvd();

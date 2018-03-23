@@ -16,10 +16,12 @@ public:
 	void nyDivisjon();
 	void visIdrett();
 	void visIdrett(char* s);
+	Idrett* getIdrett();
 	Idrett* getIdrett(char* s);
 	void lesInnIdrettFraFil();
 	void skrivTilFil();
 	void fjernSpillerNr(int n);
 	void fjernIdrett();
+	void fjernDivAvd();
 	~Idrettene();
 };

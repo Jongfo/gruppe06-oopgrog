@@ -32,7 +32,7 @@ void fjernSID()
 	{
 	case 'S': spillere.fjernSpiller(); break;
 	case 'I': idrettene.fjernIdrett(); break;
-	// TODO: case 'D': idrettene.fjernDivAvd(); break;
+	case 'D': idrettene.fjernDivAvd(); break;
 	default:
 		std::cout << "Ugyldig kommando";
 		break;
@@ -125,41 +125,19 @@ void skrivMeny()
 // skriv data om alle spelarar på eit lag
 void skrivSpillerePaaLag()
 {
-	// les inn namn paa idrett
-	char* idrettNavn;
-	rIO.lesInnICharPointer("Idrett", idrettNavn);
-	Idrett* idrett = idrettene.getIdrett(idrettNavn);
+	Idrett* idrett = idrettene.getIdrett();
 	if (idrett != nullptr)
 	{
-		// les namn paa div/avd
-		char* divNavn;
-		rIO.lesInnICharPointer("Divisjon/Avdeling", divNavn);
-		DivAvd* divisjon = idrett->getDivAvd(divNavn);
+		DivAvd* divisjon = idrett->getDivAvd();
 		if (divisjon != nullptr)
 		{
-			// les inn namn paa lag
-			char* lagNavn;
-			rIO.lesInnICharPointer("Lag", lagNavn);
-			Lag* lag = divisjon->getLag(lagNavn);
+			Lag* lag = divisjon->getLag();
 			if (lag != nullptr)
 			{
 				lag->displaySpillere();
 			}
-			else
-			{
-				std::cout << "Lag fins ikke.\n";
-			}
-		}
-		else
-		{
-			std::cout << "Divisjon/Avdeling fins ikke.\n";
 		}
 	}
-	else
-	{
-		std::cout << "Idrett fins ikke.\n";
-	}
-
 }
 
 // handterar kommando-input

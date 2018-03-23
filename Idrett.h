@@ -19,6 +19,7 @@ public:
 	void fjernSpillerNr(int n);
 	void nyDivisjon();
 	void display();
+	DivAvd* getDivAvd();
 	DivAvd* getDivAvd(char* s);
 	~Idrett();
 };

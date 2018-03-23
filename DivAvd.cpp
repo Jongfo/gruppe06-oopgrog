@@ -56,6 +56,15 @@ DivAvd::~DivAvd()
 	}
 }
 
+// les namn paa og returnerar lag
+Lag* DivAvd::getLag()
+{
+	char* lagNavn;
+	rIO.lesInnICharPointer("Lag", lagNavn);
+	Lag* lag = getLag(lagNavn);
+	return lag;
+}
+
 // returnerer eit lag i divisjonen
 Lag* DivAvd::getLag(char* s)
 {
@@ -67,6 +76,7 @@ Lag* DivAvd::getLag(char* s)
 		}
 	}
 
+	std::cout << "Lag fins ikke!\n";
 	return nullptr;
 }
 
