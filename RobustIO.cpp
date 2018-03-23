@@ -77,7 +77,7 @@ char* RobustIO::lesTabelltype(const char* t)
 		}
 		else 
 		{
-			return nullptr;
+			delete tabelltype;
 		}
 	}
 }
@@ -179,21 +179,21 @@ void RobustIO::lesDato(const char* t, char s[])
 // returnerar true dersom gyldig dato paa format aaaammdd
 bool RobustIO::okDato(char* s)
 {
-	// TODO: Gjer ferdig okDato()
 	if (strlen(s) != 8)
 	{
+		// ikkje rett lengd til aa vere dato
 		return false;
 	}
-	else if (s[4] > '1')
+	else if (s[4] > '1' || (s[4] == '1' && s[5] > '2'))
 	{
+		// månaden er feil
 		return false;
 	}
-	else if (s[4] == '1')
+	else if (s[6] > '3' || (s[6] == '3' && s[7] > '1'))
 	{
-		if (s[5] > '2')
-		{
-			return false;
-		}
+		// dagen er feil
+		// TODO: Sjekk ulike tillete dagar for ulike månadar
+		return false;
 	}
 	else
 	{
@@ -201,6 +201,7 @@ bool RobustIO::okDato(char* s)
 		{
 			if (s[i] < '0' || s[i] > '9')
 			{
+				// ikkje alle symbola er tal
 				return false;
 			}
 		}

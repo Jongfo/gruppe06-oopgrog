@@ -12,6 +12,8 @@ DivAvd::DivAvd(char* navn) : TextElement(navn)
 		{
 			if (i != j)
 			{
+				std::cout << lag[i]->getNavn() << " (hjemme) - "
+						  << lag[j]->getNavn() << " (borte):\n";
 				resultat[i][j] = new Resultat(lag[i], lag[j]);
 			}
 		}
