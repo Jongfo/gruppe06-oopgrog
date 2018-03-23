@@ -20,7 +20,11 @@ Lag::Lag()
 			{
 				std::cout << "\nFins allerede i laget.\n";
 			}
-		} while (spillerILag(nr));
+			if (!spillere.finsSpiller(nr))
+			{
+				std::cout << "\nSpiller fins ikke.\n";
+			}
+		} while (spillerILag(nr) || !spillere.finsSpiller(nr));
 		spillerNr[antSpillere++] = nr;
 	}
 }

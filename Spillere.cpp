@@ -127,3 +127,16 @@ Spillere::~Spillere()
 {
     delete spillere;
 }
+
+// returnerar true dersom spelar finst
+bool Spillere::finsSpiller(int n)
+{
+	if (spillere->inList(n))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}

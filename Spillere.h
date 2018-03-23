@@ -21,5 +21,6 @@ public:
 	void visSpiller(char* s);
 	void visSpiller(int nr);
 	int getSisteNr();
+	bool finsSpiller(int n);
     ~Spillere();
 };
