@@ -18,6 +18,7 @@ public:
     void endreSpillere(char* idrettNavn, char* divNavn, char* lagNavn);
 	void fjernSpillerNr(int n);
 	void nyDivisjon();
+	void fjernDivAvd();
 	void display();
 	DivAvd* getDivAvd();
 	DivAvd* getDivAvd(char* s);

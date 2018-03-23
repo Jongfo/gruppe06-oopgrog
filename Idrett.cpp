@@ -124,3 +124,19 @@ void Idrett::fjernSpillerNr(int n)
 		divisjoner->add((TextElement*)divisjon);
 	}
 }
+
+// fjernar ein divisjon
+void Idrett::fjernDivAvd()
+{
+	char* divisjonNavn;
+	rIO.lesInnICharPointer("Divisjon/Avdeling aa fjerne", divisjonNavn);
+	if (divisjoner->inList(divisjonNavn))
+	{
+		DivAvd* divisjon = (DivAvd*)divisjoner->remove(divisjonNavn);
+		delete divisjon;
+	}
+	else
+	{
+		std::cout << "Divisjon fins ikke!\n";
+	}
+}

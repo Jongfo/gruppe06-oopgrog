@@ -22,6 +22,5 @@ public:
 	void skrivTilFil();
 	void fjernSpillerNr(int n);
 	void fjernIdrett();
-	void fjernDivAvd();
 	~Idrettene();
 };

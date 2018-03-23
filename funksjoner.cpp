@@ -26,13 +26,22 @@ void nySID()
 // fjern spelar, idrett eller div/avd
 void fjernSID()
 {
+	// TODO: Spoer om brukaren er sikker!
 	char k = rIO.lesInnTilStor();
 
 	switch (k)
 	{
 	case 'S': spillere.fjernSpiller(); break;
 	case 'I': idrettene.fjernIdrett(); break;
-	case 'D': idrettene.fjernDivAvd(); break;
+	case 'D': // fjern divisjon/avdeling
+	{
+		Idrett* idrett = idrettene.getIdrett();
+		if (idrett != nullptr)
+		{
+			idrett->fjernDivAvd();
+		}
+		break;
+	}
 	default:
 		std::cout << "Ugyldig kommando";
 		break;

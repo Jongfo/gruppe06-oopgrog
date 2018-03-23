@@ -151,9 +151,3 @@ void Idrettene::fjernIdrett()
 		delete idrett;
 	}
 }
-
-// fjernar ein divisjon/avdeling
-void Idrettene::fjernDivAvd()
-{
-	// TODO: fyll inn
-}
