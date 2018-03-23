@@ -147,7 +147,11 @@ void Idrettene::fjernIdrett()
 	rIO.lesInnICharPointer("Idrett aa fjerne", idrettNavn);
 	if (idretter->inList(idrettNavn))
 	{
-		Idrett* idrett = (Idrett*)idretter->remove(idrettNavn);
-		delete idrett;
+		std::cout << "Vil du virkelig fjerne " << idrettNavn << "? (y/n)";
+		if (rIO.lesInnTilStor() == 'Y')
+		{
+			Idrett* idrett = (Idrett*)idretter->remove(idrettNavn);
+			delete idrett;
+		}
 	}
 }
