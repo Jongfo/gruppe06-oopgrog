@@ -26,7 +26,6 @@ void nySID()
 // fjern spelar, idrett eller div/avd
 void fjernSID()
 {
-	// TODO: Spoer om brukaren er sikker!
 	char k = rIO.lesInnTilStor();
 
 	switch (k)

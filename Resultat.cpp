@@ -1,9 +1,64 @@
 #include "Resultat.h"
 #include "RobustIO.h"
+#include "Spillere.h"
 
 extern RobustIO rIO;
+extern Spillere spillere;
 
 Resultat::Resultat(Lag* hjemmelag, Lag* bortelag)
 {
 	rIO.lesDato("Dato", dato);
+
+	// les inn antal mål
+	std::cout << "Maal:\n";
+	hjemmemaal = rIO.lesTall(hjemmelag->getNavn(), 0, MAXMAAL);
+	bortemaal = rIO.lesTall(bortelag->getNavn(), 0, MAXMAAL);
+
+	// spør om kampen blei ferdig til normal tid
+	std::cout << "Ble kampen ferdig paa normal tid? (y/n) ";
+	normalTid = rIO.lesInnTilStor() == 'Y';
+
+	// les inn målscorarar for alle måla
+	
+	// heimemål
+	if (hjemmemaal > 0)
+	{
+		std::cout << "Maalscorere (" << hjemmelag->getNavn() << "):\n";
+		for (int i = 0; i < hjemmemaal; i++)
+		{
+			// TODO: List opp spelarane på laget for brukarvennlegheit
+			do
+			{
+				hjemmescorere[i] = rIO.lesTall("Spillerens nummer",
+					0, spillere.getSisteNr());
+
+				if (!hjemmelag->spillerILag(hjemmescorere[i]))
+				{
+					std::cout << hjemmescorere[i] << " spiller ikke for "
+						<< hjemmelag->getNavn() << "!\n";
+				}
+			} while (!hjemmelag->spillerILag(hjemmescorere[i]));
+		}
+	}
+
+	// bortemål
+	if (bortemaal > 0)
+	{
+		std::cout << "Maalscorere (" << bortelag->getNavn() << "):\n";
+		for (int i = 0; i < bortemaal; i++)
+		{
+			// TODO: List opp spelarane på laget for brukarvennlegheit
+			do
+			{
+				bortescorere[i] = rIO.lesTall("Spillerens nummer",
+					0, spillere.getSisteNr());
+
+				if (!bortelag->spillerILag(bortescorere[i]))
+				{
+					std::cout << bortescorere[i] << " spiller ikke for "
+						<< bortelag->getNavn() << "!\n";
+				}
+			} while (!bortelag->spillerILag(bortescorere[i]));
+		}
+	}
 }

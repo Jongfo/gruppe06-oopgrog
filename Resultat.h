@@ -7,11 +7,11 @@ class Resultat
 {
 private:
 	char dato[9];
-	int hjemmemaal;
-	int bortemaal;
+	int  hjemmemaal;
+	int  bortemaal;
 	bool normalTid;
-	int bortescorere[MAXSPILLERE];
-	int hjemmescorere[MAXSPILLERE];
+	int  bortescorere[MAXMAAL];
+	int  hjemmescorere[MAXMAAL];
 public:
 	Resultat(Lag* hjemmelag, Lag* bortelag);
 };
