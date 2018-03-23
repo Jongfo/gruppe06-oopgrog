@@ -169,11 +169,94 @@ char* RobustIO::strip(char* s)
 // les dato inn i s paa formatet aaaammdd
 void RobustIO::lesDato(const char* t, char s[])
 {
+	char temp[MAXTEKST];
 	do
 	{
 		std::cout << t << ": ";
-		std::cin.getline(s, DATOLEN);
-	} while (!okDato(s));
+		std::cin.getline(temp, MAXTEKST);
+		fjernTegn(temp, true, true, true); // fjernar alt som ikkje er tal
+	} while (!okDato(temp));
+	strcpy(s, temp);
+}
+
+// fjerner spesifiserte tegn fra teksta s
+void RobustIO::fjernTegn(char* s, bool spesialtegn, bool mellomrom,
+						 bool bokstaver, bool tall)
+{
+	// fjern spesialteikn
+	if (spesialtegn)
+	{
+		for (int i = 0; i < strlen(s); i++)
+		{
+			if (!((s[i] >= 'A' && s[i] <= 'Z') ||
+				(s[i] >= 'a' && s[i] <= 'z') ||
+				(s[i] >= '0' && s[i] <= '9') || s[i] == ' '))
+			{
+				// flytt alt etter ned
+				for (int j = i; j < strlen(s); j++)
+				{
+					s[j] = s[j + 1];
+				}
+				i--;
+			}
+		}
+	}
+
+	// fjern mellomrom
+	if (mellomrom)
+	{
+		strip(s);
+		for (int i = 0; i < strlen(s); i++)
+		{
+			if (s[i] == ' ')
+			{
+				// flytt alt etter ned
+				for (int j = i; j < strlen(s); j++)
+				{
+					s[j] = s[j + 1];
+				}
+				i--;
+			}
+		}
+	}
+
+	// fjern bokstavar
+	if (bokstaver)
+	{
+		strip(s);
+		for (int i = 0; i < strlen(s); i++)
+		{
+			if (s[i] >= 'A' && s[i] <= 'Z')
+			{
+				// flytt alt etter ned
+				for (int j = i; j < strlen(s); j++)
+				{
+					s[j] = s[j + 1];
+				}
+				i--;
+			}
+		}
+	}
+
+	// fjern tal
+	if (tall)
+	{
+		strip(s);
+		for (int i = 0; i < strlen(s); i++)
+		{
+			if (s[i] >= '0' && s[i] <= '9')
+			{
+				// flytt alt etter ned
+				for (int j = i; j < strlen(s); j++)
+				{
+					s[j] = s[j + 1];
+				}
+				i--;
+			}
+		}
+	}
+
+
 }
 
 // returnerar true dersom gyldig dato paa format aaaammdd

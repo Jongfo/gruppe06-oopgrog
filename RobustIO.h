@@ -23,4 +23,7 @@ public:
 	char* strip(char* s);   // Fjerner blanke fra s og returnerer det
 	void lesDato(const char* t, char s[]);
 	bool okDato(char* s);
+	void fjernTegn(char* s, bool spesialtegn = true,
+		           bool mellomrom = false, bool bokstaver = false,
+		           bool tall = false);
 };
