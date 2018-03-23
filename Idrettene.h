@@ -20,5 +20,6 @@ public:
 	void lesInnIdrettFraFil();
 	void skrivTilFil();
 	void fjernSpillerNr(int n);
+	void fjernIdrett();
 	~Idrettene();
 };

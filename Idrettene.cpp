@@ -66,7 +66,6 @@ Idrett* Idrettene::getIdrett(char* s)
 	}
 	else
 	{
-		std::cout << "Idrett eksisterer ikke.\n";
 		return nullptr;
 	}
 }
@@ -128,5 +127,21 @@ void Idrettene::fjernSpillerNr(int n)
 		Idrett* idrett = (Idrett*)idretter->removeNo(i);
 		idrett->fjernSpillerNr(n);
 		idretter->add((TextElement*)idrett);
+	}
+}
+
+// fjernar ein idrett
+void Idrettene::fjernIdrett()
+{
+	char* idrettNavn;
+	rIO.lesInnICharPointer("Idrett aa fjerne", idrettNavn);
+	if (idretter->inList(idrettNavn))
+	{
+		Idrett* idrett = (Idrett*)idretter->remove(idrettNavn);
+		delete idrett;
+	}
+	else
+	{
+		std::cout << "Idrett fins ikke!\n";
 	}
 }

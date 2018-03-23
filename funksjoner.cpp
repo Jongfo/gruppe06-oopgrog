@@ -31,7 +31,7 @@ void fjernSID()
 	switch (k)
 	{
 	case 'S': spillere.fjernSpiller(); break;
-	// TODO: case 'I': idrettene.fjernIdrett(); break;
+	case 'I': idrettene.fjernIdrett(); break;
 	// TODO: case 'D': idrettene.fjernDivAvd(); break;
 	default:
 		std::cout << "Ugyldig kommando";

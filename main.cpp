@@ -13,7 +13,6 @@ int main()
 	lesFraFil();
 	skrivMeny();
 	valgMeny();
-
 	spillere.skrivTilFil();
 	idrettene.skrivTilFil();
 }
