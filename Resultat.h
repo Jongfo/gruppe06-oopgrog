@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ConstEnum.h"
+#include "Lag.h"
 
 class Resultat
 {
@@ -12,5 +13,5 @@ private:
 	int bortescorere[MAXSPILLERE];
 	int hjemmescorere[MAXSPILLERE];
 public:
-	Resultat();
+	Resultat(Lag* hjemmelag, Lag* bortelag);
 };

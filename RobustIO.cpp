@@ -165,3 +165,46 @@ char* RobustIO::strip(char* s)
 	}
 	return s;
 }
+
+// les dato inn i s paa formatet aaaammdd
+void RobustIO::lesDato(const char* t, char s[])
+{
+	do
+	{
+		std::cout << t << ": ";
+		std::cin.getline(s, DATOLEN);
+	} while (!okDato(s));
+}
+
+// returnerar true dersom gyldig dato paa format aaaammdd
+bool RobustIO::okDato(char* s)
+{
+	// TODO: Gjer ferdig okDato()
+	if (strlen(s) != 8)
+	{
+		return false;
+	}
+	else if (s[4] > '1')
+	{
+		return false;
+	}
+	else if (s[4] == '1')
+	{
+		if (s[5] > '2')
+		{
+			return false;
+		}
+	}
+	else
+	{
+		for (int i = 0; i < 8; i++)
+		{
+			if (s[i] < '0' || s[i] > '9')
+			{
+				return false;
+			}
+		}
+	}
+
+	return true;
+}

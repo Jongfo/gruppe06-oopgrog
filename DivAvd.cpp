@@ -4,6 +4,18 @@ DivAvd::DivAvd(char* navn) : TextElement(navn)
 {
 	antLag = 0;
 	DivAvd::nyeLag();
+
+	// lag terminlista
+	for (int i = 0; i < antLag; i++)
+	{
+		for (int j = 0; j < antLag; j++)
+		{
+			if (i != j)
+			{
+				resultat[i][j] = new Resultat(lag[i], lag[j]);
+			}
+		}
+	}
 }
 
 DivAvd::DivAvd(std::ifstream& inn, char* navn) : TextElement(navn)

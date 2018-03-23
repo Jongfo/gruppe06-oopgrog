@@ -21,4 +21,6 @@ public:
 	int   lesTall(const char* t, const int MIN, const int MAX); //Tekst til bruker og mellom hvilkne tall bruker kan taste
 	char  lesInnTilStor();  //Leser in en kommand/Gjør til stor bokstav
 	char* strip(char* s);   // Fjerner blanke fra s og returnerer det
+	void lesDato(const char* t, char s[]);
+	bool okDato(char* s);
 };
