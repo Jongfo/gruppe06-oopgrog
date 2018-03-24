@@ -48,7 +48,7 @@ void fjernSID()
 }
 
 // Viser ein spelar eller alle spelarar
-void visSpiller() //Kan flytte denne inn i spillere å gjøre som frode
+void visSpiller() //Kan flytte denne inn i spillere Egjøre som frode
 {
 	char temp[MAXTEKST];				//Lager midlertidig char-array
 	std::cin.getline(temp, MAXTEKST);	//henter input fra bruker
@@ -89,23 +89,60 @@ void visIdrett()
 	}
 }
 
-// les all data frå fil
+// les all data frEfil
 void lesFraFil()
 {
 	spillere.lesSpillereFraFil();
 	idrettene.lesInnIdrettFraFil();
 }
 
-// Endrer data om spillere på et lag.
+// E: Endrer data om spillere paa et lag.
 void redigerSpillere()
 {
     char* idrettNavn, * divNavn, * lagNavn;
-    // rIO.finnidrett
+	char kommando;
+	int spillerID;
+	Idrett* idretten;
+	DivAvd* avdelingen;
+	Lag* laget;
+
+
+    // finn idrett
     rIO.lesInnICharPointer("skriv inn navn paa idrett.", idrettNavn);
-    // rIO.finnDivisjon
-    rIO.lesInnICharPointer("skriv inn navn paa divisjon/avdeling.", divNavn);
-    // rIO.finnLag
-    rIO.lesInnICharPointer("skriv inn navn paa lag.", lagNavn);
+	idretten = idrettene.getIdrett(idrettNavn);
+	if (idretten)
+	{
+		// finn Divisjon
+		rIO.lesInnICharPointer("skriv inn navn paa divisjon/avdeling.", divNavn);
+		avdelingen = idretten->getDivAvd(divNavn);
+		if (avdelingen)
+		{
+			// finn Lag
+			rIO.lesInnICharPointer("skriv inn navn paa lag.", lagNavn);
+			laget = avdelingen->getLag(lagNavn);
+			if (laget)
+			{
+				std::cout << "\n\tOnsker du aa [F]jerne eller [L]egge til en spiller?";
+				kommando = rIO.lesInnTilStor();
+				switch (kommando)
+				{
+				case 'F':
+					spillerID = rIO.lesTall("Oppgi ID nummer paa spiller som skal fjernes fra laget.", 0, 9999);
+					if (laget->spillerILag(spillerID))
+						laget->fjernSpillerNr(spillerID);
+					else
+						std::cout << "\nFant ikke spiller ID";
+					break;
+				case 'L':
+
+					break;
+				default:
+					break;
+				}
+			}
+		}
+
+	}
 
     
 
@@ -124,13 +161,13 @@ void skrivMeny()
 	std::cout << "\n\tK - Skriv alle Kampene en gitt dato for en hel idrett eller en divisjon/avdeling til skjerm eller fil";
 	std::cout << "\n\tT - Skriv (T)abell for en hel idrett eller en divisjon/avdeling til skjerm eller fil";
 	std::cout << "\n\tR - Lese (R)esultatliste inn fra fil";
-	std::cout << "\n\tD - (D)ata om alle spillerne på et lag";
-	std::cout << "\n\tE - (E)ndre/redigere spillerne på et lag";
-	std::cout << "\n\tC - Skriv 10-på-topp liste av topps(C)orerne for en gitt divisjon/avdeling eller et gitt lag til skjerm eller fil";
+	std::cout << "\n\tD - (D)ata om alle spillerne pEet lag";
+	std::cout << "\n\tE - (E)ndre/redigere spillerne pEet lag";
+	std::cout << "\n\tC - Skriv 10-pEtopp liste av topps(C)orerne for en gitt divisjon/avdeling eller et gitt lag til skjerm eller fil";
 	std::cout << "\n\tQ = Quit/Avslutt";
 }
 
-// skriv data om alle spelarar på eit lag
+// skriv data om alle spelarar pEeit lag
 void skrivSpillerePaaLag()
 {
 	Idrett* idrett = idrettene.getIdrett();
