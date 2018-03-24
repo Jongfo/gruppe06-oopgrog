@@ -194,18 +194,18 @@ void valgMeny()
 	{
 		switch (kommando)
 		{
-		case 'S': visSpiller();	break;
-		case 'I': visIdrett();	break;
-		case 'N': nySID();		break;
-		case 'F': fjernSID();	break;
+		case 'S': visSpiller();				break;
+		case 'I': visIdrett();				break;
+		case 'N': nySID();					break;
+		case 'F': fjernSID();				break;
 		case 'L': break;
 		case 'K': break;
-		case 'T': break;
+		case 'T': idrettene.skrivTabell();	break;
 		case 'R': break;
-		case 'D': skrivSpillerePaaLag(); break;
+		case 'D': skrivSpillerePaaLag();	break;
 		case 'E': break;
 		case 'C': break;
-		default: skrivMeny(); break; //Skriver meny
+		default: skrivMeny();				break; //Skriver meny
 		}
 		kommando = rIO.lesInnTilStor(); // Leser brukerens ønske/valg.
 	};

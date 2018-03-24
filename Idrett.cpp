@@ -23,8 +23,7 @@ Idrett::Idrett(std::ifstream&inn, char* navn) : TextElement(navn)
 	for (int i = 0; i < antDiv; i++) {
 		char* divNavn;  rIO.lesCharPointerFraFil(inn, divNavn);
 		//Finner hvor filen ligger
-		char filPlass[MAXTEKST]; char tekst[] = "gruppe06-ooprog/Div_i_"; char type[] = ".DTA";
-		strcpy(filPlass, tekst); strcat(filPlass, navn); strcat(filPlass, divNavn); strcat(filPlass, type);
+		char* filPlass = rIO.finnPlassOgLeggeFil(navn, divNavn, "Div_i_");
 		std::ifstream innDiv(filPlass);//Åpner filen
 		if (innDiv) {
 			divisjoner->add((TextElement*)new DivAvd(innDiv, divNavn));
@@ -50,8 +49,7 @@ void Idrett::skrivTilFil(std::ofstream& idrettFil)
 		DivAvd* divisjon = (DivAvd*)divisjoner->removeNo(i);
 		idrettFil << divisjon->hentNavn() << '\n';
 		//Finner ut hvor filen skal legges
-		char filPlass[MAXTEKST]; char tekst[] = "gruppe06-ooprog/Div_i_"; char type[] = ".DTA";
-		strcpy(filPlass, tekst); strcat(filPlass, text); strcat(filPlass, divisjon->hentNavn()); strcat(filPlass, type);
+		char* filPlass = rIO.finnPlassOgLeggeFil(text, divisjon->hentNavn(), "Div_i_");
 		std::ofstream divAvdFil(filPlass); //Legger file der
 
 		divisjon->skrivTilFil(divAvdFil);
@@ -140,5 +138,41 @@ void Idrett::fjernDivAvd()
 	else
 	{
 		std::cout << "Divisjon fins ikke!\n";
+	}
+}
+//Viser tabell til divisjonen
+void Idrett::visTabell() {
+	char* divNavn; rIO.lesInnICharPointer("Navn paa divisjonen (blank for alle)", divNavn);
+	char* filNavn; rIO.lesInnICharPointer("Fil navn på Divisjonen (blankt kun til skjerm", filNavn);
+	if (!strlen(divNavn)) 
+	{
+
+			//Skriver alle tabeller til skjerm eller fil
+		for (int i = 1; i <= divisjoner->noOfElements(); i++) {
+			DivAvd* divisjon = (DivAvd*)divisjoner->removeNo(i);
+			if (strlen(filNavn)) {
+				divisjon->skrivTabellTilFil(filNavn);
+			}
+			else {
+				divisjon->visTabell();
+			}
+			divisjoner->add((TextElement*)divisjon);
+		}
+	}
+	else if (divisjoner->inList(divNavn))
+	{
+		//Skriver spesefikk tabell til sjerm eller fil
+		DivAvd* divisjon = (DivAvd*)divisjoner->remove(divNavn);
+		if (strlen(filNavn)) {
+			divisjon->skrivTabellTilFil(filNavn);
+		}
+		else {
+			divisjon->visTabell();
+		}
+		divisjoner->add((TextElement*)divisjon);
+	}
+	else 
+	{
+		std::cout << "Fant ikke Divisjonen\n\n";
 	}
 }

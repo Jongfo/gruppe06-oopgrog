@@ -22,5 +22,7 @@ public:
 	Lag* getLag(char* s);
 	void fjernSpillerNr(int n);
 	char* hentNavn();
+	void visTabell();
+	void skrivTabellTilFil(char* navn);
 	~DivAvd();
 };

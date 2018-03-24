@@ -115,15 +115,14 @@ void Idrettene::lesInnIdrettFraFil()
 void Idrettene::skrivTilFil()
 {
 	std::ofstream idrettFil("gruppe06-ooprog/IDRETTENE.DTA");
-	//std::ofstream divAvdFil("gruppe06-ooprog/NY_DIV.DTA");
 
 	idrettFil << idretter->noOfElements() << '\n';
 	
 	for (int i = 1; i <= idretter->noOfElements(); i++)
 	{
 		Idrett* idrett = (Idrett*)idretter->removeNo(i);
-		idretter->add((TextElement*)idrett);
 		idrett->skrivTilFil(idrettFil);
+		idretter->add((TextElement*)idrett);
 	}
 	
 }
@@ -155,3 +154,18 @@ void Idrettene::fjernIdrett()
 		}
 	}
 }
+// hånterer skrive ut tabbeler
+void Idrettene::skrivTabell() 
+{
+	char* idrNavn; rIO.lesInnICharPointer("Navn paa Idretten?", idrNavn);
+	if (idretter->inList(idrNavn)) {
+		Idrett* idr = (Idrett*)idretter->remove(idrNavn);
+		idr->visTabell();
+		idretter->add((TextElement*)idr);
+	}
+	else {
+		std::cout << "Fant ikke idretten \n\n";
+	}
+}
+/*
+*/

@@ -15,10 +15,6 @@ void RobustIO::lesInnICharPointer(const char* utskrift, char*& intast)
 	std::cout << utskrift << std::endl;
 	char temp[MAXTEKST];//Lager midlertidig char-array
 	std::cin.getline(temp, MAXTEKST);//Bruker skriver inn i temp
-	while (strlen(temp) <= 1) {
-		std::cout << "For kort\n";
-		std::cin.getline(temp, MAXTEKST);//Bruker skriver inn i temp
-	}
 	intast = new char[strlen(temp) + 1];//Gjør t akkurat temp langt
 	strcpy(intast, temp); //Kopierer temp over til t
 }
@@ -63,7 +59,6 @@ char* RobustIO::lesNyAdr(const char* t)
 	} while (nyAdr == nullptr);
 	return nyAdr;
 }
-
 // handterar innlesing av tabelltype
 char* RobustIO::lesTabelltype(const char* t)
 {
@@ -102,7 +97,8 @@ bool RobustIO::okNavn(char* s)
 	{
 		if (!((s[i] >= 'A' && s[i] <= 'Z') ||
 			(s[i] >= 'a' && s[i] <= 'z') ||
-			s[i] == '-' || s[i] == ' '))
+			s[i] == '-' || s[i] == ' ') ||
+			strlen(s) <= 1 )
 		{
 			return false;
 		}
@@ -120,7 +116,8 @@ bool RobustIO::okAdr(char* s)
 		if (!((s[i] >= 'A' && s[i] <= 'Z') ||
 			  (s[i] >= 'a' && s[i] <= 'z') ||
 			  (s[i] >= '0' && s[i] <= '9') ||
-			   s[i] == '-' || s[i] == ' '))
+			   s[i] == '-' || s[i] == ' ') ||
+			   strlen(s) <= 1)
 		{
 			return false;
 		}
@@ -291,4 +288,14 @@ bool RobustIO::okDato(char* s)
 	}
 
 	return true;
+}
+
+char* RobustIO::finnPlassOgLeggeFil(char* t, char* s, const char* prefix) 
+{
+	char filPlass[MAXTEKST]; char tekst[] = "gruppe06-ooprog/"; char type[] = ".DTA";
+	char space[] = "_"; 
+	strcpy(filPlass, tekst); strcat(filPlass, prefix); strcat(filPlass, t);
+	strcat(filPlass, space);  strcat(filPlass, s); strcat(filPlass, type);
+	char* f; f = new char[strlen(filPlass) + 1];
+	return strcpy(f, filPlass);
 }

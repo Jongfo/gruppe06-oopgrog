@@ -116,3 +116,16 @@ char* DivAvd::hentNavn()
 {
 	return text;
 }
+void DivAvd::visTabell()
+{
+	//TODO display Tabell
+	std::cout << "FAKE TABEL FOR " << text << "\n\n";
+}
+void DivAvd::skrivTabellTilFil(char* navn) 
+{
+	//TODO skrive tabellen til fil
+	char* filPlass = rIO.finnPlassOgLeggeFil(navn, text, "Tabell_");
+	std::ofstream divAvdFil(filPlass);
+	skrivTilFil(divAvdFil); //ONLY TEMP FOR TESTING
+	std::cout << "FAKE WRITE OUT FOR " << text << "\n\n";
+}

@@ -19,6 +19,7 @@ public:
 	void fjernSpillerNr(int n);
 	void nyDivisjon();
 	void fjernDivAvd();
+	void visTabell();
 	void display();
 	DivAvd* getDivAvd();
 	DivAvd* getDivAvd(char* s);
