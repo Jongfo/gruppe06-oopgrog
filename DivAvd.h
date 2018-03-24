@@ -21,5 +21,6 @@ public:
 	Lag* getLag();
 	Lag* getLag(char* s);
 	void fjernSpillerNr(int n);
+	char* hentNavn();
 	~DivAvd();
 };

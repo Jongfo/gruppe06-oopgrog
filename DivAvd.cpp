@@ -33,8 +33,7 @@ DivAvd::DivAvd(std::ifstream& inn, char* navn) : TextElement(navn)
 void DivAvd::skrivTilFil(std::ofstream& ut)
 {
 	// skriv data
-	ut << text << '\n'
-		<< antLag << '\n';
+	ut << antLag << '\n';
 
 	// skriv laga
 	for (int i = 0; i < antLag; i++)
@@ -111,4 +110,9 @@ void DivAvd::fjernSpillerNr(int n)
 	{
 		lag[i]->fjernSpillerNr(n);
 	}
+}
+
+char* DivAvd::hentNavn() 	
+{
+	return text;
 }

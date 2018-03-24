@@ -98,8 +98,8 @@ void Idrettene::lesInnIdrettFraFil()
 	std::ifstream inn("gruppe06-ooprog/IDRETTENE.DTA");
 	if (inn) 
 	{
-		int n; inn >> n; inn.ignore();
-		for (size_t i = 0; i < n; i++) 
+		int antIdrett; inn >> antIdrett; inn.ignore();
+		for (int i = 0; i < antIdrett; i++) 
 		{
 			char* t; rIO.lesCharPointerFraFil(inn, t);
 			idretter->add((TextElement*)(new Idrett(inn,t)));

@@ -18,30 +18,21 @@ Idrett::Idrett(std::ifstream&inn, char* navn) : TextElement(navn)
 	{
 		tabelltype = (char*)"DOES NOT EXIST";
 	}
-	char filPlass[MAXTEKST]; char tekst[] = "gruppe06-ooprog/Div_i_"; char type[] = ".DTA";
-	strcpy(filPlass, tekst); strcat(filPlass, navn); strcat(filPlass, type);
-	std::cout << filPlass << "\n\n";
 	divisjoner = new List(Sorted);
-	std::ifstream innDiv(filPlass);
-	if (innDiv) 
-	{
-		while (innDiv.good()) 
-		{
-			char* temp; rIO.lesCharPointerFraFil(innDiv, temp);
-			if (!strcmp(temp,navn)) 
-			{
-				int n; innDiv >> n; innDiv.ignore();
-				for (int i = 0; i < n; i++) 
-				{
-					char* temp2;  rIO.lesCharPointerFraFil(innDiv, temp2);
-					divisjoner->add((TextElement*)new DivAvd(innDiv,temp2));
-				}
-			}
+	int antDiv; inn >> antDiv; inn.ignore();
+	for (int i = 0; i < antDiv; i++) {
+		char* divNavn;  rIO.lesCharPointerFraFil(inn, divNavn);
+		//Finner hvor filen ligger
+		char filPlass[MAXTEKST]; char tekst[] = "gruppe06-ooprog/Div_i_"; char type[] = ".DTA";
+		strcpy(filPlass, tekst); strcat(filPlass, navn); strcat(filPlass, divNavn); strcat(filPlass, type);
+		std::ifstream innDiv(filPlass);//Åpner filen
+		if (innDiv) {
+			divisjoner->add((TextElement*)new DivAvd(innDiv, divNavn));
 		}
-	}
-	else 
-	{
-		std::cout << "\nFinner ikke NY_DIV.DTA";
+		else {
+			std::cout <<"FINNER IKKE: " << filPlass << '\n';
+		}
+
 	}
 }
 
@@ -51,18 +42,20 @@ void Idrett::skrivTilFil(std::ofstream& idrettFil)
 	// skriv data
 	idrettFil << text << '\n'
 			  << tabelltype << '\n';
-	char filPlass[MAXTEKST]; char tekst[] = "gruppe06-ooprog/Div_i_"; char type[] = ".DTA";
-	strcpy(filPlass, tekst); strcat(filPlass, text); strcat(filPlass, type);
-	std::ofstream divAvdFil(filPlass);
-	divAvdFil << text << '\n'
-			  << divisjoner->noOfElements() << '\n';
-	
+	idrettFil << divisjoner->noOfElements() << '\n';
+
 	// skriv divisjonar
 	for (int i = 1; i <= divisjoner->noOfElements(); i++)
 	{
 		DivAvd* divisjon = (DivAvd*)divisjoner->removeNo(i);
-		divisjoner->add((TextElement*)divisjon);
+		idrettFil << divisjon->hentNavn() << '\n';
+		//Finner ut hvor filen skal legges
+		char filPlass[MAXTEKST]; char tekst[] = "gruppe06-ooprog/Div_i_"; char type[] = ".DTA";
+		strcpy(filPlass, tekst); strcat(filPlass, text); strcat(filPlass, divisjon->hentNavn()); strcat(filPlass, type);
+		std::ofstream divAvdFil(filPlass); //Legger file der
+
 		divisjon->skrivTilFil(divAvdFil);
+		divisjoner->add((TextElement*)divisjon);
 	}
 }
 

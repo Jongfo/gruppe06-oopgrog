@@ -57,7 +57,14 @@ void Lag::skrivTilFil(std::ofstream& ut)
 
 	for (int i = 0; i < antSpillere; i++)
 	{
-		ut << spillerNr[i] << ' ';
+		if (i < antSpillere -1) 
+		{
+			ut << spillerNr[i] << ' ';
+		}
+		else 
+		{
+			ut << spillerNr[i];
+		}
 	}
 
 	ut << '\n';
