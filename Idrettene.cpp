@@ -115,7 +115,7 @@ void Idrettene::lesInnIdrettFraFil()
 void Idrettene::skrivTilFil()
 {
 	std::ofstream idrettFil("gruppe06-ooprog/IDRETTENE.DTA");
-	std::ofstream divAvdFil("gruppe06-ooprog/NY_DIV.DTA");
+	//std::ofstream divAvdFil("gruppe06-ooprog/NY_DIV.DTA");
 
 	idrettFil << idretter->noOfElements() << '\n';
 	
@@ -123,7 +123,7 @@ void Idrettene::skrivTilFil()
 	{
 		Idrett* idrett = (Idrett*)idretter->removeNo(i);
 		idretter->add((TextElement*)idrett);
-		idrett->skrivTilFil(idrettFil, divAvdFil);
+		idrett->skrivTilFil(idrettFil);
 	}
 	
 }

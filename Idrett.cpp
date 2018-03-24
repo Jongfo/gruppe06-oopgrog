@@ -18,8 +18,11 @@ Idrett::Idrett(std::ifstream&inn, char* navn) : TextElement(navn)
 	{
 		tabelltype = (char*)"DOES NOT EXIST";
 	}
+	char filPlass[MAXTEKST]; char tekst[] = "gruppe06-ooprog/Div_i_"; char type[] = ".DTA";
+	strcpy(filPlass, tekst); strcat(filPlass, navn); strcat(filPlass, type);
+	std::cout << filPlass << "\n\n";
 	divisjoner = new List(Sorted);
-	std::ifstream innDiv("gruppe06-ooprog/NY_DIV.DTA");
+	std::ifstream innDiv(filPlass);
 	if (innDiv) 
 	{
 		while (innDiv.good()) 
@@ -43,12 +46,14 @@ Idrett::Idrett(std::ifstream&inn, char* navn) : TextElement(navn)
 }
 
 // skriv data om idrett og divisjonar til fil
-void Idrett::skrivTilFil(std::ofstream& idrettFil, std::ofstream& divAvdFil)
+void Idrett::skrivTilFil(std::ofstream& idrettFil)
 {
 	// skriv data
 	idrettFil << text << '\n'
 			  << tabelltype << '\n';
-
+	char filPlass[MAXTEKST]; char tekst[] = "gruppe06-ooprog/Div_i_"; char type[] = ".DTA";
+	strcpy(filPlass, tekst); strcat(filPlass, text); strcat(filPlass, type);
+	std::ofstream divAvdFil(filPlass);
 	divAvdFil << text << '\n'
 			  << divisjoner->noOfElements() << '\n';
 	
