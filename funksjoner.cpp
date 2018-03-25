@@ -124,7 +124,7 @@ void redigerSpillere()
 			{
 				do
 				{
-					std::cout << "\n\tOnsker du aa [F]jerne eller [L]egge til en spiller?";
+					std::cout << "\n\tOnsker du aa [F]jerne, [L]egge til en spiller?";
 					kommando = rIO.lesInnTilStor();
 					switch (kommando)
 					{
@@ -137,7 +137,7 @@ void redigerSpillere()
 						break;
 					case 'L':
 						spillerID = rIO.lesTall("Oppgi ID nummer paa spiller som skal legges til laget.", 1, spillere.getSisteNr());
-						//laget->leggTilSpiller();
+						laget->leggTilSpiller(spillerID);
 						break;
 					case 'Q': break;	//gjør ingen ting om bruker vil avslutte.
 					default:
