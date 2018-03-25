@@ -122,29 +122,38 @@ void redigerSpillere()
 			laget = avdelingen->getLag(lagNavn);
 			if (laget)
 			{
-				std::cout << "\n\tOnsker du aa [F]jerne eller [L]egge til en spiller?";
-				kommando = rIO.lesInnTilStor();
-				switch (kommando)
+				do
 				{
-				case 'F':
-					spillerID = rIO.lesTall("Oppgi ID nummer paa spiller som skal fjernes fra laget.", 0, 9999);
-					if (laget->spillerILag(spillerID))
-						laget->fjernSpillerNr(spillerID);
-					else
-						std::cout << "\nFant ikke spiller ID";
-					break;
-				case 'L':
-
-					break;
-				default:
-					break;
-				}
+					std::cout << "\n\tOnsker du aa [F]jerne eller [L]egge til en spiller?";
+					kommando = rIO.lesInnTilStor();
+					switch (kommando)
+					{
+					case 'F':
+						spillerID = rIO.lesTall("Oppgi ID nummer paa spiller som skal fjernes fra laget.", 1, spillere.getSisteNr()); //Spiller ID knyttet til MAXSPILLERE?
+						if (laget->spillerILag(spillerID))
+							laget->fjernSpillerNr(spillerID);
+						else
+							std::cout << "\nFant ikke spiller ID";
+						break;
+					case 'L':
+						spillerID = rIO.lesTall("Oppgi ID nummer paa spiller som skal legges til laget.", 1, spillere.getSisteNr());
+						//laget->leggTilSpiller();
+						break;
+					case 'Q': break;	//gjør ingen ting om bruker vil avslutte.
+					default:
+						std::cout << "\n\n\tUkjent kommando.\n\tF: fjern spiller.\n\tL: Legg til spiller.\n\tQ: avslutt.";
+						break;
+					}
+				} while (kommando != 'Q');
 			}
+			else
+				std::cout << "\nLag ikke funnet.";
 		}
-
+		else
+			std::cout << "\nAvdeling ikke funnet.";
 	}
-
-    
+	else
+		std::cout << "\nIdrett ikke funnet.";
 
 }
 

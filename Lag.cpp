@@ -113,12 +113,35 @@ void Lag::fjernSpillerNr(int n)
 			spillerNr[i] = 0;
 
 			// flytt alle over ned
-			for (int j = i; j < antSpillere; j++)
+			for (int j = i + 1; j < antSpillere; j++)
 			{
-				spillerNr[j] = spillerNr[j + 1];
+				spillerNr[j-1] = spillerNr[j];
 			}
-			spillerNr[antSpillere - 1] = 0;
+			spillerNr[--antSpillere] = 0;
 			break;
 		}
 	}
+}
+
+bool Lag::leggTilSpiller(int spillerID)
+{
+	if (!spillerILag(spillerID) && spillere.finsSpiller(spillerID) && antSpillere < MAXSPILLERE)
+	{
+		spillerNr[antSpillere++] = spillerID;
+		std::cout << "\nSpiller lagt til.";
+		return true;
+	}
+	else if (spillerILag(spillerID))
+	{
+		std::cout << "\nFins allerede i laget.\n";
+		return false;
+	}
+	else if (!spillere.finsSpiller(spillerID))
+	{
+		std::cout << "\nSpiller fins ikke.\n";
+		return false;
+	}
+
+	std::cout << "\nUkjent grunn til aa ikke legge til spiller.";
+	return false;
 }

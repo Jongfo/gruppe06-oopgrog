@@ -22,4 +22,5 @@ public:
 	void displaySpillere();
 	void display();
 	void fjernSpillerNr(int n);
+	bool leggTilSpiller(int spillerID);
 };
