@@ -180,7 +180,7 @@ void DivAvd::skrivTerminliste()
 	// skriv datoane
 	for (int i = 0; i < antLag; i++)
 	{
-		stream << lag[i]->getNavn() << ' ';
+		stream << std::setw(kolonneStorrelse) << lag[i]->getNavn() << ' ';
 		for (int j = 0; j < antLag; j++)
 		{
 			stream << std::setw(kolonneStorrelse);
