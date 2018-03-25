@@ -6,3 +6,4 @@ void lesFraFil();
 void skrivMeny();
 void valgMeny();
 void redigerSpillere();
+void skrivTerminliste();

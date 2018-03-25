@@ -24,5 +24,6 @@ public:
 	char* hentNavn();
 	void visTabell();
 	void skrivTabellTilFil(char* navn);
+	void skrivTerminliste();
 	~DivAvd();
 };

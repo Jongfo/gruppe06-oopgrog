@@ -194,6 +194,20 @@ void skrivSpillerePaaLag()
 	}
 }
 
+// skriv terminlista til ein divisjon/avdeling
+void skrivTerminliste()
+{
+	Idrett* idrett = idrettene.getIdrett();
+	if (idrett != nullptr)
+	{
+		DivAvd* divisjon = idrett->getDivAvd();
+		if (divisjon != nullptr)
+		{
+			divisjon->skrivTerminliste();
+		}
+	}
+}
+
 // handterar kommando-input
 void valgMeny()
 {
@@ -207,7 +221,7 @@ void valgMeny()
 		case 'I': visIdrett();				break;
 		case 'N': nySID();					break;
 		case 'F': fjernSID();				break;
-		case 'L': break;
+		case 'L': skrivTerminliste();		break;
 		case 'K': break;
 		case 'T': idrettene.skrivTabell();	break;
 		case 'R': break;

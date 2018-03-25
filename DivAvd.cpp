@@ -1,4 +1,5 @@
 #include "DivAvd.h"
+#include <iomanip>
 
 DivAvd::DivAvd(char* navn) : TextElement(navn)
 {
@@ -128,4 +129,72 @@ void DivAvd::skrivTabellTilFil(char* navn)
 	std::ofstream divAvdFil(filPlass);
 	skrivTilFil(divAvdFil); //ONLY TEMP FOR TESTING
 	std::cout << "FAKE WRITE OUT FOR " << text << "\n\n";
+}
+
+// skriv terminlista til fil eller til skjerm
+void DivAvd::skrivTerminliste()
+{
+	std::ostream stream(nullptr);
+	std::ofstream fil;
+	char* filnavn;					// namnet på fila å skriva til
+	int kolonneStorrelse = 5;		// størrelsen på ei kolonne
+
+	// sett kolonnestorleik til største lagnamn
+	for (int i = 0; i < antLag; i++)
+	{
+		if (strlen(lag[i]->getNavn()) > kolonneStorrelse)
+		{
+			kolonneStorrelse = strlen(lag[i]->getNavn());
+		}
+	}
+
+	rIO.lesInnICharPointer("Filnavn:", filnavn);
+
+	if (strlen(filnavn) == 0)
+	{
+		// filnamn tomt; skriv til cout
+		stream.rdbuf(std::cout.rdbuf());
+	}
+	else
+	{
+		// skriv til fil
+		fil = std::ofstream(filnavn);
+		stream.rdbuf(fil.rdbuf());
+	}
+
+	stream << "TERMINLISTE FOR " << text << '\n';
+
+	for (int i = 0; i < kolonneStorrelse; i++)
+	{
+		stream << ' ';
+	}
+
+	// skriv namn på toppen
+	for (int i = 0; i < antLag; i++)
+	{
+		stream << std::setw(kolonneStorrelse) << lag[i]->getNavn() << ' ';
+	}
+
+	stream << '\n';
+
+	// skriv datoane
+	for (int i = 0; i < antLag; i++)
+	{
+		stream << lag[i]->getNavn() << ' ';
+		for (int j = 0; j < antLag; j++)
+		{
+			stream << std::setw(kolonneStorrelse);
+			if (i != j)
+			{
+				stream << resultat[i][j]->kortDato() << ' ';
+			}
+			else
+			{
+				stream << "----- ";
+			}
+		}
+		stream << '\n';
+	}
+
+	delete[] filnavn;
 }

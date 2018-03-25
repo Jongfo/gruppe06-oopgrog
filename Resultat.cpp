@@ -62,3 +62,16 @@ Resultat::Resultat(Lag* hjemmelag, Lag* bortelag)
 		}
 	}
 }
+
+// returnerer datoen i "dd/mm"-form
+char* Resultat::kortDato()
+{
+	char* kortDato = new char[6];
+	kortDato[0] = dato[6];
+	kortDato[1] = dato[7];
+	kortDato[2] = '/';
+	kortDato[3] = dato[4];
+	kortDato[4] = dato[5];
+	kortDato[5] = '\0';
+	return kortDato;
+}

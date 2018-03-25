@@ -14,4 +14,5 @@ private:
 	int  hjemmescorere[MAXMAAL];
 public:
 	Resultat(Lag* hjemmelag, Lag* bortelag);
+	char* kortDato();
 };
