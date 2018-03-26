@@ -158,7 +158,8 @@ void DivAvd::skrivTerminliste()
 	else
 	{
 		// skriv til fil
-		fil = std::ofstream(filnavn);
+		char* plass = rIO.finnPlassOgLeggeFil(filnavn, text, "TerminListe_");
+		fil = std::ofstream(plass);
 		stream.rdbuf(fil.rdbuf());
 	}
 
