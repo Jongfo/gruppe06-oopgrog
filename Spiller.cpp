@@ -20,14 +20,14 @@ Spiller::Spiller(std::ifstream& inn, int num) : NumElement(num)
 // skriv data om spelaren til fil
 void Spiller::skrivTilFil(std::ofstream& ut)
 {
-	ut << number << '\n'
+	ut	<< number << '\n'
 		<< navn << '\n'
 		<< adresse << '\n';
 }
 
 void Spiller::display() 
 {
-	std::cout << "ID: " << number << std::endl;
+	std::cout << "\nID: " << number << std::endl;
 	std::cout << "Navn: " << navn << std::endl;
 	std::cout << "Adressen: " << adresse << std::endl;
 }

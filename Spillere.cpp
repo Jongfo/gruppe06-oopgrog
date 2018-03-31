@@ -10,6 +10,8 @@ Spillere::Spillere()
 {
     spillere = new List(Sorted);
 }
+
+// les alle spelarane inn frå fil
 void Spillere::lesSpillereFraFil()
 {
 	std::ifstream inn("gruppe06-ooprog/SPILLERE.DTA");
@@ -27,15 +29,6 @@ void Spillere::lesSpillereFraFil()
 				spillere->add(spiller);
 			}
 		}
-		/*
-		for (int i = 0; i < sisteNr; i++)
-		{
-			int num;
-			inn >> num; inn.ignore();
-			Spiller* temp = new Spiller(inn, num);
-			spillere->add(temp);
-		}
-		*/
 	}
 	else
 	{
@@ -86,12 +79,7 @@ void Spillere::fjernSpiller()
 
 void  Spillere::visSpiller() 
 {
-	for (int i = 1; i <= spillere->noOfElements(); i++) 
-	{
-		Spiller* temp = (Spiller*)spillere->removeNo(i);
-		temp->display();
-		spillere->add(temp);
-	}
+	spillere->displayList();
 }
 
 void  Spillere::visSpiller(char* s) 
@@ -106,6 +94,7 @@ void  Spillere::visSpiller(char* s)
 		spillere->add(temp);
 	}
 }
+
 void  Spillere::visSpiller(int nr) 
 {
 	for (int i = 1; i <= spillere->noOfElements(); i++) 
