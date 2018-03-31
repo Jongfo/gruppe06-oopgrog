@@ -1,0 +1,12 @@
+<char dato>	// Resultat 1
+<int hjemmemaal> <int bortemaal> <bool normalTid>
+<int bortescorere[0]> <int bortescorere[1]> ... <int bortescorere[bortemaal-1]>
+<int hjemmescorere[0]> <int hjemmescorere[1]> ... <int hjemmescorere[hjemmemaal-1]>
+<char dato>	// Resultat 2
+<int hjemmemaal> <int bortemaal> <bool normalTid>
+<int bortescorere[0]> <int bortescorere[1]> ... <int bortescorere[bortemaal-1]>
+<int hjemmescorere[0]> <int hjemmescorere[1]> ... <int hjemmescorere[hjemmemaal-1]>
+<char dato>	// ... Resultat n
+<int hjemmemaal> <int bortemaal> <bool normalTid>
+<int bortescorere[0]> <int bortescorere[1]> ... <int bortescorere[bortemaal-1]>
+<int hjemmescorere[0]> <int hjemmescorere[1]> ... <int hjemmescorere[hjemmemaal-1]>

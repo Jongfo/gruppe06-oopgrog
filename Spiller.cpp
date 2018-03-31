@@ -37,8 +37,10 @@ int Spiller::spillerNr()
 	return number;
 }
 
-bool Spiller::sammeNavn(char* n) {
-	if (!strcmp(n, navn)) {
+bool Spiller::sammeNavn(char* n)
+{
+	if (!strcmp(n, navn))
+	{
 		return true;
 	}
 	return false;
