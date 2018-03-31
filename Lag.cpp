@@ -98,9 +98,9 @@ void Lag::displaySpillere()
 
 void Lag::display()
 {
-	std::cout << "Lag: " << navn << '\n'
-		<< "Adresse: " << postadresse << '\n'
-		<< "Antall spillere: " << antSpillere << '\n';
+	std::cout << "\n\tLag: " << navn
+		<< "\n\tAdresse: " << postadresse
+		<< "\n\tAntall spillere: " << antSpillere << '\n';
 }
 
 // fjernar spillerNr n frå lag

@@ -96,12 +96,14 @@ Lag* DivAvd::getLag(char* s)
 
 void DivAvd::display()
 {
-	std::cout << text << ":\n"
-		<< "Antall lag: " << antLag << '\n';
+	std::cout << '\n' << text << ":\n"
+			  << "Antall lag: " << antLag << '\n';
+
 	for (int i = 0; i < antLag; i++)
 	{
 		lag[i]->display();
 	}
+	std::cout << '\n';
 }
 
 // fjernar spillerNr n frå alle lag i divisjonen

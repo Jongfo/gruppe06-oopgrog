@@ -33,13 +33,15 @@ void Idrettene::nyDivisjon()
 	rIO.lesInnICharPointer("Navn paa Idrett?", t);
 
 	// 
-	if (idretter->inList(t)) {
+	if (idretter->inList(t))
+	{
 		Idrett* temp = (Idrett*)idretter->remove(t);
 		temp->nyDivisjon();
 		idretter->add((TextElement*)temp);
 		
 	}
-	else {
+	else
+	{
 		std::cout << "Finner ikke idrett\n";
 	}
 }
@@ -47,12 +49,7 @@ void Idrettene::nyDivisjon()
 // viser alle idrettar
 void Idrettene::visIdrett()
 {
-	for (int i = 1; i <= idretter->noOfElements(); i++)
-	{
-		Idrett* idrett = (Idrett*)idretter->removeNo(i);
-		idrett->display();
-		idretter->add((TextElement*)idrett);
-	}
+	idretter->displayList();
 }
 
 // spør om namn paa og returnerar idrett
@@ -158,12 +155,14 @@ void Idrettene::fjernIdrett()
 void Idrettene::skrivTabell() 
 {
 	char* idrNavn; rIO.lesInnICharPointer("Navn paa Idretten?", idrNavn);
-	if (idretter->inList(idrNavn)) {
+	if (idretter->inList(idrNavn))
+	{
 		Idrett* idr = (Idrett*)idretter->remove(idrNavn);
 		idr->visTabell();
 		idretter->add((TextElement*)idr);
 	}
-	else {
+	else
+	{
 		std::cout << "Fant ikke idretten \n\n";
 	}
 }

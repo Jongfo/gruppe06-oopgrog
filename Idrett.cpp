@@ -105,9 +105,12 @@ DivAvd* Idrett::getDivAvd(char* s)
 void Idrett::display()
 {
 	std::cout << '\n' << text << '\n'
-		<< "Tabelltype: " << tabelltype << '\n'
-		<< "Antall divisjoner: " << divisjoner->noOfElements() << '\n';
+			  << "Tabelltype: " << tabelltype << '\n'
+			  << "Antall divisjoner: " << divisjoner->noOfElements() << '\n';
 	divisjoner->displayList();
+	std::cout << '\n';
+	for (int i = 0; i < 20; i++) { std::cout << '-'; };
+	std::cout << '\n';
 }
 
 // fjernar spillerNr n frå alle lag i alle divisjonane
