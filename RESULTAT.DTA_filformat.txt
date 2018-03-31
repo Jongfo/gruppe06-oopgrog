@@ -10,3 +10,14 @@
 <int hjemmemaal> <int bortemaal> <bool normalTid>
 <int bortescorere[0]> <int bortescorere[1]> ... <int bortescorere[bortemaal-1]>
 <int hjemmescorere[0]> <int hjemmescorere[1]> ... <int hjemmescorere[hjemmemaal-1]>
+
+
+// EKSEMPEL:
+20183103
+2 3 0
+1 3
+23 22 22
+20180104
+3 2 1
+6 5 4
+8 7
