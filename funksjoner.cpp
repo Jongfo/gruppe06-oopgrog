@@ -130,8 +130,11 @@ void redigerSpillere()
 					{
 					case 'F':
 						spillerID = rIO.lesTall("Oppgi ID nummer paa spiller som skal fjernes fra laget.", 1, spillere.getSisteNr()); //Spiller ID knyttet til MAXSPILLERE?
-						if (laget->spillerILag(spillerID))
+                        if (laget->spillerILag(spillerID))
+                        {
 							laget->fjernSpillerNr(spillerID);
+                            std::cout << "\nSpiller er fjernet.";
+                        }
 						else
 							std::cout << "\nFant ikke spiller ID";
 						break;
