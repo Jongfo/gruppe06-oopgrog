@@ -89,8 +89,8 @@ Lag* DivAvd::getLag(char* s)
 			return lag[i];
 		}
 	}
-
-	std::cout << "Lag fins ikke!\n";
+    if (toupper(*s) != 'Q')
+	    std::cout << "Lag fins ikke!\n";
 	return nullptr;
 }
 

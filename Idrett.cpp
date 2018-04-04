@@ -95,11 +95,12 @@ DivAvd* Idrett::getDivAvd(char* s)
 		divisjoner->add((TextElement*)divisjon);
 		return divisjon;
 	}
-	else
-	{
-		std::cout << "Divisjon/Avdeling eksisterer ikke.\n";
+	else if (toupper(*s) == 'Q')
+	{ 
 		return nullptr;
 	}
+    std::cout << "Divisjon/Avdeling eksisterer ikke.\n";
+    return nullptr;
 }
 
 void Idrett::display()

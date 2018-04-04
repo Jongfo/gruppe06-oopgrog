@@ -113,13 +113,23 @@ void redigerSpillere()
 	if (idretten)
 	{
 		// finn Divisjon
-		rIO.lesInnICharPointer("skriv inn navn paa divisjon/avdeling.", divNavn);
-		avdelingen = idretten->getDivAvd(divNavn);
+        do
+        {
+		    rIO.lesInnICharPointer("skriv inn navn paa divisjon/avdeling.", divNavn);
+		    avdelingen = idretten->getDivAvd(divNavn);
+            if (!avdelingen && toupper(*divNavn) != 'Q')
+                std::cout << "Skriv \"Q\" om du onsker aa avslutte.\n";
+        } while (!avdelingen && toupper(*divNavn) != 'Q');
 		if (avdelingen)
 		{
 			// finn Lag
-			rIO.lesInnICharPointer("skriv inn navn paa lag.", lagNavn);
-			laget = avdelingen->getLag(lagNavn);
+            do
+            {
+			    rIO.lesInnICharPointer("skriv inn navn paa lag.", lagNavn);
+			    laget = avdelingen->getLag(lagNavn);
+                if(!laget && toupper(*lagNavn) != 'Q')
+                    std::cout << "Skriv \"Q\" om du onsker aa avslutte.\n";
+            } while (!laget && toupper(*lagNavn) != 'Q');
 			if (laget)
 			{
 				do
