@@ -164,6 +164,46 @@ void redigerSpillere()
 
 }
 
+// K: skriv resultat av kamper i gitt dato
+void resultatAvKamper()
+{
+    char* idrettNavn, *filNavn, *divNavn;
+    char dato[8];
+    Idrett* idretten;
+    DivAvd* divisjonen;
+    rIO.lesInnICharPointer("Skriv navn paa idrett:", idrettNavn);
+    idretten = idrettene.getIdrett(idrettNavn);
+    if (idretten)
+    {
+        do
+        {
+            rIO.lesInnICharPointer("Skriv navn paa divisjon/avdeling, eller blank:", divNavn);
+            divisjonen = idretten->getDivAvd(divNavn);
+
+        } while (!divisjonen && strlen(divNavn) != 0);
+
+        rIO.lesInnICharPointer("Skriv inn navn paa fil, eller blank:", filNavn);
+        rIO.lesDato("Skriv inn en dato på kampene:", dato);
+        if (strlen(divNavn) == 0)
+        {
+            if (strlen(filNavn) > 0)
+            {
+                idretten->alleKampeneTilSkjerm(dato); //not done!!!
+            }
+            else
+                idretten->alleKampeneTilFil(filNavn, dato); //not done!!!
+        }
+        else if (divisjonen)
+        {
+            if (strlen(filNavn) > 0)
+            {
+                divisjonen->kamperTilSkjerm(dato); //not done!!!
+            }
+            else
+                divisjonen->kamperTilFil(filNavn, dato); //not done!!!
+        }
+    }
+}
 
 // viser menyen til brukaren
 void skrivMeny()

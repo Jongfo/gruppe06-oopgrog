@@ -201,3 +201,13 @@ void DivAvd::skrivTerminliste()
 
 	delete[] filnavn;
 }
+
+void DivAvd::kamperTilSkjerm(char* date)
+{
+
+}
+
+void DivAvd::kamperTilFil(char* fileName, char* date)
+{
+
+}
