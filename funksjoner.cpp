@@ -232,7 +232,7 @@ void valgMeny()
 		case 'T': idrettene.skrivTabell();	break;
 		case 'R': lesResultat();			break;
 		case 'D': skrivSpillerePaaLag();	break;
-		case 'E': break;
+        case 'E': redigerSpillere();        break;
 		case 'C': break;
 		default: skrivMeny();				break; //Skriver meny
 		}
