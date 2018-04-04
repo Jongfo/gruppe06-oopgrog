@@ -84,7 +84,7 @@ Lag* DivAvd::getLag(char* s)
 {
 	for (int i = 0; i < antLag; i++)
 	{
-		if (lag[i]->getNavn())
+		if (!strcmp(lag[i]->getNavn(), s)  )
 		{
 			return lag[i];
 		}
