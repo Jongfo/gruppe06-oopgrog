@@ -108,7 +108,7 @@ void redigerSpillere()
 
 
     // finn idrett
-    rIO.lesInnICharPointer("skriv inn navn paa idrett.", idrettNavn);
+    rIO.lesInnICharPointer("Skriv inn navn paa idrett:", idrettNavn);
 	idretten = idrettene.getIdrett(idrettNavn);
 	if (idretten)
 	{
@@ -146,14 +146,8 @@ void redigerSpillere()
 					}
 				} while (kommando != 'Q');
 			}
-			else
-				std::cout << "\nLag ikke funnet.";
 		}
-		else
-			std::cout << "\nAvdeling ikke funnet.";
 	}
-	else
-		std::cout << "\nIdrett ikke funnet.";
 
 }
 
