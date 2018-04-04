@@ -130,7 +130,13 @@ int RobustIO::lesTall(const char* t, const int MIN, const int MAX)
 	int tall;
 	do {
 		std::cout << '\t' << t << " (" << MIN << '-' << MAX << "): ";
-		std::cin >> tall; std::cin.ignore();
+		std::cin >> tall; 
+		if (std::cin.fail()) 
+		{
+			std::cin.clear();
+			std::cin.ignore(MAXTEKST, '\n');
+		}
+		std::cin.ignore();
 	} while (tall < MIN || tall > MAX);
 	return tall;
 }
