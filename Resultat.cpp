@@ -75,3 +75,13 @@ char* Resultat::kortDato()
 	kortDato[5] = '\0';
 	return kortDato;
 }
+
+char* Resultat::langDato()
+{
+	return dato;
+}
+
+void Resultat::skrivTilFil(std::ofstream& fil)
+{
+	// TODO: skriv resultat til fil
+}

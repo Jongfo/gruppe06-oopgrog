@@ -15,4 +15,6 @@ private:
 public:
 	Resultat(Lag* hjemmelag, Lag* bortelag);
 	char* kortDato();
+	char* langDato();
+	void  skrivTilFil(std::ofstream& fil);
 };

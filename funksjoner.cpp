@@ -202,12 +202,6 @@ void skrivTerminliste()
 	}
 }
 
-// les alle resultata frå fil
-void lesResultat()
-{
-	// TODO
-}
-
 // handterar kommando-input
 void valgMeny()
 {
@@ -224,7 +218,7 @@ void valgMeny()
 		case 'L': skrivTerminliste();		break;
 		case 'K': break;
 		case 'T': idrettene.skrivTabell();	break;
-		case 'R': lesResultat();			break;
+		case 'R': idrettene.lesResultat();	break;
 		case 'D': skrivSpillerePaaLag();	break;
         case 'E': redigerSpillere();        break;
 		case 'C': break;

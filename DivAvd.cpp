@@ -31,7 +31,7 @@ DivAvd::DivAvd(std::ifstream& inn, char* navn) : TextElement(navn)
 }
 
 // skriv data om divisjon/avdeling til fil
-void DivAvd::skrivTilFil(std::ofstream& ut)
+void DivAvd::skrivTilFil(std::ofstream& ut, std::ofstream& resultatFil)
 {
 	// skriv data
 	ut << antLag << '\n';
@@ -41,6 +41,55 @@ void DivAvd::skrivTilFil(std::ofstream& ut)
 	{
 		lag[i]->skrivTilFil(ut);
 	}
+
+	// skriv resultat
+	resultatFil << text << '\n';
+
+	Resultat* resultatTemp[MAXLAG * MAXLAG];
+	int index = 0;
+
+	// kopier over resultat
+	for (int i = 0; i < MAXLAG; i++)
+	{
+		for (int j = 0; j < MAXLAG; j++)
+		{
+			if (i != j)
+			{
+				resultatTemp[index++] = resultat[i][j];
+			}
+		}
+	}
+
+	// sorter etter dato
+	for (int i = 0; i < index; i++)
+	{
+		for (int j = i + 1; j < index; i++)
+		{
+			if (resultatTemp[j]->langDato() < resultatTemp[i]->langDato())
+			{
+				Resultat* temp = resultatTemp[i];
+				resultatTemp[i] = resultatTemp[j];
+				resultatTemp[j] = temp;
+			}
+		}
+	}
+
+	/*
+	// for kvar i ein dato
+	//     skriv til fil
+	char* dato;
+	for (int i = 0; i < index; i++)
+	{
+		if (dato != resultatTemp[i]->langDato())
+		{
+			dato = resultatTemp[i]->langDato();
+			resultatFil << dato << '\n';
+		}
+		
+		// TODO resultatTemp[i]->skrivTilFil(resultatFil);
+	}
+	*/
+
 }
 
 // legg til 0 eller fleire nye lag, og hvis det gjør legg til det laget
@@ -129,7 +178,7 @@ void DivAvd::skrivTabellTilFil(char* navn)
 	//TODO skrive tabellen til fil
 	char* filPlass = rIO.finnPlassOgLeggeFil(navn, text, "Tabell_");
 	std::ofstream divAvdFil(filPlass);
-	skrivTilFil(divAvdFil); //ONLY TEMP FOR TESTING
+	//skrivTilFil(divAvdFil); //ONLY TEMP FOR TESTING
 	std::cout << "FAKE WRITE OUT FOR " << text << "\n\n";
 }
 

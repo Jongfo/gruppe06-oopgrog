@@ -14,7 +14,7 @@ private:
 public:
 	Idrett(char* navn);
 	Idrett(std::ifstream& inn, char* navn);
-	void skrivTilFil(std::ofstream& idrettFil);
+	void skrivTilFil(std::ofstream& idrettFil, std::ofstream& resultatFil);
     void endreSpillere(char* idrettNavn, char* divNavn, char* lagNavn);
 	void fjernSpillerNr(int n);
 	void nyDivisjon();
