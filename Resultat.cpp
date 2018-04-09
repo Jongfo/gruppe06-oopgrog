@@ -63,6 +63,11 @@ Resultat::Resultat(Lag* hjemmelag, Lag* bortelag)
 	}
 }
 
+bool Resultat::sameDate(char* date)
+{
+    return !strcmp(date, dato);
+}
+
 // returnerer datoen i "dd/mm"-form
 char* Resultat::kortDato()
 {
@@ -74,4 +79,14 @@ char* Resultat::kortDato()
 	kortDato[4] = dato[5];
 	kortDato[5] = '\0';
 	return kortDato;
+}
+
+char* Resultat::langDato()
+{
+	return dato;
+}
+
+void Resultat::skrivTilFil(std::ofstream& fil)
+{
+	// TODO: skriv resultat til fil
 }

@@ -14,5 +14,8 @@ private:
 	int  hjemmescorere[MAXMAAL];
 public:
 	Resultat(Lag* hjemmelag, Lag* bortelag);
+    bool sameDate(char* date);
 	char* kortDato();
+	char* langDato();
+	void  skrivTilFil(std::ofstream& fil);
 };

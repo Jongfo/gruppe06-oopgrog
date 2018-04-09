@@ -112,16 +112,16 @@ void Idrettene::lesInnIdrettFraFil()
 void Idrettene::skrivTilFil()
 {
 	std::ofstream idrettFil("gruppe06-ooprog/IDRETTENE.DTA");
-
+	std::ofstream resultatFil("gruppe06-ooprog/RESULTAT.DTA");
+	
 	idrettFil << idretter->noOfElements() << '\n';
 	
 	for (int i = 1; i <= idretter->noOfElements(); i++)
 	{
 		Idrett* idrett = (Idrett*)idretter->removeNo(i);
-		idrett->skrivTilFil(idrettFil);
+		idrett->skrivTilFil(idrettFil, resultatFil);
 		idretter->add((TextElement*)idrett);
 	}
-	
 }
 
 // fjernar spelarar med nr n frå alle lag i alle idrettane
@@ -166,5 +166,9 @@ void Idrettene::skrivTabell()
 		std::cout << "Fant ikke idretten \n\n";
 	}
 }
-/*
-*/
+
+// les alle resultata frå fil
+void Idrettene::lesResultat()
+{
+	std::ifstream fil("gruppe06-ooprog/RESULTAT.DTA");
+}

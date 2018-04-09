@@ -36,7 +36,7 @@ Idrett::Idrett(std::ifstream&inn, char* navn) : TextElement(navn)
 }
 
 // skriv data om idrett og divisjonar til fil
-void Idrett::skrivTilFil(std::ofstream& idrettFil)
+void Idrett::skrivTilFil(std::ofstream& idrettFil, std::ofstream& resultatFil)
 {
 	// skriv data
 	idrettFil << text << '\n'
@@ -46,13 +46,17 @@ void Idrett::skrivTilFil(std::ofstream& idrettFil)
 	// skriv divisjonar
 	for (int i = 1; i <= divisjoner->noOfElements(); i++)
 	{
+
 		DivAvd* divisjon = (DivAvd*)divisjoner->removeNo(i);
 		idrettFil << divisjon->hentNavn() << '\n';
+
 		//Finner ut hvor filen skal legges
 		char* filPlass = rIO.finnPlassOgLeggeFil(text, divisjon->hentNavn(), "Div/");
 		std::ofstream divAvdFil(filPlass); //Legger file der
 
-		divisjon->skrivTilFil(divAvdFil);
+		resultatFil << text << '\n';
+
+		divisjon->skrivTilFil(divAvdFil, resultatFil);
 		divisjoner->add((TextElement*)divisjon);
 	}
 }
@@ -101,6 +105,26 @@ DivAvd* Idrett::getDivAvd(char* s)
 	}
     std::cout << "Divisjon/Avdeling eksisterer ikke.\n";
     return nullptr;
+}
+
+void Idrett::alleKampeneTilFil(char* fileName, char* date)
+{
+    for (int i = 1; i <= divisjoner->noOfElements(); i++)
+    {
+        DivAvd* tempDiv = (DivAvd*)divisjoner->removeNo(i);
+        divisjoner->add((TextElement*)tempDiv);
+        tempDiv->kamperTilFil(fileName, date);
+    }
+}
+
+void Idrett::alleKampeneTilSkjerm(char* date)
+{
+    for (int i = 1; i <= divisjoner->noOfElements(); i++)
+    {
+        DivAvd* tempDiv = (DivAvd*)divisjoner->removeNo(i);
+        divisjoner->add((TextElement*)tempDiv);
+        tempDiv->kamperTilSkjerm(date);
+    }
 }
 
 void Idrett::display()

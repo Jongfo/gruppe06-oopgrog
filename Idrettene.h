@@ -23,5 +23,6 @@ public:
 	void fjernSpillerNr(int n);
 	void fjernIdrett();
 	void skrivTabell();
+	void lesResultat();
 	~Idrettene();
 };
