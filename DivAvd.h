@@ -25,5 +25,7 @@ public:
 	void visTabell();
 	void skrivTabellTilFil(char* navn);
 	void skrivTerminliste();
+    void kamperTilSkjerm(char* date);
+    void kamperTilFil(char* fileName, char* date);
 	~DivAvd();
 };

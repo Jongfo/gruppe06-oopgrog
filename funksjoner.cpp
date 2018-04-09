@@ -113,13 +113,23 @@ void redigerSpillere()
 	if (idretten)
 	{
 		// finn Divisjon
-		rIO.lesInnICharPointer("skriv inn navn paa divisjon/avdeling.", divNavn);
-		avdelingen = idretten->getDivAvd(divNavn);
+        do
+        {
+		    rIO.lesInnICharPointer("skriv inn navn paa divisjon/avdeling.", divNavn);
+		    avdelingen = idretten->getDivAvd(divNavn);
+            if (!avdelingen && toupper(*divNavn) != 'Q')
+                std::cout << "Skriv \"Q\" om du onsker aa avslutte.\n";
+        } while (!avdelingen && toupper(*divNavn) != 'Q');
 		if (avdelingen)
 		{
 			// finn Lag
-			rIO.lesInnICharPointer("skriv inn navn paa lag.", lagNavn);
-			laget = avdelingen->getLag(lagNavn);
+            do
+            {
+			    rIO.lesInnICharPointer("skriv inn navn paa lag.", lagNavn);
+			    laget = avdelingen->getLag(lagNavn);
+                if(!laget && toupper(*lagNavn) != 'Q')
+                    std::cout << "Skriv \"Q\" om du onsker aa avslutte.\n";
+            } while (!laget && toupper(*lagNavn) != 'Q');
 			if (laget)
 			{
 				do
@@ -130,8 +140,11 @@ void redigerSpillere()
 					{
 					case 'F':
 						spillerID = rIO.lesTall("Oppgi ID nummer paa spiller som skal fjernes fra laget.", 1, spillere.getSisteNr()); //Spiller ID knyttet til MAXSPILLERE?
-						if (laget->spillerILag(spillerID))
+                        if (laget->spillerILag(spillerID))
+                        {
 							laget->fjernSpillerNr(spillerID);
+                            std::cout << "\nSpiller er fjernet.";
+                        }
 						else
 							std::cout << "\nFant ikke spiller ID";
 						break;
@@ -151,6 +164,46 @@ void redigerSpillere()
 
 }
 
+// K: skriv resultat av kamper i gitt dato
+void resultatAvKamper()
+{
+    char* idrettNavn, *filNavn, *divNavn;
+    char dato[8];
+    Idrett* idretten;
+    DivAvd* divisjonen;
+    rIO.lesInnICharPointer("Skriv navn paa idrett:", idrettNavn);
+    idretten = idrettene.getIdrett(idrettNavn);
+    if (idretten)
+    {
+        do
+        {
+            rIO.lesInnICharPointer("Skriv navn paa divisjon/avdeling, eller blank:", divNavn);
+            divisjonen = idretten->getDivAvd(divNavn);
+
+        } while (!divisjonen && strlen(divNavn) != 0);
+
+        rIO.lesInnICharPointer("Skriv inn navn paa fil, eller blank:", filNavn);
+        rIO.lesDato("Skriv inn en dato på kampene:", dato);
+        if (strlen(divNavn) == 0)
+        {
+            if (strlen(filNavn) > 0)
+            {
+                idretten->alleKampeneTilSkjerm(dato); //not done!!!
+            }
+            else
+                idretten->alleKampeneTilFil(filNavn, dato); //not done!!!
+        }
+        else if (divisjonen)
+        {
+            if (strlen(filNavn) > 0)
+            {
+                divisjonen->kamperTilSkjerm(dato); //not done!!!
+            }
+            else
+                divisjonen->kamperTilFil(filNavn, dato); //not done!!!
+        }
+    }
+}
 
 // viser menyen til brukaren
 void skrivMeny()

@@ -99,11 +99,32 @@ DivAvd* Idrett::getDivAvd(char* s)
 		divisjoner->add((TextElement*)divisjon);
 		return divisjon;
 	}
-	else
-	{
-		std::cout << "Divisjon/Avdeling eksisterer ikke.\n";
+	else if (toupper(*s) == 'Q')
+	{ 
 		return nullptr;
 	}
+    std::cout << "Divisjon/Avdeling eksisterer ikke.\n";
+    return nullptr;
+}
+
+void Idrett::alleKampeneTilFil(char* fileName, char* date)
+{
+    for (int i = 1; i <= divisjoner->noOfElements(); i++)
+    {
+        DivAvd* tempDiv = (DivAvd*)divisjoner->removeNo(i);
+        divisjoner->add((TextElement*)tempDiv);
+        tempDiv->kamperTilFil(fileName, date);
+    }
+}
+
+void Idrett::alleKampeneTilSkjerm(char* date)
+{
+    for (int i = 1; i <= divisjoner->noOfElements(); i++)
+    {
+        DivAvd* tempDiv = (DivAvd*)divisjoner->removeNo(i);
+        divisjoner->add((TextElement*)tempDiv);
+        tempDiv->kamperTilSkjerm(date);
+    }
 }
 
 void Idrett::display()

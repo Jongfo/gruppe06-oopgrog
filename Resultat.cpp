@@ -63,6 +63,11 @@ Resultat::Resultat(Lag* hjemmelag, Lag* bortelag)
 	}
 }
 
+bool Resultat::sameDate(char* date)
+{
+    return !strcmp(date, dato);
+}
+
 // returnerer datoen i "dd/mm"-form
 char* Resultat::kortDato()
 {

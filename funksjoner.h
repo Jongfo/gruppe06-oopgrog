@@ -6,4 +6,5 @@ void lesFraFil();
 void skrivMeny();
 void valgMeny();
 void redigerSpillere();
+void resultatAvKamper();
 void skrivTerminliste();

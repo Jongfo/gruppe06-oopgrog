@@ -138,8 +138,8 @@ Lag* DivAvd::getLag(char* s)
 			return lag[i];
 		}
 	}
-
-	std::cout << "Lag fins ikke!\n";
+    if (toupper(*s) != 'Q')
+	    std::cout << "Lag fins ikke!\n";
 	return nullptr;
 }
 
@@ -249,4 +249,14 @@ void DivAvd::skrivTerminliste()
 	}
 
 	delete[] filnavn;
+}
+
+void DivAvd::kamperTilSkjerm(char* date)
+{
+
+}
+
+void DivAvd::kamperTilFil(char* fileName, char* date)
+{
+
 }
