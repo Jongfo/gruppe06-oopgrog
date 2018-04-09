@@ -15,7 +15,7 @@ private:
 public:
 	DivAvd(char* navn);
 	DivAvd(std::ifstream& inn, char* navn);
-	void skrivTilFil(std::ofstream& ut, std::ofstream& resultatFil);
+	void skrivTilFil(std::ofstream& ut);
 	void nyeLag();
 	void display();
 	Lag* getLag();
@@ -27,5 +27,6 @@ public:
 	void skrivTerminliste();
     void kamperTilSkjerm(char* date);
     void kamperTilFil(char* fileName, char* date);
+	void lesResultat(std::ifstream& fil);
 	~DivAvd();
 };

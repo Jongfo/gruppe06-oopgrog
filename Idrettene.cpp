@@ -112,14 +112,13 @@ void Idrettene::lesInnIdrettFraFil()
 void Idrettene::skrivTilFil()
 {
 	std::ofstream idrettFil("gruppe06-ooprog/IDRETTENE.DTA");
-	std::ofstream resultatFil("gruppe06-ooprog/RESULTAT.DTA");
 	
 	idrettFil << idretter->noOfElements() << '\n';
 	
 	for (int i = 1; i <= idretter->noOfElements(); i++)
 	{
 		Idrett* idrett = (Idrett*)idretter->removeNo(i);
-		idrett->skrivTilFil(idrettFil, resultatFil);
+		idrett->skrivTilFil(idrettFil);
 		idretter->add((TextElement*)idrett);
 	}
 }
@@ -171,4 +170,24 @@ void Idrettene::skrivTabell()
 void Idrettene::lesResultat()
 {
 	std::ifstream fil("gruppe06-ooprog/RESULTAT.DTA");
+	while (fil.good())
+	{
+		// finn idrett
+		char* idrettNavn;
+		rIO.lesCharPointerFraFil(fil, idrettNavn);
+		Idrett* idrett = getIdrett(idrettNavn);
+		delete[] idrettNavn;
+		if (idrett != nullptr)
+		{
+			// finn div/avd
+			char* divisjonNavn;
+			rIO.lesCharPointerFraFil(fil, divisjonNavn);
+			DivAvd* divisjon = idrett->getDivAvd(divisjonNavn);
+			delete[] idrettNavn;
+			if (divisjon != nullptr)
+			{
+				divisjon->lesResultat();
+			}
+		}
+	}
 }

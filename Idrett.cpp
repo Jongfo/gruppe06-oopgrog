@@ -36,7 +36,7 @@ Idrett::Idrett(std::ifstream&inn, char* navn) : TextElement(navn)
 }
 
 // skriv data om idrett og divisjonar til fil
-void Idrett::skrivTilFil(std::ofstream& idrettFil, std::ofstream& resultatFil)
+void Idrett::skrivTilFil(std::ofstream& idrettFil)
 {
 	// skriv data
 	idrettFil << text << '\n'
@@ -54,9 +54,7 @@ void Idrett::skrivTilFil(std::ofstream& idrettFil, std::ofstream& resultatFil)
 		char* filPlass = rIO.finnPlassOgLeggeFil(text, divisjon->hentNavn(), "Div_i_");
 		std::ofstream divAvdFil(filPlass); //Legger file der
 
-		resultatFil << text << '\n';
-
-		divisjon->skrivTilFil(divAvdFil, resultatFil);
+		divisjon->skrivTilFil(divAvdFil);
 		divisjoner->add((TextElement*)divisjon);
 	}
 }
