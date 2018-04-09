@@ -1,6 +1,0 @@
-int Antall_lag_i_div
-char* navn_på_lag
-char* adresse_til_lag
-int antall_spillere_på_lag
-<Liste med spiller nr>
-<gjenta fra line 2>
