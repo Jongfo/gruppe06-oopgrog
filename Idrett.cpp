@@ -23,7 +23,7 @@ Idrett::Idrett(std::ifstream&inn, char* navn) : TextElement(navn)
 	for (int i = 0; i < antDiv; i++) {
 		char* divNavn;  rIO.lesCharPointerFraFil(inn, divNavn);
 		//Finner hvor filen ligger
-		char* filPlass = rIO.finnPlassOgLeggeFil(navn, divNavn, "Div_i_");
+		char* filPlass = rIO.finnPlassOgLeggeFil(navn, divNavn, "Div/");
 		std::ifstream innDiv(filPlass);//Åpner filen
 		if (innDiv) {
 			divisjoner->add((TextElement*)new DivAvd(innDiv, divNavn));
@@ -51,7 +51,7 @@ void Idrett::skrivTilFil(std::ofstream& idrettFil)
 		idrettFil << divisjon->hentNavn() << '\n';
 
 		//Finner ut hvor filen skal legges
-		char* filPlass = rIO.finnPlassOgLeggeFil(text, divisjon->hentNavn(), "Div_i_");
+		char* filPlass = rIO.finnPlassOgLeggeFil(text, divisjon->hentNavn(), "Div/");
 		std::ofstream divAvdFil(filPlass); //Legger file der
 
 		divisjon->skrivTilFil(divAvdFil);

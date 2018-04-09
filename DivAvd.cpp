@@ -127,7 +127,7 @@ void DivAvd::visTabell()
 void DivAvd::skrivTabellTilFil(char* navn) 
 {
 	//TODO skrive tabellen til fil
-	char* filPlass = rIO.finnPlassOgLeggeFil(navn, text, "Tabell_");
+	char* filPlass = rIO.finnPlassOgLeggeFil(navn, text, "Tabell/");
 	std::ofstream divAvdFil(filPlass);
 	//skrivTilFil(divAvdFil); //ONLY TEMP FOR TESTING
 	std::cout << "FAKE WRITE OUT FOR " << text << "\n\n";
@@ -160,7 +160,7 @@ void DivAvd::skrivTerminliste()
 	else
 	{
 		// skriv til fil
-		char* plass = rIO.finnPlassOgLeggeFil(filnavn, text, "TerminListe_");
+		char* plass = rIO.finnPlassOgLeggeFil(filnavn, text, "TerminListe/");
 		fil = std::ofstream(plass);
 		stream.rdbuf(fil.rdbuf());
 	}
