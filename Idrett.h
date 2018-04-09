@@ -15,7 +15,7 @@ public:
 	Idrett(char* navn);
 	Idrett(std::ifstream& inn, char* navn);
 	void skrivTilFil(std::ofstream& idrettFil);
-    void endreSpillere(char* idrettNavn, char* divNavn, char* lagNavn);
+    void endreSpillere(char* idrettNavn, char* divNavn, char* lagNavn); //Hva skjer her?
 	void fjernSpillerNr(int n);
 	void nyDivisjon();
 	void fjernDivAvd();
