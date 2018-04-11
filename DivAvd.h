@@ -28,5 +28,6 @@ public:
     void kamperTilSkjerm(char* date);
     void kamperTilFil(char* fileName, char* date);
 	void lesResultat(std::ifstream& fil);
+	int  finnLagIndeks(char* navn);
 	~DivAvd();
 };

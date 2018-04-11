@@ -218,8 +218,45 @@ void DivAvd::lesResultat(std::ifstream& fil)
 	// TODO: Sjekk at innlesinga er logisk gyldig
 	char* dato;
 
+	rIO.lesCharPointerFraFil(fil, dato);
 	while (rIO.okDato(dato))
 	{
+		// finn lagindeksar
+		char* hjemmeLag;
+		char* borteLag;
+		int hjemmeLagIndeks;
+		int borteLagIndeks;
+		rIO.lesCharPointerFraFil(fil, hjemmeLag);
+		rIO.lesCharPointerFraFil(fil, borteLag);
+		hjemmeLagIndeks = finnLagIndeks(hjemmeLag);
+		borteLagIndeks = finnLagIndeks(borteLag);
+		// DEBUG
+		std::cout << hjemmeLag << " - " << borteLag << '\n';
+		// les inn resultat for denne kampen
+		resultat[hjemmeLagIndeks][borteLagIndeks]->lesFraFil(fil);
 
+		delete[] dato;
+		rIO.lesCharPointerFraFil(fil, dato);
+
+		delete[] hjemmeLag;
+		delete[] borteLag;
 	}
+
+	delete[] dato;
+}
+
+// finn indeks til laget med gitt namn
+int DivAvd::finnLagIndeks(char* navn)
+{
+	for (int i = 0; i < MAXLAG; i++)
+	{
+		if (!strcmp(navn, lag[i]->getNavn()))
+		{
+			// fant laget med namn navn
+			return i;
+		}
+	}
+
+	// fant ingen lag med dette namnet !
+	return 0;
 }

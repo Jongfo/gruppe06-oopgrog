@@ -9,6 +9,7 @@ Resultat::Resultat(Lag* hjemmelag, Lag* bortelag)
 {
 	rIO.lesDato("Dato", dato);
 
+	/*
 	// les inn antal mål
 	std::cout << "Maal:\n";
 	hjemmemaal = rIO.lesTall(hjemmelag->getNavn(), 0, MAXMAAL);
@@ -61,6 +62,7 @@ Resultat::Resultat(Lag* hjemmelag, Lag* bortelag)
 			} while (!bortelag->spillerILag(bortescorere[i]));
 		}
 	}
+	*/
 }
 
 bool Resultat::sameDate(char* date)
@@ -86,7 +88,26 @@ char* Resultat::langDato()
 	return dato;
 }
 
-void Resultat::skrivTilFil(std::ofstream& fil)
+// les info om resultat frå fil
+void Resultat::lesFraFil(std::ifstream& fil)
 {
-	// TODO: skriv resultat til fil
+	fil >> hjemmemaal >> bortemaal >> normalTid;
+	// DEBUG
+	std::cout << '\t' << hjemmemaal << " - " << bortemaal
+		<< " " << normalTid << "\n\t";
+
+	for (int i = 0; i < hjemmemaal; i++)
+	{
+		fil >> hjemmescorere[i];
+		// DEBUG
+		std::cout << ' ' << hjemmescorere[i];
+	}
+	std::cout << "\n\t";
+	for (int i = 0; i < bortemaal; i++)
+	{
+		fil >> bortescorere[i];
+		// DEBUG
+		std::cout << ' ' << bortescorere[i];
+	}
+
 }

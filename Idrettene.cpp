@@ -179,15 +179,19 @@ void Idrettene::lesResultat()
 		delete[] idrettNavn;
 		if (idrett != nullptr)
 		{
-			// finn div/avd
-			char* divisjonNavn;
-			rIO.lesCharPointerFraFil(fil, divisjonNavn);
-			DivAvd* divisjon = idrett->getDivAvd(divisjonNavn);
-			delete[] idrettNavn;
-			if (divisjon != nullptr)
+			DivAvd* divisjon;
+			do
 			{
-				divisjon->lesResultat();
-			}
+				// finn div/avd
+				char* divisjonNavn;
+				rIO.lesCharPointerFraFil(fil, divisjonNavn);
+				divisjon = idrett->getDivAvd(divisjonNavn);
+				delete[] idrettNavn;
+				if (divisjon != nullptr)
+				{
+					divisjon->lesResultat(fil);
+				}
+			} while (divisjon != nullptr);
 		}
 	}
 }
