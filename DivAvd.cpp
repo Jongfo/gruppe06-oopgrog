@@ -216,72 +216,102 @@ void DivAvd::kamperTilFil(char* fileName, char* date)
 }
 
 // les resultat for denne avdelinga inn i terminlista
-void DivAvd::lesResultat(std::ifstream& fil)
+// returnerer den andre linje etter siste resultat
+// i ein divisjon.
+// Dersom ho er tom, har vi ein ny idrett,
+// dersom ikkje, har vi ein ny divisjon
+char* DivAvd::lesResultat(std::ifstream& fil)
 {
 	// TODO: Sjekk at innlesinga er logisk gyldig
+
 	char* dato;
+	char* hjemmeLag;
+	char* borteLag;
 
+	int hjemmeLagIndeks;
+	int borteLagIndeks;
+
+	// dei to neste linjene etter innlesing av eit resultat
+	char* l1;
+	char* l2;
+
+	// les dato og namna på laga
 	rIO.lesCharPointerFraFil(fil, dato);
-	while (dato != nullptr && rIO.okDato(dato) && fil.good())
+	std::cout << dato << '\n';
+	rIO.lesCharPointerFraFil(fil, hjemmeLag);
+	rIO.lesCharPointerFraFil(fil, borteLag);
+
+	// finn ideksar
+	hjemmeLagIndeks = finnLagIndeks(hjemmeLag);
+	borteLagIndeks  = finnLagIndeks(borteLag);
+
+	delete[] hjemmeLag;
+	delete[] borteLag;
+
+	while (fil.good())
 	{
-		char* hjemmeLag;
-		char* borteLag;
-		rIO.lesCharPointerFraFil(fil, hjemmeLag);
-		rIO.lesCharPointerFraFil(fil, borteLag);
-		do
+		// DEBUG
+		std::cout << hjemmeLagIndeks << " - " << borteLagIndeks << '\n';
+
+
+		// les inn resultat for denne kampen
+		resultat[hjemmeLagIndeks][borteLagIndeks] = new Resultat(fil, dato);
+
+
+		// dei to neste linjene i fila
+		rIO.lesCharPointerFraFil(fil, l1);
+		rIO.lesCharPointerFraFil(fil, l2);
+
+		// DEBUG
+		std::cout << "l1: '" << l1 << "'\n";
+		std::cout << "l2: '" << l2 << "'\n";
+
+		// Dersom 1 er blank og 2 er blank, eller slutten av fila
+		// ny idrett
+		if ((strlen(l1) < 1 && strlen(l2) < 1) || !fil.good())
 		{
-			int hjemmeLagIndeks;
-			int borteLagIndeks;
+			std::cout << "\nA\n\n";
+			if (!fil.good()) { std::cout << "\nSLUTT\n\n"; }
+			delete[] l1;
+			return l2;
+		}
 
-			// finn lagindeksar
-			hjemmeLagIndeks = finnLagIndeks(hjemmeLag);
-			borteLagIndeks = finnLagIndeks(borteLag);
+		// Dersom 1 er blank og 1 ikkje er blank
+		// ny divisjon
+		else if (strlen(l1) < 1 && strlen(l2) > 0)
+		{
+			std::cout << "\nB\n\n";
+			delete[] l1;
+			return l2;
+		}
 
-			// DEBUG
-			std::cout << hjemmeLag << " - " << borteLag << '\n';
+		// Dersom 1 er dato og 2 er lag (2 må vere lag, ellers er fila feil),
+		// er 2 lag1 og lag2 må lesast inn
+		else if (rIO.okDato(l1) && strlen(l2) > 0)
+		{
+			std::cout << "\nC\n\n";
+			delete[] dato;
+			dato = new char[strlen(l1) + 1];
+			strcpy(dato, l1);
 
-			// les inn resultat for denne kampen
-			resultat[hjemmeLagIndeks][borteLagIndeks] = new Resultat(fil, dato);
-			
-			delete[] hjemmeLag;
-			delete[] borteLag;
-
-			rIO.lesCharPointerFraFil(fil, hjemmeLag);
+			hjemmeLagIndeks = finnLagIndeks(l2);
 			rIO.lesCharPointerFraFil(fil, borteLag);
-			std::cout << "\nles nytt heimelag: " << hjemmeLag << '\n';
-			
-			// Dersom 1 er blank og 2 er blank,
-			// ny idrett
+			borteLagIndeks = finnLagIndeks(borteLag);
+			delete[] borteLag;
+		}
 
-			// Dersom 1 er blank og 1 ikkje er blank
-			// ny divisjon
+		// dersom 1 ikkje er dato, og 2 ikkje er dato,
+		// er 1 lag1 2 lag2
+		else if (!rIO.okDato(l1) && !rIO.okDato(l2))
+		{
+			std::cout << "\nD\n\n";
+			hjemmeLagIndeks = finnLagIndeks(l1);
+			hjemmeLagIndeks = finnLagIndeks(l2);
+		}
 
-			// Dersom 1 er dato og 2 er lag,
-			// er 2 lag1 og lag2 må lestast inn
-
-			// dersom 1 ikkje er dato, og 2 ikkje er dato,
-			// er 2 lag1 2 lag2
-
-			// same dato, fortsett å lese resultat for denne dagen
-			// dersom strlen mindre enn 1 kan det ikkje vere eit lag
-			if (rIO.okDato(hjemmeLag))
-			{
-				delete[] hjemmeLag;
-				delete[] dato;
-				dato = new char[strlen(hjemmeLag) + 1];
-				strcpy(dato, hjemmeLag);
-			}
-			else if (strlen(hjemmeLag) < 1)
-			{
-				std::cout << "NY IDRETT";
-				delete[] hjemmeLag;
-				delete[] dato;
-				dato = nullptr;
-			}
-		} while (dato != nullptr && fil.good());
+		delete[] l1;
+		delete[] l2;
 	}
-
-	delete[] dato;
 }
 
 // finn indeks til laget med gitt namn

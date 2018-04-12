@@ -18,8 +18,17 @@
 <int hjemmescorere[0]> <int hjemmescorere[1]> ... <int hjemmescorere[hjemmemaal-1]>
 <int bortescorere[0]> <int bortescorere[1]> ... <int bortescorere[bortemaal-1]>
 
-<char* idrett>		// idrett2
+<char* divisjon>	// idrett1::divisjon2
+<char[9] dato>		// dato3
+<char* hjemmelag>	// idrett1::divisjon2::resultat1
+<char* bortelag> 
+<int hjemmemaal> <int bortemaal> <bool normalTid>
+<int hjemmescorere[0]> <int hjemmescorere[1]> ... <int hjemmescorere[hjemmemaal-1]>
+<int bortescorere[0]> <int bortescorere[1]> ... <int bortescorere[bortemaal-1]>
 
+
+<char* idrett>		// idrett2
+...
 
 // EKSEMPEL:
 Fotball
@@ -39,12 +48,14 @@ lag5
 lag1
 lag4
 0 0 0
+
 3. divisjon
 20190430
 lag20
 lag32
 1 0 0
 1 2
+
 
 Handball
 ...
