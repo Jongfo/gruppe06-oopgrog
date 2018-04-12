@@ -105,7 +105,8 @@ DivAvd* Idrett::getDivAvd(char* s)
     return nullptr;
 }
 
-void Idrett::alleKampeneTilFil(char* fileName, char* date)
+// Skriver alle kampene i alle divisjonene med gitt dato til fil
+void Idrett::alleKampeneTilFil(char* fileName, char* date, DivAvd* div)
 {
     for (int i = 1; i <= divisjoner->noOfElements(); i++)
     {
@@ -115,7 +116,8 @@ void Idrett::alleKampeneTilFil(char* fileName, char* date)
     }
 }
 
-void Idrett::alleKampeneTilSkjerm(char* date)
+// Skriver alle kapene i all divisjonene med gitt dato til skjerm
+void Idrett::alleKampeneTilSkjerm(char* date, DivAvd* div)
 {
     for (int i = 1; i <= divisjoner->noOfElements(); i++)
     {
