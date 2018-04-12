@@ -301,7 +301,7 @@ char* RobustIO::finnPlassOgLeggeFil(char* customname, char* id, const char* pref
 	char filPlass[MAXTEKST]; char tekst[] = "gruppe06-ooprog/"; char type[] = ".DTA";
 	char space[] = "_"; 
 	strcpy(filPlass, tekst); strcat(filPlass, prefix); strcat(filPlass, customname);
-	strcat(filPlass, space);  strcat(filPlass, s); strcat(filPlass, type);
+	strcat(filPlass, space);  strcat(filPlass, id); strcat(filPlass, type);
 	char* f; f = new char[strlen(filPlass) + 1];
 	return strcpy(f, filPlass);
 }
