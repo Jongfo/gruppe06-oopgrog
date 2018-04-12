@@ -296,12 +296,28 @@ bool RobustIO::okDato(char* s)
 	return true;
 }
 
-char* RobustIO::finnPlassOgLeggeFil(char* t, char* s, const char* prefix) 
+char* RobustIO::finnPlassOgLeggeFil(char* customname, char* id, const char* prefix) 
 {
 	char filPlass[MAXTEKST]; char tekst[] = "gruppe06-ooprog/"; char type[] = ".DTA";
 	char space[] = "_"; 
-	strcpy(filPlass, tekst); strcat(filPlass, prefix); strcat(filPlass, t);
-	strcat(filPlass, space);  strcat(filPlass, s); strcat(filPlass, type);
+	strcpy(filPlass, tekst); strcat(filPlass, prefix); strcat(filPlass, customname);
+	strcat(filPlass, space);  strcat(filPlass, id); strcat(filPlass, type);
 	char* f; f = new char[strlen(filPlass) + 1];
 	return strcpy(f, filPlass);
+}
+bool RobustIO::yn() {
+	char konfirmation;
+	do {
+		if (std::cin.fail()) {
+			std::cin.clear();
+			std::cin.ignore();
+		}
+		std::cout << " (y/n): ";
+		std::cin >> konfirmation;
+		konfirmation = toupper(konfirmation);
+	} while (std::cin.fail() || (konfirmation != 'Y' && konfirmation != 'N') );
+	if (konfirmation == 'Y') {
+		return true;
+	}
+	return false;
 }

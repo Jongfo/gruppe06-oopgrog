@@ -171,12 +171,13 @@ void resultatAvKamper()
     char dato[8];
     Idrett* idretten;
     DivAvd* divisjonen;
+
     rIO.lesInnICharPointer("Skriv navn paa idrett:", idrettNavn);
     idretten = idrettene.getIdrett(idrettNavn);
     if (idretten)
     {
         do
-        {
+        {   // bruker må skrive inn en idrett eller ingen ting for å gå videre
             rIO.lesInnICharPointer("Skriv navn paa divisjon/avdeling, eller blank:", divNavn);
             divisjonen = idretten->getDivAvd(divNavn);
 
@@ -184,24 +185,13 @@ void resultatAvKamper()
 
         rIO.lesInnICharPointer("Skriv inn navn paa fil, eller blank:", filNavn);
         rIO.lesDato("Skriv inn en dato på kampene:", dato);
-        if (strlen(divNavn) == 0)
+    
+        if (strlen(filNavn) > 0)
         {
-            if (strlen(filNavn) > 0)
-            {
-                idretten->alleKampeneTilSkjerm(dato); //not done!!!
-            }
-            else
-                idretten->alleKampeneTilFil(filNavn, dato); //not done!!!
+            idretten->alleKampeneTilFil(filNavn, dato, divisjonen); 
         }
-        else if (divisjonen)
-        {
-            if (strlen(filNavn) > 0)
-            {
-                divisjonen->kamperTilSkjerm(dato); //not done!!!
-            }
-            else
-                divisjonen->kamperTilFil(filNavn, dato); //not done!!!
-        }
+        else
+            idretten->alleKampeneTilSkjerm(dato, divisjonen); 
     }
 }
 

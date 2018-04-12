@@ -1,5 +1,6 @@
 #include "DivAvd.h"
 #include <iomanip>
+#include <iostream>
 
 DivAvd::DivAvd(char* navn) : TextElement(navn)
 {
@@ -202,6 +203,8 @@ void DivAvd::skrivTerminliste()
 	delete[] filnavn;
 }
 
+
+// Leser alle 
 void DivAvd::kamperTilSkjerm(char* date)
 {
 
