@@ -5,6 +5,41 @@
 extern RobustIO rIO;
 extern Spillere spillere;
 
+// les info om resultat frå fil
+Resultat::Resultat(std::ifstream& fil, char dato[])
+{
+
+	// DEBUG
+	std::cout << "Resultat::lesFraFil\n";
+
+	// DEBUG (std::cout)
+	fil >> hjemmemaal;
+	std::cout << '\t' << hjemmemaal << " - ";
+	fil >> bortemaal;
+	std::cout << bortemaal << "\t\t";
+	fil >> normalTid;
+	std::cout << (!normalTid ? "Ikkje " : "") << "normal tid!\n";
+
+	std::cout << "\tHS: ";
+	for (int i = 0; i < hjemmemaal; i++)
+	{
+		fil >> hjemmescorere[i];
+		// DEBUG
+		std::cout << ' ' << hjemmescorere[i];
+	}
+
+	std::cout << "\n\tBS: ";
+	for (int i = 0; i < bortemaal; i++)
+	{
+		fil >> bortescorere[i];
+		// DEBUG
+		std::cout << ' ' << bortescorere[i];
+	}
+	std::cout << '\n';
+
+	fil.ignore();
+}
+
 Resultat::Resultat(Lag* hjemmelag, Lag* bortelag)
 {
 	rIO.lesDato("Dato", dato);
@@ -86,28 +121,4 @@ char* Resultat::kortDato()
 char* Resultat::langDato()
 {
 	return dato;
-}
-
-// les info om resultat frå fil
-void Resultat::lesFraFil(std::ifstream& fil)
-{
-	fil >> hjemmemaal >> bortemaal >> normalTid;
-	// DEBUG
-	std::cout << '\t' << hjemmemaal << " - " << bortemaal
-		<< " " << normalTid << "\n\t";
-
-	for (int i = 0; i < hjemmemaal; i++)
-	{
-		fil >> hjemmescorere[i];
-		// DEBUG
-		std::cout << ' ' << hjemmescorere[i];
-	}
-	std::cout << "\n\t";
-	for (int i = 0; i < bortemaal; i++)
-	{
-		fil >> bortescorere[i];
-		// DEBUG
-		std::cout << ' ' << bortescorere[i];
-	}
-
 }

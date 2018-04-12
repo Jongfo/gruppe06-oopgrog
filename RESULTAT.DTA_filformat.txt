@@ -18,6 +18,8 @@
 <int hjemmescorere[0]> <int hjemmescorere[1]> ... <int hjemmescorere[hjemmemaal-1]>
 <int bortescorere[0]> <int bortescorere[1]> ... <int bortescorere[bortemaal-1]>
 
+<char* idrett>		// idrett2
+
 
 // EKSEMPEL:
 Fotball
@@ -43,5 +45,6 @@ lag20
 lag32
 1 0 0
 1 2
+
 Handball
 ...
