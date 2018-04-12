@@ -154,8 +154,8 @@ void Idrett::fjernDivAvd()
 	rIO.lesInnICharPointer("Divisjon/Avdeling aa fjerne", divisjonNavn);
 	if (divisjoner->inList(divisjonNavn))
 	{
-		std::cout << "Vil du virkelig fjerne " << divisjonNavn << "? (y/n)";
-		if (rIO.lesInnTilStor() == 'Y')
+		std::cout << "Vil du virkelig fjerne " << divisjonNavn << '?'; 
+		if (rIO.yn())
 		{
 			DivAvd* divisjon = (DivAvd*)divisjoner->remove(divisjonNavn);
 			delete divisjon;

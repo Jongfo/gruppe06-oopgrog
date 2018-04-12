@@ -27,4 +27,5 @@ public:
 	void fjernTegn(char* s, bool spesialtegn = true,
 		           bool mellomrom = false, bool bokstaver = false,
 		           bool tall = false);
+	bool yn(); //Skriver ja eller nei
 };

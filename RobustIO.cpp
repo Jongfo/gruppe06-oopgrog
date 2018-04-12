@@ -305,3 +305,19 @@ char* RobustIO::finnPlassOgLeggeFil(char* t, char* s, const char* prefix)
 	char* f; f = new char[strlen(filPlass) + 1];
 	return strcpy(f, filPlass);
 }
+bool RobustIO::yn() {
+	char konfirmation;
+	do {
+		if (std::cin.fail()) {
+			std::cin.clear();
+			std::cin.ignore();
+		}
+		std::cout << " (y/n): ";
+		std::cin >> konfirmation;
+		konfirmation = toupper(konfirmation);
+	} while (std::cin.fail() || (konfirmation != 'Y' && konfirmation != 'N') );
+	if (konfirmation == 'Y') {
+		return true;
+	}
+	return false;
+}
