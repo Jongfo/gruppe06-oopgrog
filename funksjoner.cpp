@@ -188,10 +188,14 @@ void resultatAvKamper()
     
         if (strlen(filNavn) > 0)
         {
-            idretten->alleKampeneTilFil(filNavn, dato, divisjonen); 
+            char* filNavnKode = rIO.finnPlassOgLeggeFil(filNavn, "resultater", "");
+            idretten->alleKampeneTilFil(filNavnKode, dato, divisjonen); 
+            delete[] filNavnKode;
         }
         else
+        {
             idretten->alleKampeneTilSkjerm(dato, divisjonen); 
+        }
     }
 }
 
