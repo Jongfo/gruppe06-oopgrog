@@ -220,10 +220,8 @@ void DivAvd::kamperTilFil(char* fileName, char* date)
 // i ein divisjon.
 // Dersom ho er tom, har vi ein ny idrett,
 // dersom ikkje, har vi ein ny divisjon
-char* DivAvd::lesResultat(std::ifstream& fil)
+char* DivAvd::lesResultat(std::ifstream& fil, bool& feil)
 {
-	// TODO: Sjekk at innlesinga er logisk gyldig
-
 	char* dato;
 	char* hjemmeLag;
 	char* borteLag;
@@ -241,22 +239,38 @@ char* DivAvd::lesResultat(std::ifstream& fil)
 	rIO.lesCharPointerFraFil(fil, hjemmeLag);
 	rIO.lesCharPointerFraFil(fil, borteLag);
 
-	// finn ideksar
+	// finn indeksar
 	hjemmeLagIndeks = finnLagIndeks(hjemmeLag);
 	borteLagIndeks  = finnLagIndeks(borteLag);
 
-	delete[] hjemmeLag;
-	delete[] borteLag;
 
 	while (fil.good())
 	{
 		// DEBUG
 		std::cout << hjemmeLagIndeks << " - " << borteLagIndeks << '\n';
+		if (hjemmeLagIndeks == -1 || borteLagIndeks == -1)
+		{
+			if (hjemmeLagIndeks == -1)
+			{
+				std::cout << "Ugyldig lag '" << hjemmeLag << "'.\n";
+			}
 
+			if (borteLagIndeks == -1)
+			{
+				std::cout << "Ugyldig lag '" << borteLag << "'.\n";
+			}
+
+			delete[] hjemmeLag;
+			delete[] borteLag;
+			delete[] dato;
+			feil = true;
+			l2 = new char[1];
+			l2[0] = '\0';
+			return l2;
+		}
 
 		// les inn resultat for denne kampen
 		resultat[hjemmeLagIndeks][borteLagIndeks] = new Resultat(fil, dato);
-
 
 		// dei to neste linjene i fila
 		rIO.lesCharPointerFraFil(fil, l1);
@@ -317,7 +331,7 @@ char* DivAvd::lesResultat(std::ifstream& fil)
 // finn indeks til laget med gitt namn
 int DivAvd::finnLagIndeks(char* navn)
 {
-	for (int i = 0; i < MAXLAG; i++)
+	for (int i = 0; i < antLag; i++)
 	{
 		if (!strcmp(navn, lag[i]->getNavn()))
 		{
@@ -327,5 +341,5 @@ int DivAvd::finnLagIndeks(char* navn)
 	}
 
 	// fant ingen lag med dette namnet !
-	return 0;
+	return -1;
 }

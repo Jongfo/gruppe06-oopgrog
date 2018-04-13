@@ -27,7 +27,7 @@ public:
 	void  skrivTerminliste();
     void  kamperTilSkjerm(char* date);
     void  kamperTilFil(char* fileName, char* date);
-	char* lesResultat(std::ifstream& fil);
+	char* lesResultat(std::ifstream& fil, bool& feil);
 	int   finnLagIndeks(char* navn);
 	~DivAvd();
 };

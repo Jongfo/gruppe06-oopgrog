@@ -72,7 +72,7 @@ Idrett* Idrettene::getIdrett(char* s)
 	}
 	else
 	{
-		std::cout << "Idrett fins ikke!\n";
+		//std::cout << "Idrett fins ikke!\n";
 		return nullptr;
 	}
 }
@@ -170,19 +170,20 @@ void Idrettene::skrivTabell()
 void Idrettene::lesResultat()
 {
 	std::ifstream fil("gruppe06-ooprog/RESULTAT.DTA");
-	while (fil.good())
+	bool feil = false;	// true dersom feil i fila
+
+	while (fil.good() && !feil)
 	{
 		// finn idrett
 		char* idrettNavn;
 		rIO.lesCharPointerFraFil(fil, idrettNavn);
 		Idrett* idrett = getIdrett(idrettNavn);
 
-
-
 		if (idrett != nullptr)
 		{
 			std::cout << "\nIdrett: " << idrettNavn << '\n';
 			delete[] idrettNavn;
+
 			char* divisjonNavn;
 			rIO.lesCharPointerFraFil(fil, divisjonNavn);
 
@@ -192,19 +193,25 @@ void Idrettene::lesResultat()
 				// finn div/avd
 				DivAvd* divisjon = idrett->getDivAvd(divisjonNavn);
 
-				delete[] divisjonNavn;
-
 				if (divisjon != nullptr)
 				{
-					divisjonNavn = divisjon->lesResultat(fil);
+					delete[] divisjonNavn;
+					divisjonNavn = divisjon->lesResultat(fil, feil);
 				}
-			} while (strlen(divisjonNavn) > 0);
+				else
+				{
+					std::cout << "Ugyldig divisjon/avdeling '"
+							  << divisjonNavn << "'.\n";
+					feil = true;
+				}
+			} while (strlen(divisjonNavn) > 0 && !feil);
 			delete[] divisjonNavn;
 		}
 		else
 		{
 			std::cout << "Ugyldig idrett '" << idrettNavn << "'.\n";
 			delete[] idrettNavn;
+			feil = true;
 		}
 	}
 }

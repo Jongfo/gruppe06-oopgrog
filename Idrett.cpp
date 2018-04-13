@@ -102,7 +102,7 @@ DivAvd* Idrett::getDivAvd(char* s)
 	{ 
 		return nullptr;
 	}
-    std::cout << "Divisjon/Avdeling eksisterer ikke.\n";
+    //std::cout << "Divisjon/Avdeling eksisterer ikke.\n";
     return nullptr;
 }
 
