@@ -190,7 +190,7 @@ void resultatAvKamper()
         {
             char* filNavnKode = rIO.finnPlassOgLeggeFil(filNavn, "resultater", "");
             idretten->alleKampeneTilFil(filNavnKode, dato, divisjonen); 
-            delete filNavnKode;
+            delete[] filNavnKode;
         }
         else
         {

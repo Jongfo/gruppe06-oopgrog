@@ -296,7 +296,7 @@ bool RobustIO::okDato(char* s)
 	return true;
 }
 
-char* RobustIO::finnPlassOgLeggeFil(char* customname, char* id, const char* prefix) 
+char* RobustIO::finnPlassOgLeggeFil(char* customname, const char* id, const char* prefix) 
 {
 	char filPlass[MAXTEKST]; char tekst[] = "gruppe06-ooprog/"; char type[] = ".DTA";
 	char space[] = "_"; 

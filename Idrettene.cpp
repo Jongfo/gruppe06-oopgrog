@@ -177,12 +177,12 @@ void Idrettene::lesResultat()
 		rIO.lesCharPointerFraFil(fil, idrettNavn);
 		Idrett* idrett = getIdrett(idrettNavn);
 
-		std::cout << "\nIdrett: " << idrettNavn << '\n';
 
-		delete[] idrettNavn;
 
 		if (idrett != nullptr)
 		{
+			std::cout << "\nIdrett: " << idrettNavn << '\n';
+			delete[] idrettNavn;
 			char* divisjonNavn;
 			rIO.lesCharPointerFraFil(fil, divisjonNavn);
 
@@ -200,6 +200,11 @@ void Idrettene::lesResultat()
 				}
 			} while (strlen(divisjonNavn) > 0);
 			delete[] divisjonNavn;
+		}
+		else
+		{
+			std::cout << "Ugyldig idrett '" << idrettNavn << "'.\n";
+			delete[] idrettNavn;
 		}
 	}
 }
