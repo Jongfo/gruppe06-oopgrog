@@ -13,7 +13,7 @@ private:
 	int  bortescorere[MAXMAAL];
 	int  hjemmescorere[MAXMAAL];
 public:
-	Resultat(std::ifstream& fil, char dato[]);
+	Resultat(std::ifstream& fil, char _dato[]);
 	Resultat(Lag* hjemmelag, Lag* bortelag);
     bool sameDate(char* date);
 	char* kortDato();
