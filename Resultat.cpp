@@ -147,7 +147,7 @@ void Resultat::skrivResultatTilSkjerm()
     {
         std::cout << spillere.getSpillerNavn(bortescorere[i]) << '\n';
     }
-    std::cout << std::endl();
+    std::cout << std::endl;
     
 }
 
