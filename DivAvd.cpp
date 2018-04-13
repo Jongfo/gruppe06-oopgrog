@@ -422,5 +422,5 @@ int DivAvd::finnLagIndeks(char* navn)
 // (SOM henholdsvid heime- og bortelag) denne dagen
 bool DivAvd::harSpilt(Lag* hjemmeLag, Lag* borteLag, char* dato)
 {
-	return false;
+	return true;
 }
