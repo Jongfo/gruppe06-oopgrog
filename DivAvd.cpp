@@ -120,12 +120,90 @@ char* DivAvd::hentNavn()
 {
 	return text;
 }
-void DivAvd::visTabell()
+void DivAvd::visTabell(char* tabell)
 {
-	//TODO display Tabell
-	std::cout << "FAKE TABEL FOR " << text << "\n\n";
+	int poengForVinn, poengForTap, poengForUavgjot, poengForVinnUt, poengForTapUt;
+	bool harUavgjort = true;
+	//Finner Tabelltypen
+	if (!strcmp(tabell, rIO.getTabelltype(1))) {
+		poengForVinn = 2; poengForTap = 0; poengForUavgjot = 1;
+		poengForTapUt = poengForTap; poengForVinnUt = poengForVinn;
+	}
+	else if (!strcmp(tabell, rIO.getTabelltype(2))) {
+		poengForVinn = 3; poengForTap = 0; poengForUavgjot = 1;
+		poengForTapUt = poengForTap; poengForVinnUt = poengForVinn;
+	}
+	else if (!strcmp(tabell, rIO.getTabelltype(3))) {
+		poengForVinn = 3; poengForTap = 0;
+		poengForTapUt = 1; poengForVinnUt = 2;
+		harUavgjort = false;
+	}
+
+	int hjemmaal[MAXLAG]; int bortemaal[MAXLAG];
+	int lagPoeng[MAXLAG]; int lagSomBleLest = 0;
+	rIO.setArrayTilNull(hjemmaal, MAXLAG); rIO.setArrayTilNull(bortemaal, MAXLAG);
+	rIO.setArrayTilNull(lagPoeng, MAXLAG);
+	//Setter poeng til de forskjellige lagene
+	for  (int i = 0; i < antLag; i++) {
+		for (int j = 0; j < antLag; j++) {
+			if (i != j && resultat[i][j] != nullptr) {
+				lagSomBleLest += 1; std::cout << "Found 2 teams!\n";
+				hjemmaal[i] += resultat[i][j]->getHjemmemaal();
+				bortemaal[j] += resultat[i][j]->getBortemaal();
+				if (resultat[i][j]->getHjemmemaal() > resultat[i][j]->getBortemaal() && resultat[i][j]->getNormalTid()) {
+					//Normaltid og hjemme laget vant
+					lagPoeng[i] += poengForVinn;
+					lagPoeng[j] += poengForTap;
+				}
+				else if (resultat[i][j]->getHjemmemaal() > resultat[i][j]->getBortemaal()) {
+					//Hvis ikke normal tid og hjemme laget vant
+					lagPoeng[i] += poengForVinnUt;
+					lagPoeng[j] += poengForTapUt;
+				}
+				else if (resultat[i][j]->getHjemmemaal() < resultat[i][j]->getBortemaal() && resultat[i][j]->getNormalTid()){
+					//Normaltid og borte laget vant
+					lagPoeng[i] += poengForTap;
+					lagPoeng[j] += poengForVinn;
+				}
+				else if(resultat[i][j]->getHjemmemaal() < resultat[i][j]->getBortemaal()) {
+					//Hvis ikke normal tid og borte laget vant
+					lagPoeng[i] += poengForTapUt;
+					lagPoeng[j] += poengForVinnUt;
+				}
+				else if(harUavgjort){
+					//Uavgjort
+					lagPoeng[i] += poengForUavgjot;
+					lagPoeng[j] += poengForUavgjot;
+				}
+			}
+		}
+	}
+	if (lagSomBleLest > 0) {
+		//Lager en sotert lag basert på poeng
+		Lag* sotert[MAXLAG];
+		for (int i = 0; i < antLag; i++) {
+			for (int j = 0; j < antLag - 1; j++) {
+				if (lagPoeng[j] > lagPoeng[j + 1]) {
+					Lag* temp = lag[j + 1];
+					sotert[j + 1] = lag[j];
+					sotert[j] = temp;
+				}
+			}
+		}
+		std::cout << "TABELL FOR: " << text << "\n\n";
+		std::cout << "Lag Navn \t HjemmeMål \t BorteMål \t Poeng \n\n";
+		for (int i = lagSomBleLest - 1; i > 0; i--) {
+			if (sotert[i] != nullptr) {
+				std::cout << sotert[i]->getNavn() << "\t\t" << hjemmaal[i] << "\t\t"
+					<< bortemaal[i] << "\t\t" << lagPoeng[i] << '\n';
+			}
+		}
+	}
+	else {
+		std::cout << "\nFant ingen lag med resultater\n";
+	}
 }
-void DivAvd::skrivTabellTilFil(char* navn) 
+void DivAvd::skrivTabellTilFil(char* navn, char* tabell) 
 {
 	//TODO skrive tabellen til fil
 	char* filPlass = rIO.finnPlassOgLeggeFil(navn, text, "Tabell/");
@@ -249,10 +327,8 @@ bool DivAvd::resultaterTilFil(char* fileName, char* date)
 // i ein divisjon.
 // Dersom ho er tom, har vi ein ny idrett,
 // dersom ikkje, har vi ein ny divisjon
-char* DivAvd::lesResultat(std::ifstream& fil)
+char* DivAvd::lesResultat(std::ifstream& fil, bool& feil)
 {
-	// TODO: Sjekk at innlesinga er logisk gyldig
-
 	char* dato;
 	char* hjemmeLag;
 	char* borteLag;
@@ -270,22 +346,54 @@ char* DivAvd::lesResultat(std::ifstream& fil)
 	rIO.lesCharPointerFraFil(fil, hjemmeLag);
 	rIO.lesCharPointerFraFil(fil, borteLag);
 
-	// finn ideksar
+	// finn indeksar
 	hjemmeLagIndeks = finnLagIndeks(hjemmeLag);
 	borteLagIndeks  = finnLagIndeks(borteLag);
 
-	delete[] hjemmeLag;
-	delete[] borteLag;
 
 	while (fil.good())
 	{
 		// DEBUG
 		std::cout << hjemmeLagIndeks << " - " << borteLagIndeks << '\n';
 
+		// Lag finst ikkje
+		if (hjemmeLagIndeks == -1 || borteLagIndeks == -1)
+		{
+			if (hjemmeLagIndeks == -1)
+			{
+				std::cout << "Ugyldig lag '" << hjemmeLag << "'.\n";
+			}
+
+			if (borteLagIndeks == -1)
+			{
+				std::cout << "Ugyldig lag '" << borteLag << "'.\n";
+			}
+
+			delete[] hjemmeLag;
+			delete[] borteLag;
+			delete[] dato;
+			feil = true;
+			l2 = new char[1];
+			l2[0] = '\0';
+			return l2;
+		}
+
+		// laga har ikkje spelt mor kvarandre denne dagen
+		if (!harSpilt(lag[hjemmeLagIndeks], lag[hjemmeLagIndeks], dato))
+		{
+			std::cout << hjemmeLagIndeks << " - " << borteLagIndeks
+					  << " har ikke spilt " << dato << '\n';
+			delete[] hjemmeLag;
+			delete[] borteLag;
+			delete[] dato;
+			feil = true;
+			l2 = new char[1];
+			l2[0] = '\0';
+			return l2;
+		}
 
 		// les inn resultat for denne kampen
 		resultat[hjemmeLagIndeks][borteLagIndeks] = new Resultat(fil, dato);
-
 
 		// dei to neste linjene i fila
 		rIO.lesCharPointerFraFil(fil, l1);
@@ -346,7 +454,7 @@ char* DivAvd::lesResultat(std::ifstream& fil)
 // finn indeks til laget med gitt namn
 int DivAvd::finnLagIndeks(char* navn)
 {
-	for (int i = 0; i < MAXLAG; i++)
+	for (int i = 0; i < antLag; i++)
 	{
 		if (!strcmp(navn, lag[i]->getNavn()))
 		{
@@ -356,5 +464,12 @@ int DivAvd::finnLagIndeks(char* navn)
 	}
 
 	// fant ingen lag med dette namnet !
-	return 0;
+	return -1;
+}
+
+// returnerer true dersom hjemmeLag har spilt mot borteLag
+// (SOM henholdsvid heime- og bortelag) denne dagen
+bool DivAvd::harSpilt(Lag* hjemmeLag, Lag* borteLag, char* dato)
+{
+	return true;
 }

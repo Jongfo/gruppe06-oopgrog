@@ -102,7 +102,7 @@ DivAvd* Idrett::getDivAvd(char* s)
 	{ 
 		return nullptr;
 	}
-    std::cout << "Divisjon/Avdeling eksisterer ikke.\n";
+    //std::cout << "Divisjon/Avdeling eksisterer ikke.\n";
     return nullptr;
 }
 
@@ -190,7 +190,7 @@ void Idrett::fjernDivAvd()
 //Viser tabell til divisjonen
 void Idrett::visTabell() {
 	char* divNavn; rIO.lesInnICharPointer("Navn paa divisjonen (blank for alle)", divNavn);
-	char* filNavn; rIO.lesInnICharPointer("Fil navn på Divisjonen (blankt kun til skjerm", filNavn);
+	char* filNavn; rIO.lesInnICharPointer("Fil navn på Divisjonen (blankt kun til skjerm)", filNavn);
 	if (!strlen(divNavn)) 
 	{
 
@@ -198,10 +198,10 @@ void Idrett::visTabell() {
 		for (int i = 1; i <= divisjoner->noOfElements(); i++) {
 			DivAvd* divisjon = (DivAvd*)divisjoner->removeNo(i);
 			if (strlen(filNavn)) {
-				divisjon->skrivTabellTilFil(filNavn);
+				divisjon->skrivTabellTilFil(filNavn, tabelltype);
 			}
 			else {
-				divisjon->visTabell();
+				divisjon->visTabell(tabelltype);
 			}
 			divisjoner->add((TextElement*)divisjon);
 		}
@@ -211,10 +211,10 @@ void Idrett::visTabell() {
 		//Skriver spesefikk tabell til sjerm eller fil
 		DivAvd* divisjon = (DivAvd*)divisjoner->remove(divNavn);
 		if (strlen(filNavn)) {
-			divisjon->skrivTabellTilFil(filNavn);
+			divisjon->skrivTabellTilFil(filNavn, tabelltype);
 		}
 		else {
-			divisjon->visTabell();
+			divisjon->visTabell(tabelltype);
 		}
 		divisjoner->add((TextElement*)divisjon);
 	}

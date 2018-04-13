@@ -296,7 +296,7 @@ bool RobustIO::okDato(char* s)
 	return true;
 }
 
-char* RobustIO::finnPlassOgLeggeFil(char* customname, char* id, const char* prefix) 
+char* RobustIO::finnPlassOgLeggeFil(char* customname, const char* id, const char* prefix) 
 {
 	char filPlass[MAXTEKST]; char tekst[] = "gruppe06-ooprog/"; char type[] = ".DTA";
 	char space[] = "_"; 
@@ -320,4 +320,16 @@ bool RobustIO::yn() {
 		return true;
 	}
 	return false;
+}
+
+void RobustIO::setArrayTilNull(int a[], const int SIZE) {
+	for (int i = 0; i < SIZE; i++) {
+		a[i] = 0;
+	}
+}
+char* RobustIO::getTabelltype(int a) {
+	if (a < ANTTABELLTYPER) {
+		return (char*)TABELLTYPER[a];
+	}
+	std::cout << "\n\nYOU ARE USING getTabelltype(int) WRONG!!!\nYOU ARE OUTSIDE OF getTabelltype(int) RANGE\n\n";
 }

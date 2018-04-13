@@ -23,9 +23,11 @@ public:
 	char* strip(char* s);   // Fjerner blanke fra s og returnerer det
 	void lesDato(const char* t, char s[]);
 	bool okDato(char* s);
-	char* finnPlassOgLeggeFil(char* customname, char* id, const char* prefix);
+	char* finnPlassOgLeggeFil(char* customname, const char* id, const char* prefix);
 	void fjernTegn(char* s, bool spesialtegn = true,
 		           bool mellomrom = false, bool bokstaver = false,
 		           bool tall = false);
 	bool yn(); //Skriver ja eller nei
+	void setArrayTilNull(int a[], const int SIZE);
+	char* getTabelltype(int a);
 };

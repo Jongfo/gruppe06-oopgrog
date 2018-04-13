@@ -6,9 +6,12 @@ extern RobustIO rIO;
 extern Spillere spillere;
 
 // les info om resultat frå fil
-Resultat::Resultat(std::ifstream& fil, char dato[])
+Resultat::Resultat(std::ifstream& fil, char _dato[])
 {
-
+	for (int i = 0; i < DATOLEN; i++)
+	{
+		dato[i] = _dato[i];
+	}
 	// DEBUG
 	std::cout << "Resultat::lesFraFil\n";
 
@@ -150,4 +153,16 @@ void Resultat::skrivResultatTilSkjerm()
 void Resultat::skrivResultatTilFil(std::ofstream & utfil)
 {
 
+}
+
+int  Resultat::getHjemmemaal() {
+	return hjemmemaal;
+}
+
+int  Resultat::getBortemaal() {
+	return bortemaal;
+}
+
+bool Resultat::getNormalTid() {
+	return normalTid;
 }
