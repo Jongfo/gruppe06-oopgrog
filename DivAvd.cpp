@@ -123,51 +123,64 @@ char* DivAvd::hentNavn()
 void DivAvd::visTabell()
 {
 	//TODO display Tabell
-	int hjemmaal[MAXLAG];
-	int bortemaal[MAXLAG];
-	int lagPoeng[MAXLAG];
-
+	int hjemmaal[MAXLAG]; int bortemaal[MAXLAG];
+	int lagPoeng[MAXLAG]; int lagSomBleLest = 0;
 	rIO.setArrayTilNull(hjemmaal, MAXLAG); rIO.setArrayTilNull(bortemaal, MAXLAG);
 	rIO.setArrayTilNull(lagPoeng, MAXLAG);
 	for  (int i = 0; i < antLag; i++) {
 		for (int j = 0; j < antLag; j++) {
 			if (i != j && resultat[i][j] != nullptr) {
+				lagSomBleLest++;
 				hjemmaal[i] += resultat[i][j]->getHjemmemaal();
 				bortemaal[j] += resultat[i][j]->getBortemaal();
-				if (resultat[i][j]->getHjemmemaal() > resultat[i][j]->getBortemaal()) {
+				if (resultat[i][j]->getHjemmemaal() > resultat[i][j]->getBortemaal() && resultat[i][j]->getNormalTid()) {
+					//Normaltid og hjemme laget vant
 					lagPoeng[i] += 3;
 					lagPoeng[j] += 0;
 				}
-				else if (resultat[i][j]->getHjemmemaal() < resultat[i][j]->getBortemaal()){
+				else if (resultat[i][j]->getHjemmemaal() > resultat[i][j]->getBortemaal()) {
+					//Hvis ikke normal tid og hjemme laget vant
+				}
+				else if (resultat[i][j]->getHjemmemaal() < resultat[i][j]->getBortemaal() && resultat[i][j]->getNormalTid()){
+					//Normaltid og borte laget vant
 					lagPoeng[i] += 0;
 					lagPoeng[j] += 3;
 				}
+				else if(resultat[i][j]->getHjemmemaal() < resultat[i][j]->getBortemaal()) {
+					//Hvis ikke normal tid og borte laget vant
+				}
 				else {
+					//Uavgjort
 					lagPoeng[i] += 1;
 					lagPoeng[j] += 1;
 				}
 			}
 		}
 	}
-	//Lager en sotert lag basert på poeng
-	Lag* sotert[MAXLAG];
-	for (int i = 0; i < antLag; i++) {
-		for (int j = 0; j < antLag - 1; j++) {
-			if (lagPoeng[j] > lagPoeng[j + 1]) {
-				Lag* temp = lag[j + 1];
-				sotert[j + 1] = lag[j];
-				sotert[j] = temp;
-				delete temp;
+	if (lagSomBleLest > 0) {
+		//Lager en sotert lag basert på poeng
+		Lag* sotert[MAXLAG];
+		for (int i = 0; i < lagSomBleLest; i++) {
+			for (int j = 0; j < antLag - 1; j++) {
+				if (lagPoeng[j] > lagPoeng[j + 1]) {
+					Lag* temp = lag[j + 1];
+					sotert[j + 1] = lag[j];
+					sotert[j] = temp;
+					delete temp;
+				}
+			}
+		}
+		std::cout << "TABELL FOR: " << text << "\n\n";
+		std::cout << "Lag Navn \t HjemmeMål \t BorteMål \t Poeng \n\n";
+		for (int i = lagSomBleLest - 1; i > 0; i--) {
+			if (sotert[i] != nullptr) {
+				std::cout << sotert[i]->getNavn() << "\t\t" << hjemmaal[i] << "\t\t"
+					<< bortemaal[i] << "\t\t" << lagPoeng[i] << '\n';
 			}
 		}
 	}
-	std::cout << "TABELL FOR: " << text << "\n\n";
-	std::cout << "Lag Navn \t HjemmeMål \t BorteMål \t Poeng \n\n";
-	for (int i = antLag -1; i > 0; i--) {
-		if (sotert[i]!=nullptr) {
-			std::cout << sotert[i]->getNavn() << "\t\t" << hjemmaal[i] << "\t\t"
-				<< bortemaal[i] << "\t\t" << lagPoeng[i] << '\n';
-		}
+	else {
+		std::cout << "\nFant ingen lag med resultater\n";
 	}
 }
 void DivAvd::skrivTabellTilFil(char* navn) 

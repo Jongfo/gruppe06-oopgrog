@@ -131,3 +131,6 @@ int  Resultat::getHjemmemaal() {
 int  Resultat::getBortemaal() {
 	return bortemaal;
 }
+bool Resultat::getNormalTid() {
+	return normalTid;
+}

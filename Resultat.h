@@ -20,4 +20,5 @@ public:
 	char* langDato();
 	int getHjemmemaal();
 	int getBortemaal();
+	bool getNormalTid();
 };
