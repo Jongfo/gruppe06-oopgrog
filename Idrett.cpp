@@ -1,4 +1,5 @@
 #include "Idrett.h"
+#include <fstream>
 Idrett::Idrett(char* navn) : TextElement(navn)
 {
 	tabelltype = rIO.lesTabelltype("Tabelltype: ");
@@ -108,11 +109,21 @@ DivAvd* Idrett::getDivAvd(char* s)
 // Skriver alle kampene i alle divisjonene med gitt dato til fil
 void Idrett::alleKampeneTilFil(char* fileName, char* date, DivAvd* div)
 {
-    for (int i = 1; i <= divisjoner->noOfElements(); i++)
+    std::ifstream innfil("RESULTAT.DTA"); //sjekk navn!
+
+
+    if (div)
     {
-        DivAvd* tempDiv = (DivAvd*)divisjoner->removeNo(i);
-        divisjoner->add((TextElement*)tempDiv);
-        tempDiv->kamperTilFil(fileName, date);
+
+    }
+    else
+    {
+        for (int i = 1; i <= divisjoner->noOfElements(); i++)
+        {
+            DivAvd* tempDiv = (DivAvd*)divisjoner->removeNo(i);
+            divisjoner->add((TextElement*)tempDiv);
+            tempDiv->kamperTilFil(fileName, date);
+        }
     }
 }
 
