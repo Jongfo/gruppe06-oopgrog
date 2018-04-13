@@ -13,9 +13,9 @@ private:
 	int  bortescorere[MAXMAAL];
 	int  hjemmescorere[MAXMAAL];
 public:
+	Resultat(std::ifstream& fil, char dato[]);
 	Resultat(Lag* hjemmelag, Lag* bortelag);
     bool sameDate(char* date);
 	char* kortDato();
 	char* langDato();
-	void  lesFraFil(std::ifstream& fil);
 };

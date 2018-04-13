@@ -176,22 +176,30 @@ void Idrettene::lesResultat()
 		char* idrettNavn;
 		rIO.lesCharPointerFraFil(fil, idrettNavn);
 		Idrett* idrett = getIdrett(idrettNavn);
+
+		std::cout << "\nIdrett: " << idrettNavn << '\n';
+
 		delete[] idrettNavn;
+
 		if (idrett != nullptr)
 		{
-			DivAvd* divisjon;
-			do
+			char* divisjonNavn;
+			rIO.lesCharPointerFraFil(fil, divisjonNavn);
+
+			do	// les resultat i ein divisjon til vi får eit tomt namn
 			{
+				std::cout << "\nDivisjon: " << divisjonNavn << '\n';
 				// finn div/avd
-				char* divisjonNavn;
-				rIO.lesCharPointerFraFil(fil, divisjonNavn);
-				divisjon = idrett->getDivAvd(divisjonNavn);
-				delete[] idrettNavn;
+				DivAvd* divisjon = idrett->getDivAvd(divisjonNavn);
+
+				delete[] divisjonNavn;
+
 				if (divisjon != nullptr)
 				{
-					divisjon->lesResultat(fil);
+					divisjonNavn = divisjon->lesResultat(fil);
 				}
-			} while (divisjon != nullptr);
+			} while (strlen(divisjonNavn) > 0);
+			delete[] divisjonNavn;
 		}
 	}
 }
