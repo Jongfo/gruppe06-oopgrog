@@ -178,26 +178,55 @@ void DivAvd::visTabell(char* tabell)
 			}
 		}
 	}
+	//DERP DERP TEST TEST
+	std::cout << "UNSORTED LIST\n";
+	for (int i = antLag - 1; i >= 0; i--) {
+		if (lag[i] != nullptr) {
+			std::cout << lag[i]->getNavn() << "\t\t" << hjemmaal[i] << "\t\t"
+				<< bortemaal[i] << "\t\t" << lagPoeng[i] << '\n';
+		}
+	}
 	if (lagSomBleLest > 0) {
 		//Lager en sotert lag basert på poeng
 		Lag* sotert[MAXLAG];
-		for (int i = 0; i < antLag; i++) {
-			for (int j = 0; j < antLag - 1; j++) {
-				if (lagPoeng[j] > lagPoeng[j + 1]) {
-					Lag* temp = lag[j + 1];
-					sotert[j + 1] = lag[j];
-					sotert[j] = temp;
+		for (int i = 0; i < MAXLAG; i++) {
+			sotert[i] = lag[i];
+		}
+		int counter = 0;
+		//Går å soterer listen
+		do {
+			for (int i = antLag-1; i > 0; i--) {
+				//Hvis den finner noe foran den som er høyere bytter de plass
+				if (lagPoeng[i-1] > lagPoeng[i]) {
+					//Soterer poengene
+					int temp = lagPoeng[i - 1];
+					lagPoeng[i - 1] = lagPoeng[i];
+					lagPoeng[i] = temp;
+					//Sorterer hjemmeMaalene
+					int temp2 = hjemmaal[i - 1];
+					hjemmaal[i - 1] = hjemmaal[i];
+					hjemmaal[i] = temp2;
+					//Sorterer borteMaalene
+					int temp3 = bortemaal[i - 1];
+					bortemaal[i - 1] = bortemaal[i];
+					bortemaal[i] = temp3;
+					//Soteret lagene
+					Lag* tempLag = sotert[i - 1];
+					sotert[i - 1] = sotert[i];
+					sotert[i] = tempLag;
 				}
 			}
-		}
+			counter++;
+		} while (counter <= antLag);
 		std::cout << "TABELL FOR: " << text << "\n\n";
 		std::cout << "Lag Navn \t HjemmeMål \t BorteMål \t Poeng \n\n";
-		for (int i = lagSomBleLest - 1; i > 0; i--) {
+		for (int i = antLag - 1; i >= 0; i--) {
 			if (sotert[i] != nullptr) {
 				std::cout << sotert[i]->getNavn() << "\t\t" << hjemmaal[i] << "\t\t"
 					<< bortemaal[i] << "\t\t" << lagPoeng[i] << '\n';
 			}
 		}
+
 	}
 	else {
 		std::cout << "\nFant ingen lag med resultater\n";
