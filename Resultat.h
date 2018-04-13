@@ -18,10 +18,6 @@ public:
     bool sameDate(char* date);
 	char* kortDato();
 	char* langDato();
-	int getHjemmemaal() {
-		return hjemmemaal;
-	}
-	int getBortemaal() {
-		return bortemaal;
-	}
+	int getHjemmemaal();
+	int getBortemaal();
 };
