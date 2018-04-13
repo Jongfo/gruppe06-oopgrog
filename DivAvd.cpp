@@ -143,7 +143,7 @@ void DivAvd::visTabell(char* tabell)
 		}
 		sorteringTilTabell(lagPoeng, vunnet, uavgjort, tapt, sotert);
 		std::cout << "TABELL FOR: " << text << "\n\n";
-		std::cout << "Lag Navn \t Vunnet \t Uavgjort \t Tapt \t Poeng \n\n";
+		std::cout << "Lag Navn \t Vunnet \t Uavgjort \t Tapt \t\t Poeng \n\n";
 		for (int i = antLag - 1; i >= 0; i--) {
 			if (sotert[i] != nullptr) {
 				std::cout << sotert[i]->getNavn() << "\t\t" << vunnet[i] << "\t\t" << uavgjort[i]
@@ -160,7 +160,32 @@ void DivAvd::skrivTabellTilFil(char* navn, char* tabell)
 {
 	//TODO skrive tabellen til fil
 	char* filPlass = rIO.finnPlassOgLeggeFil(navn, text, "Tabell/");
-	std::ofstream divAvdFil(filPlass);
+	std::ofstream tabellFil(filPlass);
+	int vunnet[MAXLAG]; int tapt[MAXLAG]; int uavgjort[MAXLAG];
+	int lagPoeng[MAXLAG];
+	rIO.setArrayTilNull(vunnet, MAXLAG); rIO.setArrayTilNull(tapt, MAXLAG);
+	rIO.setArrayTilNull(uavgjort, MAXLAG); rIO.setArrayTilNull(lagPoeng, MAXLAG);
+	//Setter poeng til de forskjellige lagene
+	if (dataTilTabell(tabell, lagPoeng, vunnet, uavgjort, tapt)) {
+		//Lager en sotert lag basert på poeng
+		Lag* sotert[MAXLAG];
+		//Setter den lik lag
+		for (int i = 0; i < MAXLAG; i++) {
+			sotert[i] = lag[i];
+		}
+		sorteringTilTabell(lagPoeng, vunnet, uavgjort, tapt, sotert);
+		tabellFil << "Lag Navn \t Vunnet \t Uavgjort \t Tapt \t\t Poeng \n\n";
+		for (int i = antLag - 1; i >= 0; i--) {
+			if (sotert[i] != nullptr) {
+				tabellFil << sotert[i]->getNavn() << "\t\t" << vunnet[i] << "\t\t" << uavgjort[i]
+					<< "\t\t" << tapt[i] << "\t\t" << lagPoeng[i] << '\n';
+			}
+		}
+
+	}
+	else {
+		std::cout << "\nFant ingen lag med resultater i " << text << "\n";
+	}
 	//skrivTilFil(divAvdFil); //ONLY TEMP FOR TESTING
 	std::cout << "FAKE WRITE OUT FOR " << text << "\n\n";
 }
