@@ -18,6 +18,7 @@ public:
 	void skrivTilFil(std::ofstream& ut);
 	virtual void display();
 	int spillerNr();
+    char* spillerNavn();
 	bool sammeNavn(char* n);
     ~Spiller();
 };

@@ -107,6 +107,21 @@ void  Spillere::visSpiller(int nr)
 	}
 }
 
+char* Spillere::getSpillerNavn(int nr)
+{
+    char* name = nullptr;
+    for (int i = 1; i <= spillere->noOfElements(); i++)
+    {
+        Spiller* temp = (Spiller*)spillere->removeNo(i);
+        if (temp->spillerNr() == nr)
+        {
+            name = temp->spillerNavn();
+        }
+        spillere->add(temp);
+    }
+    return name;
+}
+
 int Spillere::getSisteNr()
 {
 	return sisteNr;
