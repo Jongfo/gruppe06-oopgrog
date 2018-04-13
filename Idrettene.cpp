@@ -153,6 +153,7 @@ void Idrettene::fjernIdrett()
 // hånterer skrive ut tabbeler
 void Idrettene::skrivTabell() 
 {
+	//Vis resultat liste ikke finnes skal ikke dette kjøre
 	char* idrNavn; rIO.lesInnICharPointer("Navn paa Idretten?", idrNavn);
 	if (idretter->inList(idrNavn))
 	{

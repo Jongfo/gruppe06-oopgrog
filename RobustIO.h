@@ -28,4 +28,5 @@ public:
 		           bool mellomrom = false, bool bokstaver = false,
 		           bool tall = false);
 	bool yn(); //Skriver ja eller nei
+	void setArrayTilNull(int a[], const int SIZE);
 };
