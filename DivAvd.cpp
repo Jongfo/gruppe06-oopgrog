@@ -104,6 +104,7 @@ Lag* DivAvd::getLag(char* s)
 
 void DivAvd::display()
 {
+	std::cout << "\n\nHEI\n\n";
 	std::cout << '\n' << text << ":\n"
 			  << "Antall lag: " << antLag << '\n';
 
@@ -400,7 +401,7 @@ char* DivAvd::lesResultat(std::ifstream& fil, bool& feil)
 			return l2;
 		}
 
-		// laga har ikkje spelt mor kvarandre denne dagen
+		// laga har ikkje spelt mot kvarandre denne dagen
 		if (!harSpilt(lag[hjemmeLagIndeks], lag[borteLagIndeks], dato))
 		{
 			std::cout << hjemmeLagIndeks << " - " << borteLagIndeks

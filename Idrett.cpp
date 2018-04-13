@@ -203,6 +203,7 @@ void Idrett::visTabell() {
 			else {
 				divisjon->visTabell(tabelltype);
 			}
+			std::cout << "We are now here!\n";
 			divisjoner->add((TextElement*)divisjon);
 		}
 	}

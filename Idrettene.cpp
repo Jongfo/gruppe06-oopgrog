@@ -173,10 +173,11 @@ void Idrettene::lesResultat()
 	std::ifstream fil("gruppe06-ooprog/RESULTAT.DTA");
 	bool feil = false;	// true dersom feil i fila
 
-	List gjennomgaatteDivisjoner(LIFO);
+	List* gjennomgaatteDivisjoner = new List(LIFO);
 
 	while (fil.good() && !feil)
 	{
+		
 		// finn idrett
 		char* idrettNavn;
 		rIO.lesCharPointerFraFil(fil, idrettNavn);
@@ -198,7 +199,7 @@ void Idrettene::lesResultat()
 
 				if (divisjon != nullptr)
 				{
-					gjennomgaatteDivisjoner.add((TextElement*)divisjon);
+					gjennomgaatteDivisjoner->add((TextElement*)divisjon);
 					delete[] divisjonNavn;
 					divisjonNavn = divisjon->lesResultat(fil, feil);
 				}
@@ -208,6 +209,7 @@ void Idrettene::lesResultat()
 							  << divisjonNavn << "'.\n";
 					feil = true;
 				}
+
 			} while (strlen(divisjonNavn) > 0 && !feil);
 			delete[] divisjonNavn;
 		}
@@ -220,9 +222,9 @@ void Idrettene::lesResultat()
 	}
 	if (feil)
 	{
-		while (gjennomgaatteDivisjoner.noOfElements() > 0)
+		while (gjennomgaatteDivisjoner->noOfElements() > 0)
 		{
-			DivAvd* divisjon = (DivAvd*)gjennomgaatteDivisjoner.remove();
+			DivAvd* divisjon = (DivAvd*)gjennomgaatteDivisjoner->remove();
 			divisjon->fjernResultat();
 		}
 	}
@@ -230,4 +232,6 @@ void Idrettene::lesResultat()
 	{
 		std::cout << "\nInnlesing av resultat vellykket.\n";
 	}
+
+	
 }
