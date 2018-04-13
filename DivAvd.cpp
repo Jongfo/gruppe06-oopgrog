@@ -123,6 +123,50 @@ char* DivAvd::hentNavn()
 void DivAvd::visTabell()
 {
 	//TODO display Tabell
+	int hjemmaal[MAXLAG];
+	int bortemaal[MAXLAG];
+	int lagPoeng[MAXLAG];
+
+	rIO.setArrayTilNull(hjemmaal, MAXLAG); rIO.setArrayTilNull(bortemaal, MAXLAG);
+	rIO.setArrayTilNull(lagPoeng, MAXLAG);
+	for  (int i = 0; i < antLag; i++) {
+		for (int j = 0; j < antLag; j++) {
+			if (i != j && resultat[i][j] != nullptr) {
+				hjemmaal[i] += resultat[i][j]->getHjemmemaal();
+				bortemaal[j] += resultat[i][j]->getBortemaal();
+				if (resultat[i][j]->getHjemmemaal() > resultat[i][j]->getBortemaal()) {
+					lagPoeng[i] += 3;
+					lagPoeng[j] += 0;
+				}
+				else if (resultat[i][j]->getHjemmemaal() < resultat[i][j]->getBortemaal()){
+					lagPoeng[i] += 0;
+					lagPoeng[j] += 3;
+				}
+				else {
+					lagPoeng[i] += 1;
+					lagPoeng[j] += 1;
+				}
+			}
+		}
+	}
+	//Lager en sotert lag basert på poeng
+	Lag* sotert[MAXLAG];
+	for (int i = 0; i < antLag; i++) {
+		for (int j = 0; j < antLag - 1; j++) {
+			if (lagPoeng[j] > lagPoeng[j + 1]) {
+				Lag* temp = lag[j + 1];
+				sotert[j + 1] = lag[j];
+				sotert[j] = temp;
+			}
+		}
+	}
+	std::cout << "Lag Navn \t HjemmeMål \t BorteMål \t Poeng \n\n";
+	for (int i = antLag -1; i > 0; i--) {
+		if (sotert[i]!=nullptr) {
+			std::cout << sotert[i]->getNavn() << "\t\t" << hjemmaal[i] << "\t\t"
+				<< bortemaal[i] << "\t\t" << lagPoeng[i] << '\n';
+		}
+	}
 	std::cout << "FAKE TABEL FOR " << text << "\n\n";
 }
 void DivAvd::skrivTabellTilFil(char* navn) 

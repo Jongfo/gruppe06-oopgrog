@@ -321,3 +321,9 @@ bool RobustIO::yn() {
 	}
 	return false;
 }
+
+void RobustIO::setArrayTilNull(int a[], const int SIZE) {
+	for (int i = 0; i < SIZE; i++) {
+		a[i] = 0;
+	}
+}
