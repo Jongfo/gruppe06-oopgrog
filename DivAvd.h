@@ -35,5 +35,6 @@ public:
 	char* lesResultat(std::ifstream& fil, bool& feil);
 	int   finnLagIndeks(char* navn);
 	bool  harSpilt(Lag* hjemmeLag, Lag* borteLag, char* dato);
+	void  fjernResultat();
 	~DivAvd();
 };

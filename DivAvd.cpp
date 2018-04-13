@@ -438,6 +438,21 @@ char* DivAvd::lesResultat(std::ifstream& fil, bool& feil)
 			delete[] hjemmeLag;
 			delete[] borteLag;
 			delete[] dato;
+
+			feil = true;
+			l2 = new char[1];
+			l2[0] = '\0';
+			return l2;
+		}
+
+		// allereie lese resultat for denne kampen
+		if (resultat[hjemmeLagIndeks][borteLagIndeks] != nullptr)
+		{
+			std::cout << "Allerede lest resultat for "
+				<< lag[hjemmeLagIndeks]->getNavn() << " - "
+				<< lag[borteLagIndeks]->getNavn() << '\n';
+
+			delete[] dato;
 			feil = true;
 			l2 = new char[1];
 			l2[0] = '\0';
@@ -595,5 +610,21 @@ bool DivAvd::harSpilt(Lag* hjemmeLag, Lag* borteLag, char* dato)
 	else
 	{
 		return false;
+	}
+}
+
+// fjernar alle resultat frå divisjonen/avdelinga
+void DivAvd::fjernResultat()
+{
+	for (int i = 0; i < antLag; i++)
+	{
+		for (int j = 0; j < antLag; j++)
+		{
+			if (resultat[i][j] != nullptr)
+			{
+				delete resultat[i][j];
+				resultat[i][j] = nullptr;
+			}
+		}
 	}
 }
