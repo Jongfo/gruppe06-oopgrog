@@ -327,3 +327,9 @@ void RobustIO::setArrayTilNull(int a[], const int SIZE) {
 		a[i] = 0;
 	}
 }
+char* RobustIO::getTabelltype(int a) {
+	if (a < ANTTABELLTYPER) {
+		return (char*)TABELLTYPER[a];
+	}
+	std::cout << "\n\nYOU ARE USING getTabelltype(int) WRONG!!!\nYOU ARE OUTSIDE OF getTabelltype(int) RANGE\n\n";
+}

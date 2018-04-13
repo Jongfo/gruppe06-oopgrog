@@ -29,4 +29,5 @@ public:
 		           bool tall = false);
 	bool yn(); //Skriver ja eller nei
 	void setArrayTilNull(int a[], const int SIZE);
+	char* getTabelltype(int a);
 };
