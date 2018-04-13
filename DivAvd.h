@@ -22,8 +22,8 @@ public:
 	Lag*  getLag(char* s);
 	void  fjernSpillerNr(int n);
 	char* hentNavn();
-	void  visTabell();
-	void  skrivTabellTilFil(char* navn);
+	void  visTabell(char* tabell);
+	void  skrivTabellTilFil(char* navn, char* tabell);
 	void  skrivTerminliste();
     void  kamperTilSkjerm(char* date);
     void  kamperTilFil(char* fileName, char* date);

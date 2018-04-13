@@ -120,39 +120,60 @@ char* DivAvd::hentNavn()
 {
 	return text;
 }
-void DivAvd::visTabell()
+void DivAvd::visTabell(char* tabell)
 {
-	//TODO display Tabell
+	int poengForVinn, poengForTap, poengForUavgjot, poengForVinnUt, poengForTapUt;
+	bool harUavgjort = true;
+	//Finner Tabelltypen
+	if (!strcmp(tabell, rIO.getTabelltype(1))) {
+		poengForVinn = 2; poengForTap = 0; poengForUavgjot = 1;
+		poengForTapUt = poengForTap; poengForVinnUt = poengForVinn;
+	}
+	else if (!strcmp(tabell, rIO.getTabelltype(2))) {
+		poengForVinn = 3; poengForTap = 0; poengForUavgjot = 1;
+		poengForTapUt = poengForTap; poengForVinnUt = poengForVinn;
+	}
+	else if (!strcmp(tabell, rIO.getTabelltype(3))) {
+		poengForVinn = 3; poengForTap = 0;
+		poengForTapUt = 1; poengForVinnUt = 2;
+		harUavgjort = false;
+	}
+
 	int hjemmaal[MAXLAG]; int bortemaal[MAXLAG];
 	int lagPoeng[MAXLAG]; int lagSomBleLest = 0;
 	rIO.setArrayTilNull(hjemmaal, MAXLAG); rIO.setArrayTilNull(bortemaal, MAXLAG);
 	rIO.setArrayTilNull(lagPoeng, MAXLAG);
+	//Setter poeng til de forskjellige lagene
 	for  (int i = 0; i < antLag; i++) {
 		for (int j = 0; j < antLag; j++) {
 			if (i != j && resultat[i][j] != nullptr) {
-				lagSomBleLest++;
+				lagSomBleLest += 1; std::cout << "Found 2 teams!\n";
 				hjemmaal[i] += resultat[i][j]->getHjemmemaal();
 				bortemaal[j] += resultat[i][j]->getBortemaal();
 				if (resultat[i][j]->getHjemmemaal() > resultat[i][j]->getBortemaal() && resultat[i][j]->getNormalTid()) {
 					//Normaltid og hjemme laget vant
-					lagPoeng[i] += 3;
-					lagPoeng[j] += 0;
+					lagPoeng[i] += poengForVinn;
+					lagPoeng[j] += poengForTap;
 				}
 				else if (resultat[i][j]->getHjemmemaal() > resultat[i][j]->getBortemaal()) {
 					//Hvis ikke normal tid og hjemme laget vant
+					lagPoeng[i] += poengForVinnUt;
+					lagPoeng[j] += poengForTapUt;
 				}
 				else if (resultat[i][j]->getHjemmemaal() < resultat[i][j]->getBortemaal() && resultat[i][j]->getNormalTid()){
 					//Normaltid og borte laget vant
-					lagPoeng[i] += 0;
-					lagPoeng[j] += 3;
+					lagPoeng[i] += poengForTap;
+					lagPoeng[j] += poengForVinn;
 				}
 				else if(resultat[i][j]->getHjemmemaal() < resultat[i][j]->getBortemaal()) {
 					//Hvis ikke normal tid og borte laget vant
+					lagPoeng[i] += poengForTapUt;
+					lagPoeng[j] += poengForVinnUt;
 				}
-				else {
+				else if(harUavgjort){
 					//Uavgjort
-					lagPoeng[i] += 1;
-					lagPoeng[j] += 1;
+					lagPoeng[i] += poengForUavgjot;
+					lagPoeng[j] += poengForUavgjot;
 				}
 			}
 		}
@@ -160,13 +181,12 @@ void DivAvd::visTabell()
 	if (lagSomBleLest > 0) {
 		//Lager en sotert lag basert på poeng
 		Lag* sotert[MAXLAG];
-		for (int i = 0; i < lagSomBleLest; i++) {
+		for (int i = 0; i < antLag; i++) {
 			for (int j = 0; j < antLag - 1; j++) {
 				if (lagPoeng[j] > lagPoeng[j + 1]) {
 					Lag* temp = lag[j + 1];
 					sotert[j + 1] = lag[j];
 					sotert[j] = temp;
-					delete temp;
 				}
 			}
 		}
@@ -183,7 +203,7 @@ void DivAvd::visTabell()
 		std::cout << "\nFant ingen lag med resultater\n";
 	}
 }
-void DivAvd::skrivTabellTilFil(char* navn) 
+void DivAvd::skrivTabellTilFil(char* navn, char* tabell) 
 {
 	//TODO skrive tabellen til fil
 	char* filPlass = rIO.finnPlassOgLeggeFil(navn, text, "Tabell/");
