@@ -157,9 +157,11 @@ void DivAvd::visTabell()
 				Lag* temp = lag[j + 1];
 				sotert[j + 1] = lag[j];
 				sotert[j] = temp;
+				delete temp;
 			}
 		}
 	}
+	std::cout << "TABELL FOR: " << text << "\n\n";
 	std::cout << "Lag Navn \t HjemmeMål \t BorteMål \t Poeng \n\n";
 	for (int i = antLag -1; i > 0; i--) {
 		if (sotert[i]!=nullptr) {
@@ -167,7 +169,6 @@ void DivAvd::visTabell()
 				<< bortemaal[i] << "\t\t" << lagPoeng[i] << '\n';
 		}
 	}
-	std::cout << "FAKE TABEL FOR " << text << "\n\n";
 }
 void DivAvd::skrivTabellTilFil(char* navn) 
 {

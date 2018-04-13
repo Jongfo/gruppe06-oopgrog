@@ -125,3 +125,9 @@ char* Resultat::langDato()
 {
 	return dato;
 }
+int  Resultat::getHjemmemaal() {
+	return hjemmemaal;
+}
+int  Resultat::getBortemaal() {
+	return bortemaal;
+}
