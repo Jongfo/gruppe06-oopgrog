@@ -158,7 +158,6 @@ void DivAvd::visTabell(char* tabell)
 }
 void DivAvd::skrivTabellTilFil(char* navn, char* tabell) 
 {
-	//TODO skrive tabellen til fil
 	char* filPlass = rIO.finnPlassOgLeggeFil(navn, text, "Tabell/");
 	std::ofstream tabellFil(filPlass);
 	int vunnet[MAXLAG]; int tapt[MAXLAG]; int uavgjort[MAXLAG];
