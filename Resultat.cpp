@@ -6,9 +6,12 @@ extern RobustIO rIO;
 extern Spillere spillere;
 
 // les info om resultat frå fil
-Resultat::Resultat(std::ifstream& fil, char dato[])
+Resultat::Resultat(std::ifstream& fil, char _dato[])
 {
-
+	for (int i = 0; i < DATOLEN; i++)
+	{
+		dato[i] = _dato[i];
+	}
 	// DEBUG
 	std::cout << "Resultat::lesFraFil\n";
 

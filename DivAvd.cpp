@@ -293,6 +293,8 @@ char* DivAvd::lesResultat(std::ifstream& fil, bool& feil)
 	{
 		// DEBUG
 		std::cout << hjemmeLagIndeks << " - " << borteLagIndeks << '\n';
+
+		// Lag finst ikkje
 		if (hjemmeLagIndeks == -1 || borteLagIndeks == -1)
 		{
 			if (hjemmeLagIndeks == -1)
@@ -305,6 +307,20 @@ char* DivAvd::lesResultat(std::ifstream& fil, bool& feil)
 				std::cout << "Ugyldig lag '" << borteLag << "'.\n";
 			}
 
+			delete[] hjemmeLag;
+			delete[] borteLag;
+			delete[] dato;
+			feil = true;
+			l2 = new char[1];
+			l2[0] = '\0';
+			return l2;
+		}
+
+		// laga har ikkje spelt mor kvarandre denne dagen
+		if (!harSpilt(lag[hjemmeLagIndeks], lag[hjemmeLagIndeks], dato))
+		{
+			std::cout << hjemmeLagIndeks << " - " << borteLagIndeks
+					  << " har ikke spilt " << dato << '\n';
 			delete[] hjemmeLag;
 			delete[] borteLag;
 			delete[] dato;
@@ -387,4 +403,11 @@ int DivAvd::finnLagIndeks(char* navn)
 
 	// fant ingen lag med dette namnet !
 	return -1;
+}
+
+// returnerer true dersom hjemmeLag har spilt mot borteLag
+// (SOM henholdsvid heime- og bortelag) denne dagen
+bool DivAvd::harSpilt(Lag* hjemmeLag, Lag* borteLag, char* dato)
+{
+	return false;
 }

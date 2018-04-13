@@ -29,5 +29,6 @@ public:
     void  kamperTilFil(char* fileName, char* date);
 	char* lesResultat(std::ifstream& fil, bool& feil);
 	int   finnLagIndeks(char* navn);
+	bool  harSpilt(Lag* hjemmeLag, Lag* borteLag, char* dato);
 	~DivAvd();
 };
