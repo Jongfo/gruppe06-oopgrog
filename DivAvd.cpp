@@ -205,14 +205,43 @@ void DivAvd::skrivTerminliste()
 
 
 // Leser alle 
-void DivAvd::kamperTilSkjerm(char* date)
+bool DivAvd::resultaterTilSkjerm(char* date)
 {
-
+    bool found = false;
+    for (int i = 0; i < MAXLAG; i++)
+    {
+        for (int j = 0; j < MAXLAG; j++)
+        {
+            if (resultat[i][j]->sameDate(date))
+            {
+                std::cout << "H: " << lag[i]->getNavn() << " vs. B: " << lag[j]->getNavn() << '\n';
+                resultat[i][j]->skrivResultatTilSkjerm();
+                found = true;
+            }
+        }
+    }
+    return found;
 }
 
-void DivAvd::kamperTilFil(char* fileName, char* date)
+bool DivAvd::resultaterTilFil(char* fileName, char* date)
 {
+    bool found = false;
+    std::ofstream utfil(fileName);
 
+
+    for (int i = 0; i < MAXLAG; i++)
+    {
+        for (int j = 0; j < MAXLAG; j++)
+        {
+            if (resultat[i][j]->sameDate(date))
+            {
+                utfil << "H: " << lag[i]->getNavn() << " vs. B: " << lag[j]->getNavn() << '\n';
+                resultat[i][j]->skrivResultatTilFil(utfil);
+                found = true;
+            }
+        }
+    }
+    return found;
 }
 
 // les resultat for denne avdelinga inn i terminlista

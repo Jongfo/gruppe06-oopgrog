@@ -25,8 +25,8 @@ public:
 	void  visTabell();
 	void  skrivTabellTilFil(char* navn);
 	void  skrivTerminliste();
-    void  kamperTilSkjerm(char* date);
-    void  kamperTilFil(char* fileName, char* date);
+    bool  resultaterTilSkjerm(char* date);
+    bool  resultaterTilFil(char* fileName, char* date);
 	char* lesResultat(std::ifstream& fil);
 	int   finnLagIndeks(char* navn);
 	~DivAvd();

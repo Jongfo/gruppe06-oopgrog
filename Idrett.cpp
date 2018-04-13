@@ -107,14 +107,12 @@ DivAvd* Idrett::getDivAvd(char* s)
 }
 
 // Skriver alle kampene i alle divisjonene med gitt dato til fil
-void Idrett::alleKampeneTilFil(char* fileName, char* date, DivAvd* div)
+bool Idrett::resultatDatoTilFil(char* fileName, char* date, DivAvd* div)
 {
-    std::ifstream innfil("RESULTAT.DTA"); //sjekk navn!
-
-
+    bool found = false;
     if (div)
     {
-
+        div->resultaterTilFil(fileName, date);
     }
     else
     {
@@ -122,20 +120,30 @@ void Idrett::alleKampeneTilFil(char* fileName, char* date, DivAvd* div)
         {
             DivAvd* tempDiv = (DivAvd*)divisjoner->removeNo(i);
             divisjoner->add((TextElement*)tempDiv);
-            tempDiv->kamperTilFil(fileName, date);
+            found = tempDiv->resultaterTilFil(fileName, date);
         }
     }
+    return found;
 }
 
 // Skriver alle kapene i all divisjonene med gitt dato til skjerm
-void Idrett::alleKampeneTilSkjerm(char* date, DivAvd* div)
+bool Idrett::resultatDatoTilSkjerm(char* date, DivAvd* div)
 {
-    for (int i = 1; i <= divisjoner->noOfElements(); i++)
+    bool found = false;
+    if (div)
     {
-        DivAvd* tempDiv = (DivAvd*)divisjoner->removeNo(i);
-        divisjoner->add((TextElement*)tempDiv);
-        tempDiv->kamperTilSkjerm(date);
+        div->resultaterTilSkjerm(date);
     }
+    else
+    {
+        for (int i = 1; i <= divisjoner->noOfElements(); i++)
+        {
+            DivAvd* tempDiv = (DivAvd*)divisjoner->removeNo(i);
+            divisjoner->add((TextElement*)tempDiv);
+            found = tempDiv->resultaterTilSkjerm(date);
+        }
+    }
+    return found;
 }
 
 void Idrett::display()

@@ -18,4 +18,6 @@ public:
     bool sameDate(char* date);
 	char* kortDato();
 	char* langDato();
+    void skrivResultatTilSkjerm();
+    void skrivResultatTilFil(std::ofstream & utfil);
 };

@@ -183,18 +183,36 @@ void resultatAvKamper()
 
         } while (!divisjonen && strlen(divNavn) != 0);
 
+        // ber bruker omm å skrive inn filnavn og dato.
         rIO.lesInnICharPointer("Skriv inn navn paa fil, eller blank:", filNavn);
         rIO.lesDato("Skriv inn en dato på kampene:", dato);
     
+       // // vi starter lesing av fil
+       // std::ifstream innfil("gruppe06-ooprog/RESULTAT.DTA"); //sjekk navn!
+       // char* idrettNavnFraFil, *divNavnFraFil, *hjemmeLag, *borteLag;
+       // int antHjemMaal, antBortMaal;
+       // bool normTid;
+
         if (strlen(filNavn) > 0)
         {
             char* filNavnKode = rIO.finnPlassOgLeggeFil(filNavn, "resultater", "");
-            idretten->alleKampeneTilFil(filNavnKode, dato, divisjonen); 
-            delete filNavnKode;
+            bool found = idretten->resultatDatoTilFil(filNavnKode, dato, divisjonen);
+
+
+            if (!found)
+            {
+                std::cout << "\n\tFant ingen resultater.\n";
+            }
+            else
+            {
+                std::cout << "\n\tFil lagret som \"" << filNavnKode << "\".\n";
+            }
+            delete[] filNavnKode;
         }
         else
         {
-            idretten->alleKampeneTilSkjerm(dato, divisjonen); 
+            std::cout << "\n\n\tResultater for " << dato << ":\n";
+            bool found = idretten->resultatDatoTilSkjerm(dato, divisjonen); 
         }
     }
 }
@@ -263,7 +281,7 @@ void valgMeny()
 		case 'N': nySID();					break;
 		case 'F': fjernSID();				break;
 		case 'L': skrivTerminliste();		break;
-		case 'K': break;
+        case 'K': resultatAvKamper();       break;  // ikke fulført!
 		case 'T': idrettene.skrivTabell();	break;
 		case 'R': idrettene.lesResultat();	break;
 		case 'D': skrivSpillerePaaLag();	break;
