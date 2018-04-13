@@ -316,7 +316,7 @@ char* DivAvd::lesResultat(std::ifstream& fil, bool& feil)
 		}
 
 		// laga har ikkje spelt mor kvarandre denne dagen
-		/*if (!harSpilt(hjemmeLag, borteLag, dato))
+		if (!harSpilt(lag[hjemmeLagIndeks], lag[hjemmeLagIndeks], dato))
 		{
 			std::cout << hjemmeLagIndeks << " - " << borteLagIndeks
 					  << " har ikke spilt " << dato << '\n';
@@ -327,7 +327,7 @@ char* DivAvd::lesResultat(std::ifstream& fil, bool& feil)
 			l2 = new char[1];
 			l2[0] = '\0';
 			return l2;
-		}*/
+		}
 
 		// les inn resultat for denne kampen
 		resultat[hjemmeLagIndeks][borteLagIndeks] = new Resultat(fil, dato);
