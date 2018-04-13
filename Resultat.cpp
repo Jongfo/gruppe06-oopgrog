@@ -12,33 +12,20 @@ Resultat::Resultat(std::ifstream& fil, char _dato[])
 	{
 		dato[i] = _dato[i];
 	}
-	// DEBUG
-	std::cout << "Resultat::lesFraFil\n";
 
-	// DEBUG (std::cout)
 	fil >> hjemmemaal;
-	std::cout << '\t' << hjemmemaal << " - ";
 	fil >> bortemaal;
-	std::cout << bortemaal << "\t\t";
 	fil >> normalTid;
-	std::cout << (!normalTid ? "Ikkje " : "") << "normal tid!\n";
 
-	std::cout << "\tHS: ";
 	for (int i = 0; i < hjemmemaal; i++)
 	{
 		fil >> hjemmescorere[i];
-		// DEBUG
-		std::cout << ' ' << hjemmescorere[i];
 	}
 
-	std::cout << "\n\tBS: ";
 	for (int i = 0; i < bortemaal; i++)
 	{
 		fil >> bortescorere[i];
-		// DEBUG
-		std::cout << ' ' << bortescorere[i];
 	}
-	std::cout << '\n';
 
 	fil.ignore();
 }

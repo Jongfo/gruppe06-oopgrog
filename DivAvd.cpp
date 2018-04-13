@@ -348,7 +348,6 @@ char* DivAvd::lesResultat(std::ifstream& fil, bool& feil)
 
 	// les dato og namna på laga
 	rIO.lesCharPointerFraFil(fil, dato);
-	std::cout << dato << '\n';
 	rIO.lesCharPointerFraFil(fil, hjemmeLag);
 	rIO.lesCharPointerFraFil(fil, borteLag);
 
@@ -359,9 +358,6 @@ char* DivAvd::lesResultat(std::ifstream& fil, bool& feil)
 
 	while (fil.good())
 	{
-		// DEBUG
-		std::cout << hjemmeLagIndeks << " - " << borteLagIndeks << '\n';
-
 		// Lag finst ikkje
 		if (hjemmeLagIndeks == -1 || borteLagIndeks == -1)
 		{
@@ -420,16 +416,10 @@ char* DivAvd::lesResultat(std::ifstream& fil, bool& feil)
 		rIO.lesCharPointerFraFil(fil, l1);
 		rIO.lesCharPointerFraFil(fil, l2);
 
-		// DEBUG
-		std::cout << "l1: '" << l1 << "'\n";
-		std::cout << "l2: '" << l2 << "'\n";
-
 		// Dersom 1 er blank og 2 er blank, eller slutten av fila
 		// ny idrett
 		if ((strlen(l1) < 1 && strlen(l2) < 1) || !fil.good())
 		{
-			std::cout << "\nA\n\n";
-			if (!fil.good()) { std::cout << "\nSLUTT\n\n"; }
 			delete[] l1;
 			return l2;
 		}
@@ -438,7 +428,6 @@ char* DivAvd::lesResultat(std::ifstream& fil, bool& feil)
 		// ny divisjon
 		else if (strlen(l1) < 1 && strlen(l2) > 0)
 		{
-			std::cout << "\nB\n\n";
 			delete[] l1;
 			return l2;
 		}
@@ -447,7 +436,6 @@ char* DivAvd::lesResultat(std::ifstream& fil, bool& feil)
 		// er 2 lag1 og lag2 må lesast inn
 		else if (rIO.okDato(l1) && strlen(l2) > 0)
 		{
-			std::cout << "\nC\n\n";
 			delete[] dato;
 			dato = new char[strlen(l1) + 1];
 			strcpy(dato, l1);
@@ -462,7 +450,6 @@ char* DivAvd::lesResultat(std::ifstream& fil, bool& feil)
 		// er 1 lag1 2 lag2
 		else if (!rIO.okDato(l1) && !rIO.okDato(l2))
 		{
-			std::cout << "\nD\n\n";
 			hjemmeLagIndeks = finnLagIndeks(l1);
 			borteLagIndeks = finnLagIndeks(l2);
 		}
@@ -479,8 +466,6 @@ int DivAvd::finnLagIndeks(char* navn)
 	{
 		if (!strcmp(navn, lag[i]->getNavn()))
 		{
-			std::cout << "\n\'" << navn << "\' :: "
-				<< i << '\n';
 			// fant laget med namn navn
 			return i;
 		}
@@ -494,8 +479,6 @@ int DivAvd::finnLagIndeks(char* navn)
 // (SOM henholdsvid heime- og bortelag) denne dagen
 bool DivAvd::harSpilt(Lag* hjemmeLag, Lag* borteLag, char* dato)
 {
-	std::cout << "\nharSpilt(" << hjemmeLag->getNavn() << ", "
-		<< borteLag->getNavn() << ", " << dato << ")\n\n";
 	char filPlassering[MAXTEKST] = "gruppe06-ooprog/TerminListe/";
 	char kortDato[6] = {
 		dato[6], dato[7],
@@ -528,20 +511,16 @@ bool DivAvd::harSpilt(Lag* hjemmeLag, Lag* borteLag, char* dato)
 	{
 		buffer[it++] = fil.get();
 		buffer[it] = '\0';
-		std::cout << '\'' << buffer << "\' - '" << hjemmeLag->getNavn() << "\'\n";
 	}
 
 	// les til datoen
 	for (int i = 0; i < finnLagIndeks(borteLag->getNavn()); i++)
 	{
 		fil >> buffer;
-		std::cout << '\'' << buffer << "\'\n";
 	}
 
 	char faktiskDato[6];
 	fil >> faktiskDato;
-
-	std::cout << '\n' << kortDato << ' ' << faktiskDato << '\n';
 
 	if (!strcmp(kortDato, faktiskDato))
 	{

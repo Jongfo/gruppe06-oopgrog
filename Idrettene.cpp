@@ -185,7 +185,6 @@ void Idrettene::lesResultat()
 
 		if (idrett != nullptr)
 		{
-			std::cout << "\nIdrett: " << idrettNavn << '\n';
 			delete[] idrettNavn;
 
 			char* divisjonNavn;
@@ -193,7 +192,6 @@ void Idrettene::lesResultat()
 
 			do	// les resultat i ein divisjon til vi får eit tomt namn
 			{
-				std::cout << "\nDivisjon: " << divisjonNavn << '\n';
 				// finn div/avd
 				DivAvd* divisjon = idrett->getDivAvd(divisjonNavn);
 
