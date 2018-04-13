@@ -456,7 +456,8 @@ int DivAvd::finnLagIndeks(char* navn)
 // (SOM henholdsvid heime- og bortelag) denne dagen
 bool DivAvd::harSpilt(Lag* hjemmeLag, Lag* borteLag, char* dato)
 {
-	return true;
+	std::cout << "\nharSpilt(" << hjemmeLag->getNavn() << ", "
+		<< borteLag->getNavn() << ", " << dato << ")\n\n";
 	char filPlassering[MAXTEKST] = "gruppe06-ooprog/TerminListe/";
 	char kortDato[6] = {
 		dato[6], dato[7],
