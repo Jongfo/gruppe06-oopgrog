@@ -283,7 +283,7 @@ void valgMeny()
 		case 'L': skrivTerminliste();		break;
         case 'K': resultatAvKamper();       break;  // ikke fulført!
 		case 'T': idrettene.skrivTabell();	break;
-		case 'R': idrettene.lesResultat(); idrettene.visIdrett();	break;
+		case 'R': idrettene.lesResultat();	break;
 		case 'D': skrivSpillerePaaLag();	break;
         case 'E': redigerSpillere();        break;
 		case 'C': break;

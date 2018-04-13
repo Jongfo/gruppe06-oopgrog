@@ -232,6 +232,4 @@ void Idrettene::lesResultat()
 	{
 		std::cout << "\nInnlesing av resultat vellykket.\n";
 	}
-
-	
 }
