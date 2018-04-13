@@ -140,19 +140,39 @@ void Resultat::skrivResultatTilSkjerm()
     std::cout << "HjemmeMaal ble scoret av: \n";
     for (int i = 0; i < hjemmemaal; i++)
     {
-        spillere.visSpiller(hjemmescorere[i]);
+        std::cout << spillere.getSpillerNavn(hjemmescorere[i]) << '\n';
     }
     std::cout << "Bortemaal ble scoret av: \n";
     for (int i = 0; i < bortemaal; i++)
     {
-        spillere.visSpiller(bortescorere[i]);
+        std::cout << spillere.getSpillerNavn(bortescorere[i]) << '\n';
     }
+    std::cout << std::endl();
     
 }
 
 void Resultat::skrivResultatTilFil(std::ofstream & utfil)
 {
-
+    utfil << hjemmemaal << " - " << bortemaal;
+    if (normalTid)
+    {
+        utfil << "normal tid\n";
+    }
+    else
+    {
+        utfil << "overtid\n";
+    }
+    utfil << "HjemmeMaal ble scoret av: \n";
+    for (int i = 0; i < hjemmemaal; i++)
+    {
+        utfil << spillere.getSpillerNavn(hjemmescorere[i]) << '\n';
+    }
+    utfil << "Bortemaal ble scoret av: \n";
+    for (int i = 0; i < bortemaal; i++)
+    {
+        utfil << spillere.getSpillerNavn(bortescorere[i]) << '\n';
+    }
+    utfil << '\n';
 }
 
 int  Resultat::getHjemmemaal() {

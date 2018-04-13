@@ -20,6 +20,7 @@ public:
 	void visSpiller();
 	void visSpiller(char* s);
 	void visSpiller(int nr);
+    char* getSpillerNavn(int nr);
 	int getSisteNr();
 	bool finsSpiller(int n);
     ~Spillere();
