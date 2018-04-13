@@ -129,102 +129,19 @@ char* DivAvd::hentNavn()
 }
 void DivAvd::visTabell(char* tabell)
 {
-	int poengForVinn, poengForTap, poengForUavgjot, poengForVinnUt, poengForTapUt;
-	bool harUavgjort = true;
-	//Finner Tabelltypen
-	if (!strcmp(tabell, rIO.getTabelltype(1))) {
-		poengForVinn = 2; poengForTap = 0; poengForUavgjot = 1;
-		poengForTapUt = poengForTap; poengForVinnUt = poengForVinn;
-	}
-	else if (!strcmp(tabell, rIO.getTabelltype(2))) {
-		poengForVinn = 3; poengForTap = 0; poengForUavgjot = 1;
-		poengForTapUt = poengForTap; poengForVinnUt = poengForVinn;
-	}
-	else if (!strcmp(tabell, rIO.getTabelltype(3))) {
-		poengForVinn = 3; poengForTap = 0;
-		poengForTapUt = 1; poengForVinnUt = 2;
-		harUavgjort = false;
-	}
-
 	int hjemmaal[MAXLAG]; int bortemaal[MAXLAG];
-	int lagPoeng[MAXLAG]; int lagSomBleLest = 0;
+	int lagPoeng[MAXLAG];
 	rIO.setArrayTilNull(hjemmaal, MAXLAG); rIO.setArrayTilNull(bortemaal, MAXLAG);
 	rIO.setArrayTilNull(lagPoeng, MAXLAG);
 	//Setter poeng til de forskjellige lagene
-	for  (int i = 0; i < antLag; i++) {
-		for (int j = 0; j < antLag; j++) {
-			if (i != j && resultat[i][j] != nullptr) {
-				lagSomBleLest += 1; std::cout << "Found 2 teams!\n";
-				hjemmaal[i] += resultat[i][j]->getHjemmemaal();
-				bortemaal[j] += resultat[i][j]->getBortemaal();
-				if (resultat[i][j]->getHjemmemaal() > resultat[i][j]->getBortemaal() && resultat[i][j]->getNormalTid()) {
-					//Normaltid og hjemme laget vant
-					lagPoeng[i] += poengForVinn;
-					lagPoeng[j] += poengForTap;
-				}
-				else if (resultat[i][j]->getHjemmemaal() > resultat[i][j]->getBortemaal()) {
-					//Hvis ikke normal tid og hjemme laget vant
-					lagPoeng[i] += poengForVinnUt;
-					lagPoeng[j] += poengForTapUt;
-				}
-				else if (resultat[i][j]->getHjemmemaal() < resultat[i][j]->getBortemaal() && resultat[i][j]->getNormalTid()){
-					//Normaltid og borte laget vant
-					lagPoeng[i] += poengForTap;
-					lagPoeng[j] += poengForVinn;
-				}
-				else if(resultat[i][j]->getHjemmemaal() < resultat[i][j]->getBortemaal()) {
-					//Hvis ikke normal tid og borte laget vant
-					lagPoeng[i] += poengForTapUt;
-					lagPoeng[j] += poengForVinnUt;
-				}
-				else if(harUavgjort){
-					//Uavgjort
-					lagPoeng[i] += poengForUavgjot;
-					lagPoeng[j] += poengForUavgjot;
-				}
-			}
-		}
-	}
-	//DERP DERP TEST TEST
-	std::cout << "UNSORTED LIST\n";
-	for (int i = antLag - 1; i >= 0; i--) {
-		if (lag[i] != nullptr) {
-			std::cout << lag[i]->getNavn() << "\t\t" << hjemmaal[i] << "\t\t"
-				<< bortemaal[i] << "\t\t" << lagPoeng[i] << '\n';
-		}
-	}
-	if (lagSomBleLest > 0) {
+	if (dataTilTabell(tabell, lagPoeng, hjemmaal, bortemaal)) {
 		//Lager en sotert lag basert på poeng
 		Lag* sotert[MAXLAG];
+		//Setter den lik lag
 		for (int i = 0; i < MAXLAG; i++) {
 			sotert[i] = lag[i];
 		}
-		int counter = 0;
-		//Går å soterer listen
-		do {
-			for (int i = antLag-1; i > 0; i--) {
-				//Hvis den finner noe foran den som er høyere bytter de plass
-				if (lagPoeng[i-1] > lagPoeng[i]) {
-					//Soterer poengene
-					int temp = lagPoeng[i - 1];
-					lagPoeng[i - 1] = lagPoeng[i];
-					lagPoeng[i] = temp;
-					//Sorterer hjemmeMaalene
-					int temp2 = hjemmaal[i - 1];
-					hjemmaal[i - 1] = hjemmaal[i];
-					hjemmaal[i] = temp2;
-					//Sorterer borteMaalene
-					int temp3 = bortemaal[i - 1];
-					bortemaal[i - 1] = bortemaal[i];
-					bortemaal[i] = temp3;
-					//Soteret lagene
-					Lag* tempLag = sotert[i - 1];
-					sotert[i - 1] = sotert[i];
-					sotert[i] = tempLag;
-				}
-			}
-			counter++;
-		} while (counter <= antLag);
+		sorteringTilTabell(lagPoeng, hjemmaal, bortemaal, sotert);
 		std::cout << "TABELL FOR: " << text << "\n\n";
 		std::cout << "Lag Navn \t HjemmeMål \t BorteMål \t Poeng \n\n";
 		for (int i = antLag - 1; i >= 0; i--) {
@@ -595,4 +512,85 @@ bool DivAvd::harSpilt(Lag* hjemmeLag, Lag* borteLag, char* dato)
 	{
 		return false;
 	}
+}
+bool DivAvd::dataTilTabell(char* tabell, int poeng[], int hjem[],int borte[]) {
+	int poengForVinn, poengForTap, poengForUavgjot, poengForVinnUt, poengForTapUt;
+	bool harUavgjort = true; bool lestData = false;
+	//Finner Tabelltypen
+	if (!strcmp(tabell, rIO.getTabelltype(1))) {
+		poengForVinn = 2; poengForTap = 0; poengForUavgjot = 1;
+		poengForTapUt = poengForTap; poengForVinnUt = poengForVinn;
+	}
+	else if (!strcmp(tabell, rIO.getTabelltype(2))) {
+		poengForVinn = 3; poengForTap = 0; poengForUavgjot = 1;
+		poengForTapUt = poengForTap; poengForVinnUt = poengForVinn;
+	}
+	else if (!strcmp(tabell, rIO.getTabelltype(3))) {
+		poengForVinn = 3; poengForTap = 0;
+		poengForTapUt = 1; poengForVinnUt = 2;
+		harUavgjort = false;
+	}
+	for (int i = 0; i < antLag; i++) {
+		for (int j = 0; j < antLag; j++) {
+			if (i != j && resultat[i][j] != nullptr) {
+				lestData = true;
+				hjem[i] += resultat[i][j]->getHjemmemaal();
+				borte[j] += resultat[i][j]->getBortemaal();
+				if (resultat[i][j]->getHjemmemaal() > resultat[i][j]->getBortemaal() && resultat[i][j]->getNormalTid()) {
+					//Normaltid og hjemme laget vant
+					poeng[i] += poengForVinn;
+					poeng[j] += poengForTap;
+				}
+				else if (resultat[i][j]->getHjemmemaal() > resultat[i][j]->getBortemaal()) {
+					//Hvis ikke normal tid og hjemme laget vant
+					poeng[i] += poengForVinnUt;
+					poeng[j] += poengForTapUt;
+				}
+				else if (resultat[i][j]->getHjemmemaal() < resultat[i][j]->getBortemaal() && resultat[i][j]->getNormalTid()) {
+					//Normaltid og borte laget vant
+					poeng[i] += poengForTap;
+					poeng[j] += poengForVinn;
+				}
+				else if (resultat[i][j]->getHjemmemaal() < resultat[i][j]->getBortemaal()) {
+					//Hvis ikke normal tid og borte laget vant
+					poeng[i] += poengForTapUt;
+					poeng[j] += poengForVinnUt;
+				}
+				else if (harUavgjort) {
+					//Uavgjort
+					poeng[i] += poengForUavgjot;
+					poeng[j] += poengForUavgjot;
+				}
+			}
+		}
+	}
+	return lestData;
+}
+void DivAvd::sorteringTilTabell(int poeng[], int hjem[], int borte[], Lag* sorter[]) {
+	int counter = 0;
+	//Går å soterer listen
+	do {
+		for (int i = antLag - 1; i > 0; i--) {
+			//Hvis den finner noe foran den som er høyere bytter de plass
+			if (poeng[i - 1] > poeng[i]) {
+				//Soterer poengene
+				int temp = poeng[i - 1];
+				poeng[i - 1] = poeng[i];
+				poeng[i] = temp;
+				//Sorterer hjemmeMaalene
+				int temp2 = hjem[i - 1];
+				hjem[i - 1] = hjem[i];
+				hjem[i] = temp2;
+				//Sorterer borteMaalene
+				int temp3 = borte[i - 1];
+				borte[i - 1] = borte[i];
+				borte[i] = temp3;
+				//Soteret lagene
+				Lag* tempLag = sorter[i - 1];
+				sorter[i - 1] = sorter[i];
+				sorter[i] = tempLag;
+			}
+		}
+		counter++;
+	} while (counter <= antLag);
 }

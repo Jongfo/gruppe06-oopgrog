@@ -35,5 +35,7 @@ public:
 	char* lesResultat(std::ifstream& fil, bool& feil);
 	int   finnLagIndeks(char* navn);
 	bool  harSpilt(Lag* hjemmeLag, Lag* borteLag, char* dato);
+	bool dataTilTabell(char* tabell, int poeng[], int hjem[], int borte[]);
+	void sorteringTilTabell(int poeng[], int hjem[], int borte[], Lag* sorter[]);
 	~DivAvd();
 };
