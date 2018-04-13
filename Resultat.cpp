@@ -125,12 +125,44 @@ char* Resultat::langDato()
 {
 	return dato;
 }
+
+void Resultat::skrivResultatTilSkjerm()
+{
+    std::cout << hjemmemaal << " - " << bortemaal;
+    if (normalTid)
+    {
+        std::cout << "normal tid\n";
+    }
+    else
+    {
+        std::cout << "overtid\n";
+    }
+    std::cout << "HjemmeMaal ble scoret av: \n";
+    for (int i = 0; i < hjemmemaal; i++)
+    {
+        spillere.visSpiller(hjemmescorere[i]);
+    }
+    std::cout << "Bortemaal ble scoret av: \n";
+    for (int i = 0; i < bortemaal; i++)
+    {
+        spillere.visSpiller(bortescorere[i]);
+    }
+    
+}
+
+void Resultat::skrivResultatTilFil(std::ofstream & utfil)
+{
+
+}
+
 int  Resultat::getHjemmemaal() {
 	return hjemmemaal;
 }
+
 int  Resultat::getBortemaal() {
 	return bortemaal;
 }
+
 bool Resultat::getNormalTid() {
 	return normalTid;
 }

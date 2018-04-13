@@ -25,6 +25,9 @@ public:
 	void  visTabell(char* tabell);
 	void  skrivTabellTilFil(char* navn, char* tabell);
 	void  skrivTerminliste();
+    bool  resultaterTilSkjerm(char* date);
+    bool  resultaterTilFil(char* fileName, char* date);
+	char* lesResultat(std::ifstream& fil);
     void  kamperTilSkjerm(char* date);
     void  kamperTilFil(char* fileName, char* date);
 	char* lesResultat(std::ifstream& fil, bool& feil);
