@@ -56,7 +56,7 @@ void Idrettene::visIdrett()
 Idrett* Idrettene::getIdrett()
 {
 	char* idrettNavn;
-	rIO.lesInnICharPointer("Idrett", idrettNavn);
+	rIO.lesInnICharPointer("Idrett:", idrettNavn);
 	Idrett* idrett = getIdrett(idrettNavn);
 	return idrett;
 }
@@ -139,7 +139,7 @@ void Idrettene::fjernSpillerNr(int n)
 void Idrettene::fjernIdrett()
 {
 	char* idrettNavn;
-	rIO.lesInnICharPointer("Idrett aa fjerne", idrettNavn);
+	rIO.lesInnICharPointer("Idrett aa fjerne:", idrettNavn);
 	if (idretter->inList(idrettNavn))
 	{
 		std::cout << "Vil du virkelig fjerne " << idrettNavn << '?';

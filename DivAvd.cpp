@@ -104,7 +104,6 @@ Lag* DivAvd::getLag(char* s)
 
 void DivAvd::display()
 {
-	std::cout << "\n\nHEI\n\n";
 	std::cout << '\n' << text << ":\n"
 			  << "Antall lag: " << antLag << '\n';
 
@@ -182,12 +181,11 @@ void DivAvd::skrivTabellTilFil(char* navn, char* tabell)
 			}
 		}
 
+		std::cout << "Velykket skrevet" << text << " tabell til fil\n\n";
 	}
 	else {
 		std::cout << "\nFant ingen lag med resultater i " << text << "\n";
 	}
-	//skrivTilFil(divAvdFil); //ONLY TEMP FOR TESTING
-	std::cout << "FAKE WRITE OUT FOR " << text << "\n\n";
 }
 
 // skriv terminlista til fil eller til skjerm
