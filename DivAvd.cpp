@@ -29,6 +29,7 @@ DivAvd::DivAvd(std::ifstream& inn, char* navn) : TextElement(navn)
 	{
 		lag[i] = new Lag(inn);
 	}
+	rIO.lesCharPointerFraFil(inn, terminlisteFil);
 }
 
 // skriv data om divisjon/avdeling til fil
@@ -41,6 +42,12 @@ void DivAvd::skrivTilFil(std::ofstream& ut)
 	for (int i = 0; i < antLag; i++)
 	{
 		lag[i]->skrivTilFil(ut);
+	}
+
+	// namn på terminlistefila
+	if (terminlisteFil != nullptr)
+	{
+		ut << terminlisteFil << '\n';
 	}
 }
 
@@ -182,9 +189,19 @@ void DivAvd::skrivTabellTilFil(char* navn)
 // skriv terminlista til fil eller til skjerm
 void DivAvd::skrivTerminliste()
 {
+	char filPlassering[MAXTEKST] = "gruppe06-ooprog/TerminListe/";
+
+	if (terminlisteFil != nullptr)
+	{
+		for (int i = 0; i < strlen(terminlisteFil); i++)
+		{
+			filPlassering[strlen(filPlassering)] = terminlisteFil[i];
+			filPlassering[strlen(filPlassering) + 1] = '\0';
+		}
+	}
+
 	std::ostream stream(nullptr);
 	std::ofstream fil;
-	char* filnavn;					// namnet på fila å skriva til
 	int kolonneStorrelse = 5;		// størrelsen på ei kolonne
 
 	// sett kolonnestorleik til største lagnamn
@@ -196,6 +213,7 @@ void DivAvd::skrivTerminliste()
 		}
 	}
 
+	char* filnavn;
 	rIO.lesInnICharPointer("Filnavn:", filnavn);
 
 	if (strlen(filnavn) == 0)
@@ -205,46 +223,65 @@ void DivAvd::skrivTerminliste()
 	}
 	else
 	{
+		delete[] terminlisteFil;
+		terminlisteFil = new char[strlen(filnavn) + 1];
+		strcpy(terminlisteFil, filnavn);
 		// skriv til fil
-		char* plass = rIO.finnPlassOgLeggeFil(filnavn, text, "TerminListe/");
-		fil = std::ofstream(plass);
+
+		// legg til brukarbestemt namn til filnamn
+		for (int i = 0; i < strlen(terminlisteFil); i++)
+		{
+			filPlassering[strlen(filPlassering)] = terminlisteFil[i];
+			filPlassering[strlen(filPlassering) + 1] = '\0';
+		}
+		fil = std::ofstream(filPlassering);
 		stream.rdbuf(fil.rdbuf());
 	}
 
-	stream << "TERMINLISTE FOR " << text << '\n';
-
-	for (int i = 0; i < kolonneStorrelse; i++)
+	if (terminlisteFil != nullptr && strlen(filnavn) == 0)
 	{
-		stream << ' ';
-	}
-
-	// skriv namn på toppen
-	for (int i = 0; i < antLag; i++)
-	{
-		stream << std::setw(kolonneStorrelse) << lag[i]->getNavn() << ' ';
-	}
-
-	stream << '\n';
-
-	// skriv datoane
-	for (int i = 0; i < antLag; i++)
-	{
-		stream << std::setw(kolonneStorrelse) << lag[i]->getNavn() << ' ';
-		for (int j = 0; j < antLag; j++)
+		std::ifstream innfil(filPlassering);
+		char buffer[MAXTEKST];
+		while (innfil.good())
 		{
-			stream << std::setw(kolonneStorrelse);
-			if (i != j)
-			{
-				stream << resultat[i][j]->kortDato() << ' ';
-			}
-			else
-			{
-				stream << "----- ";
-			}
+			innfil.getline(buffer, MAXTEKST);
+			stream << buffer << '\n';
 		}
-		stream << '\n';
 	}
+	else
+	{
+		for (int i = 0; i < kolonneStorrelse; i++)
+		{
+			stream << ' ';
+		}
 
+		// skriv namn på toppen
+		for (int i = 0; i < antLag; i++)
+		{
+			stream << std::setw(kolonneStorrelse) << lag[i]->getNavn() << ' ';
+		}
+
+		stream << '\n';
+
+		// skriv datoane
+		for (int i = 0; i < antLag; i++)
+		{
+			stream << std::setw(kolonneStorrelse) << lag[i]->getNavn() << ' ';
+			for (int j = 0; j < antLag; j++)
+			{
+				stream << std::setw(kolonneStorrelse);
+				if (i != j)
+				{
+					stream << resultat[i][j]->kortDato() << ' ';
+				}
+				else
+				{
+					stream << "----- ";
+				}
+			}
+			stream << '\n';
+		}
+	}
 	delete[] filnavn;
 }
 
@@ -317,7 +354,7 @@ char* DivAvd::lesResultat(std::ifstream& fil, bool& feil)
 		}
 
 		// laga har ikkje spelt mor kvarandre denne dagen
-		if (!harSpilt(lag[hjemmeLagIndeks], lag[hjemmeLagIndeks], dato))
+		if (!harSpilt(lag[hjemmeLagIndeks], lag[borteLagIndeks], dato))
 		{
 			std::cout << hjemmeLagIndeks << " - " << borteLagIndeks
 					  << " har ikke spilt " << dato << '\n';
@@ -381,7 +418,7 @@ char* DivAvd::lesResultat(std::ifstream& fil, bool& feil)
 		{
 			std::cout << "\nD\n\n";
 			hjemmeLagIndeks = finnLagIndeks(l1);
-			hjemmeLagIndeks = finnLagIndeks(l2);
+			borteLagIndeks = finnLagIndeks(l2);
 		}
 
 		delete[] l1;
@@ -396,6 +433,8 @@ int DivAvd::finnLagIndeks(char* navn)
 	{
 		if (!strcmp(navn, lag[i]->getNavn()))
 		{
+			std::cout << "\n\'" << navn << "\' :: "
+				<< i << '\n';
 			// fant laget med namn navn
 			return i;
 		}
@@ -410,4 +449,59 @@ int DivAvd::finnLagIndeks(char* navn)
 bool DivAvd::harSpilt(Lag* hjemmeLag, Lag* borteLag, char* dato)
 {
 	return true;
+	char filPlassering[MAXTEKST] = "gruppe06-ooprog/TerminListe/";
+	char kortDato[6] = {
+		dato[6], dato[7],
+		'/',
+		dato[4], dato[5],
+		'\0'
+	};
+
+
+	// legg til brukarbestemt namn
+	for (int i = 0; i < strlen(terminlisteFil); i++)
+	{
+		filPlassering[strlen(filPlassering)] = terminlisteFil[i];
+		filPlassering[strlen(filPlassering) + 1] = '\0';
+	}
+
+	std::ifstream fil(filPlassering);
+	char buffer[MAXTEKST];
+	fil.getline(buffer, MAXTEKST);		// les gjennom lagnamna på toppen
+
+	// les til heimelaget
+	for (int i = 0; i < finnLagIndeks(hjemmeLag->getNavn()); i++)
+	{
+		fil.getline(buffer, MAXTEKST);
+	}
+
+	// les forbi namnet på heimelaget
+	int it = 0;
+	while (strcmp(buffer, hjemmeLag->getNavn()))
+	{
+		buffer[it++] = fil.get();
+		buffer[it] = '\0';
+		std::cout << '\'' << buffer << "\' - '" << hjemmeLag->getNavn() << "\'\n";
+	}
+
+	// les til datoen
+	for (int i = 0; i < finnLagIndeks(borteLag->getNavn()); i++)
+	{
+		fil >> buffer;
+		std::cout << '\'' << buffer << "\'\n";
+	}
+
+	char faktiskDato[6];
+	fil >> faktiskDato;
+
+	std::cout << '\n' << kortDato << ' ' << faktiskDato << '\n';
+
+	if (!strcmp(kortDato, faktiskDato))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }

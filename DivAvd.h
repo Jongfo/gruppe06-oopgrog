@@ -12,6 +12,8 @@ private:
 	Lag* lag[MAXLAG];
 	Resultat* resultat[MAXLAG][MAXLAG];
 
+	char* terminlisteFil;	// namnet på fila der terminlista ligg
+
 public:
 	DivAvd(char* navn);
 	DivAvd(std::ifstream& inn, char* navn);
