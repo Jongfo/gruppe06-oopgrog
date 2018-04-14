@@ -55,8 +55,7 @@ void DivAvd::skrivTilFil(std::ofstream& ut)
 //TODO Vinne om lageet finnes fra før
 void DivAvd::nyeLag() 
 {
-	char t[] = "Hvor mange lag oensker du aa legge til?";
-	int l = rIO.lesTall(t, 0, MAXLAG - antLag);
+	int l = rIO.lesTall("Hvor mange lag oensker du aa legge til?", 0, MAXLAG - antLag);
 	for (int i = antLag; i < antLag + l; i++) {
 		lag[i] = new Lag();
 	}
