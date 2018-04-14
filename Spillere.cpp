@@ -84,34 +84,42 @@ void Spillere::fjernSpiller()
 		std::cout << "Ingen spillere fjernet.\n";
 	}
 }
-
+//Viser alle spillere
 void  Spillere::visSpiller() 
 {
 	spillere->displayList();
 }
-
+//Viser Spiller med navn s
 void  Spillere::visSpiller(char* s) 
 {
+	bool fantS = false;
 	for (int i = 1; i <= spillere->noOfElements(); i++) 
 	{
 		Spiller* temp = (Spiller*)spillere->removeNo(i);
 		if (temp->sammeNavn(s)) 
 		{
-			temp->display();
+			temp->display(); fantS = true;
 		}
 		spillere->add(temp);
 	}
+	if (!fantS) {
+		std::cout << "Fant ikke spiller " << s << "\n\n";
+	}
 }
-
+//Viser spiller med nummer nr
 void  Spillere::visSpiller(int nr) 
 {
+	bool fantNr = false;
 	for (int i = 1; i <= spillere->noOfElements(); i++) 
 	{
 		Spiller* temp = (Spiller*)spillere->removeNo(i);
 		if (temp->spillerNr() == nr) {
-			temp->display();
+			temp->display(); fantNr = true;
 		}
 		spillere->add(temp);
+	}
+	if (!fantNr) {
+		std::cout << "Fant ikke spiller nr." << nr << "\n\n";
 	}
 }
 

@@ -113,7 +113,7 @@ bool Idrett::resultatDatoTilFil(std::ofstream &utfil, char* date, DivAvd* div)
     utfil << "Resultater for " << TextElement::text << ' ' << date << ":\n";
     if (div)
     {
-        div->resultaterTilFil(utfil, date);
+        found = div->resultaterTilFil(utfil, date);
     }
     else
     {
@@ -121,7 +121,8 @@ bool Idrett::resultatDatoTilFil(std::ofstream &utfil, char* date, DivAvd* div)
         {
             DivAvd* tempDiv = (DivAvd*)divisjoner->removeNo(i);
             divisjoner->add((TextElement*)tempDiv);
-            found = tempDiv->resultaterTilFil(utfil, date);
+            if (tempDiv->resultaterTilFil(utfil, date))
+                found = true;
         }
     }
     return found;
@@ -131,9 +132,10 @@ bool Idrett::resultatDatoTilFil(std::ofstream &utfil, char* date, DivAvd* div)
 bool Idrett::resultatDatoTilSkjerm(char* date, DivAvd* div)
 {
     bool found = false;
+    std::cout << "\n\n\tResultater for " << TextElement::text << ' ' << date << ":\n";
     if (div)
     {
-        div->resultaterTilSkjerm(date);
+        found = div->resultaterTilSkjerm(date);
     }
     else
     {
@@ -141,7 +143,8 @@ bool Idrett::resultatDatoTilSkjerm(char* date, DivAvd* div)
         {
             DivAvd* tempDiv = (DivAvd*)divisjoner->removeNo(i);
             divisjoner->add((TextElement*)tempDiv);
-            found = tempDiv->resultaterTilSkjerm(date);
+            if (tempDiv->resultaterTilSkjerm(date))
+                found = true;
         }
     }
     return found;

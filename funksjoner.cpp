@@ -214,7 +214,6 @@ void resultatAvKamper()
         }
         else
         {
-            std::cout << "\n\n\tResultater for " << dato << ":\n";
             bool found = idretten->resultatDatoTilSkjerm(dato, divisjonen); 
         }
     }
