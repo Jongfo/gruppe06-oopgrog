@@ -1,12 +1,15 @@
 #include "Idrett.h"
 #include <fstream>
+
+
 Idrett::Idrett(char* navn) : TextElement(navn)
 {
 	tabelltype = rIO.lesTabelltype("Tabelltype: ");
 	divisjoner = new List(Sorted);
 	nyDivisjon();
-	
 }
+
+
 Idrett::Idrett(std::ifstream&inn, char* navn) : TextElement(navn) 
 {
 	char* tabelltemp;
@@ -62,16 +65,30 @@ void Idrett::skrivTilFil(std::ofstream& idrettFil)
 
 void Idrett::nyDivisjon()
 {
-	char* t;
-	rIO.lesInnICharPointer("Navn paa Divisjon/Avdeling?", t);
-	if (!divisjoner->inList(t))
+	char* t = nullptr;
+	do
 	{
-		divisjoner->add((TextElement*)new DivAvd(t));
+		delete[] t;
+		rIO.lesInnICharPointer("Navn paa Divisjon/Avdeling?", t);
+	} while (strlen(t) == 1);
+
+	if (strlen(t) > 1)
+	{
+		if (!divisjoner->inList(t))
+		{
+			divisjoner->add((TextElement*)new DivAvd(t));
+		}
+		else
+		{
+			std::cout << "Denne divisjonen finner allerede i listen";
+		}
 	}
 	else
 	{
-		std::cout << "Denne divisjonen finner allerede i listen";
+		std::cout << "Ingen divisjon laga.\n";
 	}
+	
+	delete[] t;
 }
 
 Idrett::~Idrett()
