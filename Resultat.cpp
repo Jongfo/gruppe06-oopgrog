@@ -118,18 +118,20 @@ void Resultat::skrivResultatTilSkjerm()
     std::cout << hjemmemaal << " - " << bortemaal;
     if (normalTid)
     {
-        std::cout << "normal tid\n";
+        std::cout << " normal tid\n";
     }
     else
     {
-        std::cout << "overtid\n";
+        std::cout << " overtid\n";
     }
-    std::cout << "HjemmeMaal ble scoret av: \n";
+    if (hjemmemaal)
+        std::cout << "HjemmeMaal ble scoret av: \n";
     for (int i = 0; i < hjemmemaal; i++)
     {
         std::cout << spillere.getSpillerNavn(hjemmescorere[i]) << '\n';
     }
-    std::cout << "Bortemaal ble scoret av: \n";
+    if (bortemaal)
+        std::cout << "Bortemaal ble scoret av: \n";
     for (int i = 0; i < bortemaal; i++)
     {
         std::cout << spillere.getSpillerNavn(bortescorere[i]) << '\n';
@@ -143,18 +145,20 @@ void Resultat::skrivResultatTilFil(std::ofstream & utfil)
     utfil << hjemmemaal << " - " << bortemaal;
     if (normalTid)
     {
-        utfil << "normal tid\n";
+        utfil << " normal tid\n";
     }
     else
     {
-        utfil << "overtid\n";
+        utfil << " overtid\n";
     }
-    utfil << "HjemmeMaal ble scoret av: \n";
+    if (hjemmemaal)
+        utfil << "HjemmeMaal ble scoret av: \n";
     for (int i = 0; i < hjemmemaal; i++)
     {
         utfil << spillere.getSpillerNavn(hjemmescorere[i]) << '\n';
     }
-    utfil << "Bortemaal ble scoret av: \n";
+    if (bortemaal)
+        utfil << "Bortemaal ble scoret av: \n";
     for (int i = 0; i < bortemaal; i++)
     {
         utfil << spillere.getSpillerNavn(bortescorere[i]) << '\n';

@@ -1,1 +1,1 @@
-No known bugs
+Når ny indrett blir lagd og vi skriver blank ved laging av ny DivAvd så blir en ny "blank" DivAvd laget.
