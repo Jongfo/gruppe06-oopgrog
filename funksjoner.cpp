@@ -171,7 +171,7 @@ void redigerSpillere()
 void resultatAvKamper()
 {
     char* idrettNavn, *filNavn, *divNavn;
-    char dato[8];
+    char dato[9];
     Idrett* idretten;
     DivAvd* divisjonen;
 
