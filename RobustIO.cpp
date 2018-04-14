@@ -15,8 +15,9 @@ void RobustIO::lesInnICharPointer(const char* utskrift, char*& intast)
 	std::cout << utskrift << std::endl;
 	char temp[MAXTEKST];//Lager midlertidig char-array
 	std::cin.getline(temp, MAXTEKST);//Bruker skriver inn i temp
-	intast = new char[strlen(temp) + 1];//Gjør t akkurat temp langt
-	strcpy(intast, temp); //Kopierer temp over til t
+	temp[0] = toupper(temp[0]);//Første bokstav er altid stor
+	intast = new char[strlen(temp) + 1];//Gjør intast akkurat temp langt
+	strcpy(intast, temp); //Kopierer temp over til intast
 }
 void RobustIO::lesCharPointerFraFil(std::ifstream &inn, char*& t)
 {
@@ -125,7 +126,8 @@ bool RobustIO::okAdr(char* s)
 	return true;
 }
 
-int RobustIO::lesTall(const char* t, const int MIN, const int MAX)
+int RobustIO::lesTall(const char* t, const int MIN, const int MAX,
+					  bool avbrudd, int avbruddsNr)
 {
 	int tall;
 	do {
@@ -134,17 +136,16 @@ int RobustIO::lesTall(const char* t, const int MIN, const int MAX)
 		if (std::cin.fail()) 
 		{
 			std::cin.clear();
-			std::cin.ignore(MAXTEKST, '\n');
 		}
 		std::cin.ignore();
-	} while (tall < MIN || tall > MAX);
+	} while ((tall < MIN || tall > MAX) && (!avbrudd || tall != avbruddsNr));
 	return tall;
 }
 
-char RobustIO::lesInnTilStor()
+char RobustIO::lesInnTilStor(const char tekst[MAXTEKST])
 {
 	char ch;
-	std::cout << "\n\nKommando: ";
+	std::cout << tekst;
 	std::cin >> ch; std::cin.ignore();
 	return (toupper(ch));
 }

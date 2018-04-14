@@ -171,7 +171,7 @@ void redigerSpillere()
 void resultatAvKamper()
 {
     char* idrettNavn, *filNavn, *divNavn;
-    char dato[8];
+    char dato[9];
     Idrett* idretten;
     DivAvd* divisjonen;
 
@@ -276,10 +276,12 @@ void skrivTerminliste()
 // handterar kommando-input
 void valgMeny()
 {
-	char kommando = rIO.lesInnTilStor(); // Leser brukerens ›nske/valg.
+	// Leser brukerens ›nske/valg.
+	char kommando = ' '; 
 
 	while (kommando != 'Q')
 	{
+		kommando = rIO.lesInnTilStor("\n\nKommando: ");
 		switch (kommando)
 		{
 		case 'S': visSpiller();				break;
@@ -295,6 +297,5 @@ void valgMeny()
 		case 'C': break;
 		default: skrivMeny();				break; //Skriver meny
 		}
-		kommando = rIO.lesInnTilStor(); // Leser brukerens ønske/valg.
 	};
 }

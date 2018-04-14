@@ -147,8 +147,15 @@ void Idrettene::fjernIdrett()
 		{
 			Idrett* idrett = (Idrett*)idretter->remove(idrettNavn);
 			delete idrett;
+			std::cout << idrettNavn << " fjernet.\n";
+		}
+		else
+		{
+			std::cout << idrettNavn << " ikke fjernet.\n";
 		}
 	}
+
+	delete[] idrettNavn;
 }
 // hånterer skrive ut tabbeler
 void Idrettene::skrivTabell() 
