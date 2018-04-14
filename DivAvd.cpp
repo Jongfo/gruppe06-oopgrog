@@ -249,7 +249,7 @@ void DivAvd::skrivTerminliste()
 			stream << buffer << '\n';
 		}
 	}
-	else
+	else if (!(antLag > 1 && resultat[0][1] == nullptr))
 	{
 		for (int i = 0; i < kolonneStorrelse; i++)
 		{
@@ -282,6 +282,10 @@ void DivAvd::skrivTerminliste()
 			}
 			stream << '\n';
 		}
+	}
+	else
+	{
+		std::cout << "Kunne ikke skrive ut tabell.\n";
 	}
 	delete[] filnavn;
 }
