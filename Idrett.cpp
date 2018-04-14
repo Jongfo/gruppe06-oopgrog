@@ -107,12 +107,13 @@ DivAvd* Idrett::getDivAvd(char* s)
 }
 
 // Skriver alle kampene i alle divisjonene med gitt dato til fil
-bool Idrett::resultatDatoTilFil(char* fileName, char* date, DivAvd* div)
+bool Idrett::resultatDatoTilFil(std::ofstream &utfil, char* date, DivAvd* div)
 {
     bool found = false;
+    utfil << "Resultater for " << TextElement::text << ' ' << date << ":\n";
     if (div)
     {
-        div->resultaterTilFil(fileName, date);
+        div->resultaterTilFil(utfil, date);
     }
     else
     {
@@ -120,7 +121,7 @@ bool Idrett::resultatDatoTilFil(char* fileName, char* date, DivAvd* div)
         {
             DivAvd* tempDiv = (DivAvd*)divisjoner->removeNo(i);
             divisjoner->add((TextElement*)tempDiv);
-            found = tempDiv->resultaterTilFil(fileName, date);
+            found = tempDiv->resultaterTilFil(utfil, date);
         }
     }
     return found;

@@ -161,7 +161,10 @@ void redigerSpillere()
 			}
 		}
 	}
-
+    else
+    {
+        std::cout << "Fant ikke idrett. Gaar tilbake til hovedmeny.";
+    }
 }
 
 // K: skriv resultat av kamper i gitt dato
@@ -186,22 +189,22 @@ void resultatAvKamper()
         // ber bruker omm å skrive inn filnavn og dato.
         rIO.lesInnICharPointer("Skriv inn navn paa fil, eller blank:", filNavn);
         rIO.lesDato("Skriv inn en dato på kampene:", dato);
-    
-       // // vi starter lesing av fil
-       // std::ifstream innfil("gruppe06-ooprog/RESULTAT.DTA"); //sjekk navn!
-       // char* idrettNavnFraFil, *divNavnFraFil, *hjemmeLag, *borteLag;
-       // int antHjemMaal, antBortMaal;
-       // bool normTid;
-
+        
         if (strlen(filNavn) > 0)
         {
             char* filNavnKode = rIO.finnPlassOgLeggeFil(filNavn, "resultater", "");
-            bool found = idretten->resultatDatoTilFil(filNavnKode, dato, divisjonen);
+            std::ofstream utfil(filNavnKode);
+
+            bool found = idretten->resultatDatoTilFil(utfil, dato, divisjonen);
 
 
             if (!found)
             {
                 std::cout << "\n\tFant ingen resultater.\n";
+                if (std::remove(filNavnKode))
+                {
+                    std::cout << "\tOps! dummy fil ble laget!: " << filNavnKode << std::endl;
+                }
             }
             else
             {
@@ -214,6 +217,10 @@ void resultatAvKamper()
             std::cout << "\n\n\tResultater for " << dato << ":\n";
             bool found = idretten->resultatDatoTilSkjerm(dato, divisjonen); 
         }
+    }
+    else
+    {
+        std::cout << "Fant ikke idrett. Gaar tilbake til hovedmeny.";
     }
 }
 

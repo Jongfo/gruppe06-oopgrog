@@ -16,7 +16,7 @@ public:
 	Idrett(std::ifstream& inn, char* navn);
 	void skrivTilFil(std::ofstream& idrettFil);
     bool resultatDatoTilSkjerm(char* date, DivAvd* div);
-    bool resultatDatoTilFil(char* fileName, char* date, DivAvd* div);
+    bool resultatDatoTilFil(std::ofstream &utfil, char* date, DivAvd* div);
 	void fjernSpillerNr(int n);
 	void nyDivisjon();
 	void fjernDivAvd();

@@ -296,32 +296,37 @@ bool DivAvd::resultaterTilSkjerm(char* date)
     {
         for (int j = 0; j < MAXLAG; j++)
         {
-            if (resultat[i][j]->sameDate(date))
+            if (resultat[i][j]) // sjekk om resultat eksisterer.
             {
-                std::cout << "H: " << lag[i]->getNavn() << " vs. B: " << lag[j]->getNavn() << '\n';
-                resultat[i][j]->skrivResultatTilSkjerm();
-                found = true;
+                if (resultat[i][j]->sameDate(date))
+                {
+                    std::cout << "H: " << lag[i]->getNavn() << " vs. B: " << lag[j]->getNavn() << '\n';
+                    resultat[i][j]->skrivResultatTilSkjerm();
+                    found = true;
+                }
             }
         }
     }
     return found;
 }
 
-bool DivAvd::resultaterTilFil(char* fileName, char* date)
+bool DivAvd::resultaterTilFil(std::ofstream &utfil, char* date)
 {
     bool found = false;
-    std::ofstream utfil(fileName);
 
 
     for (int i = 0; i < MAXLAG; i++)
     {
         for (int j = 0; j < MAXLAG; j++)
         {
-            if (resultat[i][j]->sameDate(date))
+            if (resultat[i][j]) // sjekk om resultat eksisterer.
             {
-                utfil << "H: " << lag[i]->getNavn() << " vs. B: " << lag[j]->getNavn() << '\n';
-                resultat[i][j]->skrivResultatTilFil(utfil);
-                found = true;
+                if (resultat[i][j]->sameDate(date))
+                {
+                    utfil << "H: " << lag[i]->getNavn() << " vs. B: " << lag[j]->getNavn() << '\n';
+                    resultat[i][j]->skrivResultatTilFil(utfil);
+                    found = true;
+                }
             }
         }
     }
