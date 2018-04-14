@@ -115,7 +115,7 @@ void redigerSpillere()
 		// finn Divisjon
         do
         {
-		    rIO.lesInnICharPointer("skriv inn navn paa divisjon/avdeling.", divNavn);
+		    rIO.lesInnICharPointer("Skriv inn navn paa divisjon/avdeling.", divNavn);
 		    avdelingen = idretten->getDivAvd(divNavn);
             if (!avdelingen && toupper(*divNavn) != 'Q')
                 std::cout << "Skriv \"Q\" om du onsker aa avslutte.\n";
@@ -125,7 +125,7 @@ void redigerSpillere()
 			// finn Lag
             do
             {
-			    rIO.lesInnICharPointer("skriv inn navn paa lag.", lagNavn);
+			    rIO.lesInnICharPointer("Skriv inn navn paa lag.", lagNavn);
 			    laget = avdelingen->getLag(lagNavn);
                 if(!laget && toupper(*lagNavn) != 'Q')
                     std::cout << "Skriv \"Q\" om du onsker aa avslutte.\n";
@@ -281,7 +281,7 @@ void valgMeny()
 
 	while (kommando != 'Q')
 	{
-		kommando = rIO.lesInnTilStor("\n\nKommando: ");
+		kommando = rIO.lesInnTilStor("\n\nHovedkommando: ");
 		switch (kommando)
 		{
 		case 'S': visSpiller();				break;
