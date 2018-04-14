@@ -171,12 +171,16 @@ void DivAvd::skrivTabellTilFil(std::ofstream &utfil, char* tabell)
 			sotert[i] = lag[i];
 		}
 		sorteringTilTabell(lagPoeng, vunnet, uavgjort, tapt, sotert);
-		utfil << "Divisjon: " << TextElement::text 
-              << "\nLag Navn \tVunnet \tUavgjort \tTapt \tPoeng \n\n";
+		utfil << "Divisjon: " << TextElement::text << '\n'
+              << std::setw(15) << std::left << "Lag Navn" 
+              << std::setw(10) << "Vunnet" << std::setw(10) << "Uavgjort" 
+              << std::setw(10) << "Tapt"   << std::setw(10) << "Poeng" << '\n';
 		for (int i = antLag - 1; i >= 0; i--) {
 			if (sotert[i] != nullptr) {
-				utfil << sotert[i]->getNavn() << "\t\t" << vunnet[i] << "\t\t" << uavgjort[i]
-					<< "\t\t\t" << tapt[i] << "\t\t" << lagPoeng[i] << '\n';
+				utfil << std::setw(17) << std::left << sotert[i]->getNavn() 
+                      << std::setw(10) << vunnet[i] 
+                      << std::setw(10) << uavgjort[i] << std::setw(10) << tapt[i] 
+                      << std::setw(10) << lagPoeng[i] << '\n';
 			}
 		}
         utfil << '\n'; // ny linje før neste div.
