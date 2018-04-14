@@ -61,21 +61,15 @@ char* RobustIO::lesNyAdr(const char* t)
 	return nyAdr;
 }
 // handterar innlesing av tabelltype
-char* RobustIO::lesTabelltype(const char* t)
+char* RobustIO::lesTabelltype()
 {
-	while (true)
+	for (int i = 1; i < ANTTABELLTYPER; i++)
 	{
-		char* tabelltype;
-		lesInnICharPointer(t, tabelltype);
-		if (finnesTabellen(tabelltype)) 
-		{
-			return tabelltype;
-		}
-		else 
-		{
-			delete tabelltype;
-		}
+		std::cout << '\t' << i << ": " << TABELLTYPER[i] << '\n';
 	}
+	int n = lesTall("Tabelltype", 1, ANTTABELLTYPER - 1);
+	
+	return (char*)TABELLTYPER[n];
 }
 bool RobustIO::finnesTabellen(char* tabelltype) 
 {
@@ -138,7 +132,7 @@ int RobustIO::lesTall(const char* t, const int MIN, const int MAX,
 			std::cin.clear();
 		}
 		std::cin.ignore();
-	} while ((tall < MIN || tall > MAX) && (!avbrudd || tall != avbruddsNr));
+	} while ((tall < MIN || tall > MAX) || (avbrudd && tall != avbruddsNr));
 	return tall;
 }
 

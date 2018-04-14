@@ -4,7 +4,8 @@
 
 Idrett::Idrett(char* navn) : TextElement(navn)
 {
-	tabelltype = rIO.lesTabelltype("Tabelltype: ");
+	// les inn tabelltype
+	tabelltype = rIO.lesTabelltype();
 	divisjoner = new List(Sorted);
 	nyDivisjon();
 }
