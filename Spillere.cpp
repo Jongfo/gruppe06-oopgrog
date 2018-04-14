@@ -84,14 +84,18 @@ void  Spillere::visSpiller()
 
 void  Spillere::visSpiller(char* s) 
 {
+	bool fantS = false;
 	for (int i = 1; i <= spillere->noOfElements(); i++) 
 	{
 		Spiller* temp = (Spiller*)spillere->removeNo(i);
 		if (temp->sammeNavn(s)) 
 		{
-			temp->display();
+			temp->display(); fantS = true;
 		}
 		spillere->add(temp);
+	}
+	if (!fantS) {
+		std::cout << "Fant ikke spiller " << s << "\n\n";
 	}
 }
 
