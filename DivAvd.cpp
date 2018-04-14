@@ -291,7 +291,8 @@ void DivAvd::skrivTerminliste()
 // Leser alle 
 bool DivAvd::resultaterTilSkjerm(char* date)
 {
-    bool found = false;
+    bool found = false,
+         first = true;
     for (int i = 0; i < MAXLAG; i++)
     {
         for (int j = 0; j < MAXLAG; j++)
@@ -300,9 +301,15 @@ bool DivAvd::resultaterTilSkjerm(char* date)
             {
                 if (resultat[i][j]->sameDate(date))
                 {
+                    found = true;
+                    if (first)
+                    {
+                        std::cout << "Divisjon/Avd: " << TextElement::text << '\n';
+                        first = false;
+                    }
                     std::cout << "H: " << lag[i]->getNavn() << " vs. B: " << lag[j]->getNavn() << '\n';
                     resultat[i][j]->skrivResultatTilSkjerm();
-                    found = true;
+                    std::cout << std::endl;
                 }
             }
         }
@@ -312,8 +319,9 @@ bool DivAvd::resultaterTilSkjerm(char* date)
 
 bool DivAvd::resultaterTilFil(std::ofstream &utfil, char* date)
 {
-    bool found = false;
-
+    bool found = false, 
+         first = true;
+    
 
     for (int i = 0; i < MAXLAG; i++)
     {
@@ -323,9 +331,15 @@ bool DivAvd::resultaterTilFil(std::ofstream &utfil, char* date)
             {
                 if (resultat[i][j]->sameDate(date))
                 {
+                    found = true;
+                    if (first)
+                    {
+                        utfil << "Divisjon/Avd: " << TextElement::text << '\n';
+                        first = false;
+                    }
                     utfil << "H: " << lag[i]->getNavn() << " vs. B: " << lag[j]->getNavn() << '\n';
                     resultat[i][j]->skrivResultatTilFil(utfil);
-                    found = true;
+                    utfil << '\n';
                 }
             }
         }
