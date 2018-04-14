@@ -5,3 +5,4 @@ const int MAXLAG = 30;
 const int MATRISE = 10;		//Til Resultat liste
 const int DATOLEN = 9;		//Dato lengden
 const int MAXMAAL = 50;		// maks antal mål eit lag kan ha i ein kamp
+const int ANTTABELLTYPER = 4;

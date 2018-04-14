@@ -5,7 +5,10 @@
 Idrett::Idrett(char* navn) : TextElement(navn)
 {
 	// les inn tabelltype
-	tabelltype = rIO.lesTabelltype();
+	for (int i = 1; i < ANTTABELLTYPER; i++) {
+		std::cout << '\t' <<  i << ". " << rIO.getTabelltype(i)<< "\n";
+	}
+	tabelltype = rIO.getTabelltype(rIO.lesTall("Tabelltype",1,ANTTABELLTYPER-1));
 	divisjoner = new List(Sorted);
 	nyDivisjon();
 }
@@ -77,7 +80,23 @@ void Idrett::nyDivisjon()
 	{
 		if (!divisjoner->inList(t))
 		{
-			divisjoner->add((TextElement*)new DivAvd(t));
+			//Finne en fil å lese data fra
+			char* filPlass; bool fantPlass = false; bool utAvLoop = false;
+			do {
+				rIO.lesInnICharPointer("Hva heter filen til Divisjonen? (husk fil type '.dta'/'.txt')", filPlass);
+				char lok[MAXTEKST] = "gruppe06-ooprog/Div/";  strcat(lok, filPlass);
+				std::ifstream nyDiv(lok);
+				if (nyDiv) {
+					divisjoner->add((TextElement*)new DivAvd(nyDiv, t));
+					fantPlass = true; std::cout << "Lest fra filen" << filPlass << '\n';
+				}
+				else if (!strcmp(filPlass, "q")|| !strcmp(filPlass, "Q")) {
+					utAvLoop = true; delete[] filPlass;
+				}
+				else {
+					std::cout << "Fant ikke filen (Q for aa avslutte)\n";
+				}
+			} while (!fantPlass && !utAvLoop );
 		}
 		else
 		{
