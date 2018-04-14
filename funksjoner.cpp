@@ -277,10 +277,11 @@ void skrivTerminliste()
 void valgMeny()
 {
 	// Leser brukerens ›nske/valg.
-	char kommando = rIO.lesInnTilStor("\n\nKommando: ");
+	char kommando = ' '; 
 
 	while (kommando != 'Q')
 	{
+		kommando = rIO.lesInnTilStor("\n\nKommando: ");
 		switch (kommando)
 		{
 		case 'S': visSpiller();				break;
@@ -296,6 +297,5 @@ void valgMeny()
 		case 'C': break;
 		default: skrivMeny();				break; //Skriver meny
 		}
-		kommando = rIO.lesInnTilStor(); // Leser brukerens ønske/valg.
 	};
 }
