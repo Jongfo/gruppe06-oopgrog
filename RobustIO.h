@@ -14,7 +14,7 @@ public:
 	void  lesCharPointerFraFil(std::ifstream &inn, char*& t); //Brukes til å lese inn i pointer fra fil 
 	char* lesNyttNavn(const char* t);
 	char* lesNyAdr(const char* t);
-	char* lesTabelltype(const char* t);
+	char* lesTabelltype();
 	bool  finnesTabellen(char* tabelltype);
 	bool  okNavn(char* s);
 	bool  okAdr(char* s); 
