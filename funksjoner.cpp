@@ -277,7 +277,8 @@ void skrivTerminliste()
 // handterar kommando-input
 void valgMeny()
 {
-	char kommando = rIO.lesInnTilStor(); // Leser brukerens ›nske/valg.
+	// Leser brukerens ›nske/valg.
+	char kommando = rIO.lesInnTilStor("\n\nKommando: ");
 
 	while (kommando != 'Q')
 	{

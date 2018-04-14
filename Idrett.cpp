@@ -84,7 +84,7 @@ DivAvd* Idrett::getDivAvd()
 {
 	// les namn paa div/avd
 	char* divNavn;
-	rIO.lesInnICharPointer("Divisjon/Avdeling", divNavn);
+	rIO.lesInnICharPointer("Divisjon/Avdeling:", divNavn);
 	DivAvd* divisjon = getDivAvd(divNavn);
 	return divisjon;
 }
@@ -181,12 +181,19 @@ void Idrett::fjernDivAvd()
 		{
 			DivAvd* divisjon = (DivAvd*)divisjoner->remove(divisjonNavn);
 			delete divisjon;
+			std::cout << divisjonNavn << " fjernet.\n";
+		}
+		else
+		{
+			std::cout << divisjonNavn << " ikke fjernet.\n";
 		}
 	}
 	else
 	{
 		std::cout << "Divisjon fins ikke!\n";
 	}
+
+	delete[] divisjonNavn;
 }
 //Viser tabell til divisjonen
 void Idrett::visTabell() {
