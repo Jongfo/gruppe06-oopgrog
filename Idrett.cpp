@@ -80,7 +80,7 @@ void Idrett::nyDivisjon()
 	{
 		if (!divisjoner->inList(t))
 		{
-			//Finne en fil å lese data fra
+			//Finne en fil å lese data fra!
 			char* filPlass; bool fantPlass = false; bool utAvLoop = false;
 			do {
 				rIO.lesInnICharPointer("Hva heter filen til Divisjonen? (husk fil type '.dta'/'.txt')", filPlass);
