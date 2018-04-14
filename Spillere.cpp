@@ -3,6 +3,7 @@
 #include "Idrettene.h"
 #include "RobustIO.h"
 
+
 extern RobustIO rIO;
 extern Idrettene idrettene;
 
@@ -60,21 +61,28 @@ void Spillere::nySpiller()
 // fjernar ein spelar fraa lista
 void Spillere::fjernSpiller()
 {
-	int n = rIO.lesTall("Spillerens nummer?", 1, sisteNr);
-	for (int i = 1; i <= spillere->noOfElements(); i++)
+	int n = rIO.lesTall("Spillerens nummer? (-1 for å avbryte)", 1, sisteNr, true);
+	if (n != -1)
 	{
-		Spiller* spiller = (Spiller*)spillere->removeNo(i);
-		if (spiller->spillerNr() == n)
+		for (int i = 1; i <= spillere->noOfElements(); i++)
 		{
-			delete spiller;
+			Spiller* spiller = (Spiller*)spillere->removeNo(i);
+			if (spiller->spillerNr() == n)
+			{
+				delete spiller;
+			}
+			else
+			{
+				spillere->add(spiller);
+			}
 		}
-		else
-		{
-			spillere->add(spiller);
-		}
+		idrettene.fjernSpillerNr(n);
+		std::cout << "\nSpiller nr. " << n << " fjernet.\n";
 	}
-
-	idrettene.fjernSpillerNr(n);
+	else
+	{
+		std::cout << "Ingen spillere fjernet.\n";
+	}
 }
 //Viser alle spillere
 void  Spillere::visSpiller() 
