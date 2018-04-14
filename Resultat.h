@@ -23,4 +23,9 @@ public:
 	int getHjemmemaal();
 	int getBortemaal();
 	bool getNormalTid();
+	void besteSpillere(int spiller[]) {
+		for (int i = 0; i < hjemmemaal; i++) {
+			spiller[hjemmescorere[i]]++;
+		}
+	}
 };

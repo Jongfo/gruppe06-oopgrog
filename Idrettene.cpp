@@ -238,3 +238,14 @@ void Idrettene::lesResultat()
 		std::cout << "\nInnlesing av resultat vellykket.\n";
 	}
 }
+void Idrettene::finnToppScorer() {
+	char* idrNavn; rIO.lesInnICharPointer("Navn paa Idretten?", idrNavn);
+	if (idretter->inList(idrNavn)) {
+		Idrett* idr = (Idrett*)idretter->remove(idrNavn);
+		idr->finnTopScorer();
+		idretter->add((TextElement*)idr);
+	}
+	else {
+		std::cout << "Fant ikke idretten \n\n";
+	}
+}

@@ -24,5 +24,6 @@ public:
 	void fjernIdrett();
 	void skrivTabell();
 	void lesResultat();
+	void finnToppScorer();
 	~Idrettene();
 };

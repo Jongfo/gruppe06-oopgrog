@@ -284,18 +284,18 @@ void valgMeny()
 		kommando = rIO.lesInnTilStor("\n\nHovedkommando: ");
 		switch (kommando)
 		{
-		case 'S': visSpiller();				break;
-		case 'I': visIdrett();				break;
-		case 'N': nySID();					break;
-		case 'F': fjernSID();				break;
-		case 'L': skrivTerminliste();		break;
-        case 'K': resultatAvKamper();       break;  // ikke fulført!
-		case 'T': idrettene.skrivTabell();	break;
-		case 'R': idrettene.lesResultat();	break;
-		case 'D': skrivSpillerePaaLag();	break;
-        case 'E': redigerSpillere();        break;
-		case 'C': break;
-		default: skrivMeny();				break; //Skriver meny
+		case 'S': visSpiller();				  break;
+		case 'I': visIdrett();				  break;
+		case 'N': nySID();					  break;
+		case 'F': fjernSID();				  break;
+		case 'L': skrivTerminliste();		  break;
+        case 'K': resultatAvKamper();         break;  // ikke fulført!
+		case 'T': idrettene.skrivTabell();	  break;
+		case 'R': idrettene.lesResultat();	  break;
+		case 'D': skrivSpillerePaaLag();	  break;
+        case 'E': redigerSpillere();          break;
+		case 'C': idrettene.finnToppScorer(); break;
+		default: skrivMeny();				  break; //Skriver meny
 		}
 	};
 }

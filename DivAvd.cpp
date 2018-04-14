@@ -2,25 +2,7 @@
 #include <iomanip>
 #include <iostream>
 
-/*DivAvd::DivAvd(char* navn) : TextElement(navn)
-{
-	antLag = 0;
-	DivAvd::nyeLag();
-
-	// lag terminlista
-	for (int i = 0; i < antLag; i++)
-	{
-		for (int j = 0; j < antLag; j++)
-		{
-			if (i != j)
-			{
-				std::cout << lag[i]->getNavn() << " (hjemme) - "
-						  << lag[j]->getNavn() << " (borte):\n";
-				resultat[i][j] = new Resultat(lag[i], lag[j]);
-			}
-		}
-	}
-}*/
+extern Spillere spillere;
 
 DivAvd::DivAvd(std::ifstream& inn, char* navn) : TextElement(navn)
 {
@@ -658,4 +640,114 @@ void DivAvd::sorteringTilTabell(int poeng[], int vunnet[], int uavgjort[], int t
 		}
 		counter++;
 	} while (counter <= antLag);\
+}
+void DivAvd::finnTopScorer() {
+	char* lagNavn; rIO.lesInnICharPointer("Navn paa laget (blank for alle)", lagNavn);
+	int alleSpillere[MAXSPILLERE]; int spillerPos[MAXSPILLERE + 1];
+	rIO.setArrayTilNull(alleSpillere, MAXSPILLERE);
+	for (int i = 1; i < MAXSPILLERE; i++) {
+		spillerPos[i-1] = i; //Setter SpillerPos til å være ID'en til Spillerne
+	}
+	if (!strlen(lagNavn)) {
+		char* filNavn; rIO.lesInnICharPointer("Skriv fil navn hvis onsket aa skrve til fil (blankt kun til skjerm)", filNavn);
+		finnBesteSpillere(alleSpillere);
+		sorteringTilScorer(alleSpillere, spillerPos);
+		//Skriver topscorer til fil
+		if (strlen(filNavn)) {
+			char* filPlass = rIO.finnPlassOgLeggeFil(filNavn, "", "TopScorer_");
+			std::ofstream topScorerFil(filPlass);
+			// skriver idrett navn først i fila.
+			topScorerFil << "Divisjon: " << text << '\n';
+
+			skrivScorerTilFil(topScorerFil, alleSpillere, spillerPos);
+			delete[] filPlass; 
+		}
+		//Skriver topscorer til skjerm
+		else {
+			skrivScorerTilSkjerm(alleSpillere, spillerPos);
+		}
+		delete[] filNavn;
+	}
+	else {
+		bool fantLag = false; int indexLag;
+		for (int i = 0; i < antLag; i++) {
+			if (!strcmp(lagNavn, lag[i]->getNavn())) {
+				fantLag = true; indexLag = i;
+			}
+			
+		}
+		if (fantLag) {
+			char* filNavn; rIO.lesInnICharPointer("Skriv fil navn hvis onsket aa skrve til fil (blankt kun til skjerm)", filNavn);
+			finnBesteSpillereiLag(alleSpillere, indexLag);
+			sorteringTilScorer(alleSpillere, spillerPos);
+			//Skriver spesefikk lag top scorer til skjerm eller fil
+			if (strlen(filNavn)) { // Til fil
+				char* filPlass = rIO.finnPlassOgLeggeFil(filNavn, "", "TopScorer_");
+				std::ofstream topScorerFil(filPlass);
+				// skriver idrett navn først i fila.
+				topScorerFil << "Divisjon: " << text << '\n';
+				skrivScorerTilFil(topScorerFil, alleSpillere, spillerPos);
+				delete[] filPlass; 	delete[] filNavn;
+			}
+			else {//Til Skjerm
+				skrivScorerTilSkjerm(alleSpillere, spillerPos);
+			}
+		}
+		else {
+			std::cout << "Fant ikke Laget\n\n";
+		}
+	}
+
+	delete[] lagNavn;
+}
+void DivAvd::sorteringTilScorer(int s[], int pos[]) {
+	int counter = 0;
+	do {
+		for (int i = MAXSPILLERE - 1; i > 0; i--) {
+			//Hvis den finner noe før den som er høyere bytter de plass
+			if (s[i - 1] < s[i]) {
+				//Soterer spiller scorere
+				int temp = s[i];
+				s[i] = s[i - 1];
+				s[i - 1] = temp;
+				//Sorter positionen på de
+				int temp2 = pos[i];
+				pos[i] = pos[i - 1];
+				pos[i - 1] = temp2;
+
+			}
+		}
+		counter++;
+	} while (counter <= MAXSPILLERE);
+}
+void DivAvd::skrivScorerTilFil(std::ofstream& tsf, int s[], int pos[]) {
+	for (int i = 0; i < 10; i++) {
+		if (spillere.finsSpiller(pos[i]) && s[i] > 0) {
+			tsf << spillere.getSpillerNavn(pos[i]) << " - " << s[i] << " maal" << '\n';
+		}
+	}
+}
+void DivAvd::skrivScorerTilSkjerm(int s[], int pos[]) {
+	for (int i = 0; i < 10; i++) {
+		if (spillere.finsSpiller(pos[i]) && s[i] > 0) {
+			std::cout << spillere.getSpillerNavn(pos[i]) << " - " << s[i] << " maal" << '\n';
+		}
+	}
+}
+void DivAvd::finnBesteSpillere(int s[]) {
+	for (int i = 0; i <= antLag; i++) {
+		for (int j = 0; j < antLag; j++) {
+			if (i != j && resultat[i][j] != nullptr) {
+				resultat[i][j]->besteSpillere(s);
+			}
+		}
+	}
+}
+void DivAvd::finnBesteSpillereiLag(int s[], int lagNr) {
+	for (int i = 0; i < antLag; i++) {
+		if (lagNr != i) {
+			resultat[lagNr][i]->besteSpillere(s);
+			resultat[i][lagNr]->besteSpillere(s);
+		}
+	}
 }

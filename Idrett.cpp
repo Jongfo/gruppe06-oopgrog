@@ -292,3 +292,16 @@ void Idrett::visTabell() {
     delete[] filNavn;
     delete[] divNavn;
 }
+
+void Idrett::finnTopScorer() {
+	char* divisjonNavn;
+	rIO.lesInnICharPointer("I hvilken divisjon vil du vinne toppScorer", divisjonNavn);
+	if (divisjoner->inList(divisjonNavn)) {
+		DivAvd* divisjon = (DivAvd*)divisjoner->remove(divisjonNavn);
+		divisjon->finnTopScorer();
+		divisjoner->add((TextElement*)divisjon);
+	}
+	else {
+		std::cout << "Fant ikke divisjonen\n";
+	}
+}

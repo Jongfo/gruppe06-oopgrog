@@ -24,5 +24,6 @@ public:
 	void display();
 	DivAvd* getDivAvd();
 	DivAvd* getDivAvd(char* s);
+	void finnTopScorer();
 	~Idrett();
 };

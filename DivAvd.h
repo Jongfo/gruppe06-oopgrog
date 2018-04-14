@@ -4,6 +4,7 @@
 #include "Lag.h"
 #include "Resultat.h"
 #include "ConstEnum.h"
+#include "Spillere.h"
 
 class DivAvd : TextElement
 {
@@ -15,7 +16,6 @@ private:
 	char* terminlisteFil;	// namnet på fila der terminlista ligg
 
 public:
-	DivAvd(char* navn);
 	DivAvd(std::ifstream& inn, char* navn);
 	void  skrivTilFil(std::ofstream& ut);
 	void  nyeLag();
@@ -35,5 +35,11 @@ public:
 	void  fjernResultat();
 	bool dataTilTabell(char* tabell, int poeng[], int vunnet[], int uavgjort[], int tapt[]);
 	void sorteringTilTabell(int poeng[], int vunnet[], int uavgjort[], int tapt[], Lag* sorter[]);
+	void finnTopScorer();
+	void sorteringTilScorer(int s[], int pos[]);
+	void skrivScorerTilFil(std::ofstream& tsf, int s[], int pos[]);
+	void skrivScorerTilSkjerm(int s[], int pos[]);
+	void finnBesteSpillere(int s[]);
+	void finnBesteSpillereiLag(int s[], int lagNr);
 	~DivAvd();
 };
