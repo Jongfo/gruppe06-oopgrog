@@ -97,13 +97,17 @@ void  Spillere::visSpiller(char* s)
 
 void  Spillere::visSpiller(int nr) 
 {
+	bool fantNr = false;
 	for (int i = 1; i <= spillere->noOfElements(); i++) 
 	{
 		Spiller* temp = (Spiller*)spillere->removeNo(i);
 		if (temp->spillerNr() == nr) {
-			temp->display();
+			temp->display(); fantNr = true;
 		}
 		spillere->add(temp);
+	}
+	if (!fantNr) {
+		std::cout << "Fant ikke spiller nr." << nr << "\n\n";
 	}
 }
 
