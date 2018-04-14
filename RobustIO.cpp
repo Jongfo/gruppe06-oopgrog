@@ -1,7 +1,4 @@
 #include "RobustIO.h"
-
-const int ANTTABELLTYPER = 4;
-
 // inneheld namna på tabelltypane
 const char* TABELLTYPER[ANTTABELLTYPER] = {
 	"DOES NOT EXIST",

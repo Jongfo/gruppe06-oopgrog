@@ -1,0 +1,22 @@
+5
+Lag 1
+Adresse 1
+2
+1 3
+Lag 2
+34
+2
+34 23
+Lag 3
+AKKASKKA
+2
+6 7
+Lag 4
+LALALALSKSLD
+2
+9 11
+Lag 5
+Lag 5 sin adresse
+2
+13 14
+lamo.DTA

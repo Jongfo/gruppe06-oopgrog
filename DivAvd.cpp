@@ -2,7 +2,7 @@
 #include <iomanip>
 #include <iostream>
 
-DivAvd::DivAvd(char* navn) : TextElement(navn)
+/*DivAvd::DivAvd(char* navn) : TextElement(navn)
 {
 	antLag = 0;
 	DivAvd::nyeLag();
@@ -20,7 +20,7 @@ DivAvd::DivAvd(char* navn) : TextElement(navn)
 			}
 		}
 	}
-}
+}*/
 
 DivAvd::DivAvd(std::ifstream& inn, char* navn) : TextElement(navn)
 {
