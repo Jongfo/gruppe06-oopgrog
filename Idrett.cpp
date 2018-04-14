@@ -238,10 +238,10 @@ void Idrett::fjernDivAvd()
 //Viser tabell til divisjonen
 void Idrett::visTabell() {
 	char* divNavn; rIO.lesInnICharPointer("Navn paa divisjonen (blank for alle)", divNavn);
-	char* filNavn; rIO.lesInnICharPointer("Skriv fil navn hvis onsket aa skrve til fil (blankt kun til skjerm)", filNavn);
+	char* filNavn; 
 	if (!strlen(divNavn)) 
 	{
-
+        rIO.lesInnICharPointer("Skriv fil navn hvis onsket aa skrve til fil (blankt kun til skjerm)", filNavn);
 			//Skriver alle tabeller til skjerm eller fil
         if (strlen(filNavn))
         {
@@ -267,9 +267,11 @@ void Idrett::visTabell() {
 			    divisjoner->add((TextElement*)divisjon);
 			}
 		}
+        delete[] filNavn;
 	}
 	else if (divisjoner->inList(divNavn))
 	{
+        rIO.lesInnICharPointer("Skriv fil navn hvis onsket aa skrve til fil (blankt kun til skjerm)", filNavn);
 		//Skriver spesefikk tabell til sjerm eller fil
 		DivAvd* divisjon = (DivAvd*)divisjoner->remove(divNavn);
 		if (strlen(filNavn)) {
@@ -284,12 +286,12 @@ void Idrett::visTabell() {
 			divisjon->visTabell(tabelltype);
 		}
 		divisjoner->add((TextElement*)divisjon);
+        delete[] filNavn;
 	}
 	else 
 	{
 		std::cout << "Fant ikke Divisjonen\n\n";
 	}
-    delete[] filNavn;
     delete[] divNavn;
 }
 
