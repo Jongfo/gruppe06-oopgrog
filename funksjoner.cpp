@@ -289,7 +289,7 @@ void valgMeny()
 		case 'N': nySID();					break;
 		case 'F': fjernSID();				break;
 		case 'L': skrivTerminliste();		break;
-        case 'K': resultatAvKamper();       break;  // ikke fulført!
+        case 'K': resultatAvKamper();       break;
 		case 'T': idrettene.skrivTabell();	break;
 		case 'R': idrettene.lesResultat();	break;
 		case 'D': skrivSpillerePaaLag();	break;
