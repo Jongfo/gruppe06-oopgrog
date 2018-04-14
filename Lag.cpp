@@ -20,7 +20,7 @@ Lag::Lag()
 			{
 				std::cout << "\nFins allerede i laget.\n";
 			}
-			if (!spillere.finsSpiller(nr))
+			if (!spillere.finsSpiller(nr) || nr > spillere.getSisteNr())
 			{
 				std::cout << "\nSpiller fins ikke.\n";
 			}

@@ -70,7 +70,7 @@ void Idrett::nyDivisjon()
 	}
 	else
 	{
-		std::cout << "Denne divisjonen finner allerede i listen";
+		std::cout << "Denne divisjonen finnes allerede i listen";
 	}
 }
 
