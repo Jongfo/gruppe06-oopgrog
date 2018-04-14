@@ -288,7 +288,7 @@ void DivAvd::skrivTerminliste()
 }
 
 
-// Leser alle 
+// K: Skriver denne divisjonens resultater til skjerm
 bool DivAvd::resultaterTilSkjerm(char* date)
 {
     bool found = false,
@@ -317,6 +317,7 @@ bool DivAvd::resultaterTilSkjerm(char* date)
     return found;
 }
 
+// K: fører denne divisjonens resultater til fil.
 bool DivAvd::resultaterTilFil(std::ofstream &utfil, char* date)
 {
     bool found = false, 
