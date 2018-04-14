@@ -76,12 +76,12 @@ void Spillere::fjernSpiller()
 
 	idrettene.fjernSpillerNr(n);
 }
-
+//Viser alle spillere
 void  Spillere::visSpiller() 
 {
 	spillere->displayList();
 }
-
+//Viser Spiller med navn s
 void  Spillere::visSpiller(char* s) 
 {
 	bool fantS = false;
@@ -98,7 +98,7 @@ void  Spillere::visSpiller(char* s)
 		std::cout << "Fant ikke spiller " << s << "\n\n";
 	}
 }
-
+//Viser spiller med nummer nr
 void  Spillere::visSpiller(int nr) 
 {
 	bool fantNr = false;
