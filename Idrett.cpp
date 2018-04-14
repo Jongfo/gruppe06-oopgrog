@@ -238,20 +238,34 @@ void Idrett::fjernDivAvd()
 //Viser tabell til divisjonen
 void Idrett::visTabell() {
 	char* divNavn; rIO.lesInnICharPointer("Navn paa divisjonen (blank for alle)", divNavn);
-	char* filNavn; rIO.lesInnICharPointer("Fil navn på Divisjonen (blankt kun til skjerm)", filNavn);
+	char* filNavn; rIO.lesInnICharPointer("Skriv fil navn hvis onsket aa skrve til fil (blankt kun til skjerm)", filNavn);
 	if (!strlen(divNavn)) 
 	{
 
 			//Skriver alle tabeller til skjerm eller fil
-		for (int i = 1; i <= divisjoner->noOfElements(); i++) {
-			DivAvd* divisjon = (DivAvd*)divisjoner->removeNo(i);
-			if (strlen(filNavn)) {
-				divisjon->skrivTabellTilFil(filNavn, tabelltype);
-			}
-			else {
+        if (strlen(filNavn))
+        {
+            char* filPlass = rIO.finnPlassOgLeggeFil(filNavn, "", "Tabell/");
+            std::ofstream tabellFil(filPlass);
+            // skriver idrett navn først i fila.
+            tabellFil << "Idrett: " << TextElement::text << '\n'; 
+
+            for (int i = 1; i <= divisjoner->noOfElements(); i++)
+            {
+                DivAvd* divisjon = (DivAvd*)divisjoner->removeNo(i);
+                divisjon->skrivTabellTilFil(tabellFil, tabelltype);
+                divisjoner->add((TextElement*)divisjon);
+            }
+            delete[] filPlass;
+        }
+		else 
+        {
+            for (int i = 1; i <= divisjoner->noOfElements(); i++)
+            {
+                DivAvd* divisjon = (DivAvd*)divisjoner->removeNo(i);
 				divisjon->visTabell(tabelltype);
+			    divisjoner->add((TextElement*)divisjon);
 			}
-			divisjoner->add((TextElement*)divisjon);
 		}
 	}
 	else if (divisjoner->inList(divNavn))
@@ -259,7 +273,12 @@ void Idrett::visTabell() {
 		//Skriver spesefikk tabell til sjerm eller fil
 		DivAvd* divisjon = (DivAvd*)divisjoner->remove(divNavn);
 		if (strlen(filNavn)) {
-			divisjon->skrivTabellTilFil(filNavn, tabelltype);
+            char* filPlass = rIO.finnPlassOgLeggeFil(filNavn, "", "Tabell/");
+            std::ofstream tabellFil(filPlass);
+            // skriver idrett navn først i fila.
+            tabellFil << "Idrett: " << TextElement::text << '\n';
+			divisjon->skrivTabellTilFil(tabellFil, tabelltype);
+            delete[] filPlass;
 		}
 		else {
 			divisjon->visTabell(tabelltype);
@@ -270,4 +289,6 @@ void Idrett::visTabell() {
 	{
 		std::cout << "Fant ikke Divisjonen\n\n";
 	}
+    delete[] filNavn;
+    delete[] divNavn;
 }

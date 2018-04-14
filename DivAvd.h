@@ -25,7 +25,7 @@ public:
 	void  fjernSpillerNr(int n);
 	char* hentNavn();
 	void  visTabell(char* tabell);
-	void  skrivTabellTilFil(char* navn, char* tabell);
+	void  skrivTabellTilFil(std::ofstream &utfil, char* tabell);
 	void  skrivTerminliste();
     bool  resultaterTilSkjerm(char* date);
     bool  resultaterTilFil(std::ofstream &utfil, char* date);

@@ -155,10 +155,9 @@ void DivAvd::visTabell(char* tabell)
 		std::cout << "\nFant ingen lag med resultater i " << text << "\n";
 	}
 }
-void DivAvd::skrivTabellTilFil(char* navn, char* tabell) 
+void DivAvd::skrivTabellTilFil(std::ofstream &utfil, char* tabell) 
 {
-	char* filPlass = rIO.finnPlassOgLeggeFil(navn, text, "Tabell/");
-	std::ofstream tabellFil(filPlass);
+	
 	int vunnet[MAXLAG]; int tapt[MAXLAG]; int uavgjort[MAXLAG];
 	int lagPoeng[MAXLAG];
 	rIO.setArrayTilNull(vunnet, MAXLAG); rIO.setArrayTilNull(tapt, MAXLAG);
@@ -172,15 +171,16 @@ void DivAvd::skrivTabellTilFil(char* navn, char* tabell)
 			sotert[i] = lag[i];
 		}
 		sorteringTilTabell(lagPoeng, vunnet, uavgjort, tapt, sotert);
-		tabellFil << "Lag Navn \t Vunnet \t Uavgjort \t Tapt \t\t Poeng \n\n";
+		utfil << "Divisjon: " << TextElement::text 
+              << "\nLag Navn \tVunnet \tUavgjort \tTapt \tPoeng \n\n";
 		for (int i = antLag - 1; i >= 0; i--) {
 			if (sotert[i] != nullptr) {
-				tabellFil << sotert[i]->getNavn() << "\t\t" << vunnet[i] << "\t\t" << uavgjort[i]
-					<< "\t\t" << tapt[i] << "\t\t" << lagPoeng[i] << '\n';
+				utfil << sotert[i]->getNavn() << "\t\t" << vunnet[i] << "\t\t" << uavgjort[i]
+					<< "\t\t\t" << tapt[i] << "\t\t" << lagPoeng[i] << '\n';
 			}
 		}
-
-		std::cout << "Velykket skrevet" << text << " tabell til fil\n\n";
+        utfil << '\n'; // ny linje før neste div.
+		std::cout << "Velykket skrevet " << text << " tabell til fil\n\n";
 	}
 	else {
 		std::cout << "\nFant ingen lag med resultater i " << text << "\n";
