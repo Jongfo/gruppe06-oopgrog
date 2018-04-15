@@ -14,7 +14,9 @@ Idrettene::~Idrettene()
 void Idrettene::nyIdrett() 
 {
 	char* t;
-	rIO.lesInnICharPointer("Navn paa Idrett?", t);
+	do {
+		rIO.lesInnICharPointer("Navn paa Idrett?", t);
+	} while (strlen(t) < 1);//Sørge for at den ikke er forkort
 
 	// sjekk at idretten ikkje allereie finst
 	if (!idretter->inList(t))
