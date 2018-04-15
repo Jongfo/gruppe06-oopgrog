@@ -4,8 +4,9 @@
 
 extern Spillere spillere;
 
-DivAvd::DivAvd(std::ifstream& inn, char* navn) : TextElement(navn)
+DivAvd::DivAvd(std::ifstream& inn, char* navn, char* divFil) : TextElement(navn)
 {
+	divFilPos = divFil;
 	inn >> antLag; inn.ignore();
 	for (int i = 0; i < antLag; i++) 
 	{
@@ -30,8 +31,9 @@ DivAvd::DivAvd(std::ifstream& inn, char* navn) : TextElement(navn)
 }
 
 // skriv data om divisjon/avdeling til fil
-void DivAvd::skrivTilFil(std::ofstream& ut)
+void DivAvd::skrivTilFil()
 {
+	std::ofstream ut(divFilPos);
 	// skriv data
 	ut << antLag << '\n';
 
@@ -752,8 +754,11 @@ void DivAvd::finnBesteSpillere(int s[]) {
 void DivAvd::finnBesteSpillereiLag(int s[], int lagNr) {
 	for (int i = 0; i < antLag; i++) {
 		if (lagNr != i) {
-			resultat[lagNr][i]->besteSpillereHjemmeScor(s);//Allle hjemme kamper for lagNr
+			resultat[lagNr][i]->besteSpillereHjemmeScor(s);//Alle hjemme kamper for lagNr
 			resultat[i][lagNr]->besteSpillereBorteScor(s);//Alle borte kamoer for lagNr
 		}
 	}
+}
+char* DivAvd::getDivFilPos() {
+	return divFilPos;
 }

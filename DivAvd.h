@@ -12,10 +12,11 @@ private:
 	int antLag;
 	Lag* lag[MAXLAG];
 	Resultat* resultat[MAXLAG][MAXLAG];
+	char* divFilPos;
 
 public:
-	DivAvd(std::ifstream& inn, char* navn);
-	void skrivTilFil(std::ofstream& ut);
+	DivAvd(std::ifstream& inn, char* navn, char* divFil);
+	void skrivTilFil();
 	void nyeLag();
 	void display();
 	Lag* getLag();
@@ -39,5 +40,6 @@ public:
 	void skrivScorerTilSkjerm(int s[], int pos[]);
 	void finnBesteSpillere(int s[]);
 	void finnBesteSpillereiLag(int s[], int lagNr);
+	char* getDivFilPos();
 	~DivAvd();
 };

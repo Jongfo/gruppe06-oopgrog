@@ -3,18 +3,25 @@ Char* Navn_på_Idrett_1
 Tabeltype Tabel_Type_1
 Int Antall_Divisjoner_i_Idrett_1
 Char* Navn_på_Divisjon1_Til_Idrett_1
+Char* Plaseringen_Til_Data_Filen_Til_Divisjon1_I_Idrett_1
 Char* Navn_på_Divisjon2_Til_Idrett_1
+Char* Plaseringen_Til_Data_Filen_Til_Divisjon2_I_Idrett_1
 Char* Navn_på_Idrett_2
 Tabeltype Tabel_Type_2
 Int Antall_Divisjoner_i_Idrett_2
 Char* Navn_på_Divisjon1_Til_Idrett_2
+Char* Plaseringen_Til_Data_Filen_Til_Divisjon1_I_Idrett_2
+//Exempel
 2
 Fotball
 3-1-0
 2
 1.Divisjon
+gruppe06-ooprog/Div/Fotball_1.Divisjon.DTA
 Eliteserien
+gruppe06-ooprog/Div/Fotball_Eliteserien.DTA
 Haandball
 2-1-0
 1
 Eliteserien
+gruppe06-ooprog/Div/EgenlagetFil.DTA
