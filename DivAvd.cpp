@@ -40,6 +40,17 @@ void DivAvd::skrivTilFil(std::ofstream& ut)
 	{
 		lag[i]->skrivTilFil(ut);
 	}
+
+	for (int i = 0; i < antLag; i++)
+	{
+		for (int j = 0; j < antLag; j++)
+		{
+			if (i != j)
+			{
+				ut << resultat[i][j]->langDato() << '\n';
+			}
+		}
+	}
 }
 
 // legg til 0 eller fleire nye lag, og hvis det gjør legg til det laget
