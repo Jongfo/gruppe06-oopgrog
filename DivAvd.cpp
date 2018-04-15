@@ -560,7 +560,7 @@ void DivAvd::fjernResultat()
 bool DivAvd::dataTilTabell(char* tabell, int poeng[], int vunnet[], int uavgjort[], int tapt[]) {
 	int poengForVinn, poengForTap, poengForUavgjot, poengForVinnUt, poengForTapUt;
 	bool harUavgjort = true; bool lestData = false;
-	//Finner Tabelltypen
+	//Finner Tabelltypen detter er hardkodet
 	if (!strcmp(tabell, rIO.getTabelltype(1))) {
 		poengForVinn = 2; poengForTap = 0; poengForUavgjot = 1;
 		poengForTapUt = poengForTap; poengForVinnUt = poengForVinn;
@@ -643,13 +643,13 @@ void DivAvd::sorteringTilTabell(int poeng[], int vunnet[], int uavgjort[], int t
 			}
 		}
 		counter++;
-	} while (counter <= antLag);\
+	} while (counter <= antLag);
 }
 void DivAvd::finnTopScorer() {
 	char* lagNavn; rIO.lesInnICharPointer("Navn paa laget (blank for alle)", lagNavn);
 	int alleSpillere[MAXSPILLERE]; int spillerPos[MAXSPILLERE + 1];
 	rIO.setArrayTilNull(alleSpillere, MAXSPILLERE);
-	for (int i = 1; i < MAXSPILLERE; i++) {
+	for (int i = 1; i <= MAXSPILLERE; i++) {
 		spillerPos[i-1] = i; //Setter SpillerPos til å være ID'en til Spillerne
 	}
 	if (!strlen(lagNavn)) {
@@ -668,6 +668,7 @@ void DivAvd::finnTopScorer() {
 		}
 		//Skriver topscorer til skjerm
 		else {
+			std::cout << "Divisjon: " << text << '\n';
 			skrivScorerTilSkjerm(alleSpillere, spillerPos);
 		}
 		delete[] filNavn;
@@ -694,6 +695,7 @@ void DivAvd::finnTopScorer() {
 				delete[] filPlass; 	delete[] filNavn;
 			}
 			else {//Til Skjerm
+				std::cout << "Divisjon: " << text << '\n';
 				skrivScorerTilSkjerm(alleSpillere, spillerPos);
 			}
 		}
@@ -714,7 +716,7 @@ void DivAvd::sorteringTilScorer(int s[], int pos[]) {
 				int temp = s[i];
 				s[i] = s[i - 1];
 				s[i - 1] = temp;
-				//Sorter positionen på de
+				//Sorter positionen på spillerene til å være lik topscorer
 				int temp2 = pos[i];
 				pos[i] = pos[i - 1];
 				pos[i - 1] = temp2;
@@ -742,7 +744,9 @@ void DivAvd::finnBesteSpillere(int s[]) {
 	for (int i = 0; i <= antLag; i++) {
 		for (int j = 0; j < antLag; j++) {
 			if (i != j && resultat[i][j] != nullptr) {
-				resultat[i][j]->besteSpillere(s);
+				resultat[i][j]->besteSpillereHjemmeScor(s);
+				resultat[i][j]->besteSpillereBorteScor(s);
+				
 			}
 		}
 	}
@@ -750,8 +754,8 @@ void DivAvd::finnBesteSpillere(int s[]) {
 void DivAvd::finnBesteSpillereiLag(int s[], int lagNr) {
 	for (int i = 0; i < antLag; i++) {
 		if (lagNr != i) {
-			resultat[lagNr][i]->besteSpillere(s);
-			resultat[i][lagNr]->besteSpillere(s);
+			resultat[lagNr][i]->besteSpillereHjemmeScor(s);//Allle hjemme kamper for lagNr
+			resultat[i][lagNr]->besteSpillereBorteScor(s);//Alle borte kamoer for lagNr
 		}
 	}
 }

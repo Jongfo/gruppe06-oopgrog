@@ -297,7 +297,7 @@ void Idrett::visTabell() {
 
 void Idrett::finnTopScorer() {
 	char* divisjonNavn;
-	rIO.lesInnICharPointer("I hvilken divisjon vil du vinne toppScorer", divisjonNavn);
+	rIO.lesInnICharPointer("I hvilken divisjon vil du finne toppScorer?", divisjonNavn);
 	if (divisjoner->inList(divisjonNavn)) {
 		DivAvd* divisjon = (DivAvd*)divisjoner->remove(divisjonNavn);
 		divisjon->finnTopScorer();
