@@ -182,8 +182,6 @@ bool Idrettene::lesResultat()
 	std::ifstream fil("gruppe06-ooprog/RESULTAT.DTA");
 	bool feil = false;	// true dersom feil i fila
 
-	List* gjennomgaatteDivisjoner = new List(LIFO);
-
 	while (fil.good() && !feil)
 	{
 		
@@ -206,7 +204,6 @@ bool Idrettene::lesResultat()
 
 				if (divisjon != nullptr)
 				{
-					gjennomgaatteDivisjoner->add((TextElement*)divisjon);
 					delete[] divisjonNavn;
 					divisjonNavn = divisjon->lesResultat(fil, feil);
 				}
@@ -227,15 +224,8 @@ bool Idrettene::lesResultat()
 			feil = true;
 		}
 	}
-	if (feil)
-	{
-		while (gjennomgaatteDivisjoner->noOfElements() > 0)
-		{
-			DivAvd* divisjon = (DivAvd*)gjennomgaatteDivisjoner->remove();
-			divisjon->fjernResultat();
-		}
-	}
-	else
+
+	if (!feil)
 	{
 		std::cout << "\nInnlesing av resultat vellykket.\n";
 	}

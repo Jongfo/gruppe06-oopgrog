@@ -30,9 +30,12 @@ Resultat::Resultat(std::ifstream& fil, char _dato[])
 	fil.ignore();
 }
 
-Resultat::Resultat(Lag* hjemmelag, Lag* bortelag)
+Resultat::Resultat(char _dato[])
 {
-	rIO.lesDato("Dato", dato);
+	strcpy(dato, _dato);
+
+	// vi bruker dette får å sjå om resultat har blitt registert
+	hjemmemaal = -1;
 }
 
 bool Resultat::sameDate(char* date)

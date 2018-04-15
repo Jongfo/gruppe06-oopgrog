@@ -4,7 +4,7 @@ char* adresse_til_lag
 int antall_spillere_på_lag
 <Liste med spiller nr>
 <gjenta fra line 2>
-<namn på terminlistefil>
+<dato 1> <dato 2> ... <dato n>
 
 Eksempel:
 2
@@ -16,4 +16,5 @@ Lag002
 Adresse002
 2
 3 4
-terminlistefil.DTA
+20180101		// lag001 - lag002
+20180101		// lag002 - lag001

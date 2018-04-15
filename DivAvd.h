@@ -13,8 +13,6 @@ private:
 	Lag* lag[MAXLAG];
 	Resultat* resultat[MAXLAG][MAXLAG];
 
-	char* terminlisteFil;	// namnet på fila der terminlista ligg
-
 public:
 	DivAvd(std::ifstream& inn, char* navn);
 	void skrivTilFil(std::ofstream& ut);
