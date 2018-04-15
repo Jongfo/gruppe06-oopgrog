@@ -17,22 +17,22 @@ private:
 
 public:
 	DivAvd(std::ifstream& inn, char* navn);
-	void  skrivTilFil(std::ofstream& ut);
-	void  nyeLag();
-	void  display();
-	Lag*  getLag();
-	Lag*  getLag(char* s);
-	void  fjernSpillerNr(int n);
+	void skrivTilFil(std::ofstream& ut);
+	void nyeLag();
+	void display();
+	Lag* getLag();
+	Lag* getLag(char* s);
+	void fjernSpillerNr(int n);
 	char* hentNavn();
-	void  visTabell(char* tabell);
-	void  skrivTabellTilFil(std::ofstream &utfil, char* tabell);
-	void  skrivTerminliste();
-    bool  resultaterTilSkjerm(char* date);
-    bool  resultaterTilFil(std::ofstream &utfil, char* date);
+	void visTabell(char* tabell);
+	void skrivTabellTilFil(std::ofstream &utfil, char* tabell);
+	void skrivTerminliste();
+    bool resultaterTilSkjerm(char* date);
+    bool resultaterTilFil(std::ofstream &utfil, char* date);
 	char* lesResultat(std::ifstream& fil, bool& feil);
-	int   finnLagIndeks(char* navn);
-	bool  harSpilt(Lag* hjemmeLag, Lag* borteLag, char* dato);
-	void  fjernResultat();
+	int finnLagIndeks(char* navn);
+	bool harSpilt(Lag* hjemmeLag, Lag* borteLag, char* dato);
+	void fjernResultat();
 	bool dataTilTabell(char* tabell, int poeng[], int vunnet[], int uavgjort[], int tapt[]);
 	void sorteringTilTabell(int poeng[], int vunnet[], int uavgjort[], int tapt[], Lag* sorter[]);
 	void finnTopScorer();
@@ -41,8 +41,5 @@ public:
 	void skrivScorerTilSkjerm(int s[], int pos[]);
 	void finnBesteSpillere(int s[]);
 	void finnBesteSpillereiLag(int s[], int lagNr);
-	char* getTerminlisteFil() {
-		return terminlisteFil;
-	}
 	~DivAvd();
 };
