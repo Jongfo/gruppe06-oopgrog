@@ -31,7 +31,7 @@ char* RobustIO::lesNyttNavn(const char* t)
 	do
 	{
 		lesInnICharPointer(t, nyttNavn);
-		if (!okNavn(nyttNavn))
+		if (!okNavn(nyttNavn) || strlen(nyttNavn) < 1)
 		{
 			std::cout << "Ugyldig navn\n";
 			delete[] nyttNavn;
@@ -48,7 +48,7 @@ char* RobustIO::lesNyAdr(const char* t)
 	do
 	{
 		lesInnICharPointer(t, nyAdr);
-		if (!okAdr(nyAdr))
+		if (!okAdr(nyAdr) || strlen(nyAdr) < 1)
 		{
 			std::cout << "Ugyldig adresse\n";
 			delete[] nyAdr;
@@ -299,13 +299,13 @@ char* RobustIO::finnPlassOgLeggeFil(char* customname, const char* id, const char
 }
 bool RobustIO::yn() {
 	char konfirmation;
+	std::cout << " (y/n): ";
 	do {
 		if (std::cin.fail()) {
 			std::cin.clear();
 			std::cin.ignore();
 		}
-		std::cout << " (y/n): ";
-		std::cin >> konfirmation;
+		std::cin >> konfirmation; std::cin.ignore();
 		konfirmation = toupper(konfirmation);
 	} while (std::cin.fail() || (konfirmation != 'Y' && konfirmation != 'N') );
 	if (konfirmation == 'Y') {

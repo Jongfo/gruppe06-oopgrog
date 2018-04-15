@@ -177,7 +177,7 @@ void Idrettene::skrivTabell()
 }
 
 // les alle resultata frå fil
-void Idrettene::lesResultat()
+bool Idrettene::lesResultat()
 {
 	std::ifstream fil("gruppe06-ooprog/RESULTAT.DTA");
 	bool feil = false;	// true dersom feil i fila
@@ -239,6 +239,7 @@ void Idrettene::lesResultat()
 	{
 		std::cout << "\nInnlesing av resultat vellykket.\n";
 	}
+	return feil;
 }
 void Idrettene::finnToppScorer() {
 	char* idrNavn; rIO.lesInnICharPointer("Navn paa Idretten?", idrNavn);

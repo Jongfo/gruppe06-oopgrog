@@ -270,6 +270,12 @@ void skrivTerminliste()
 		{
 			divisjon->skrivTerminliste();
 		}
+		else {
+		std::cout << "Fant ikke divisjonen";
+		}
+	}
+	else {
+		std::cout << "Fant ikke idrett\n";
 	}
 }
 
@@ -277,25 +283,29 @@ void skrivTerminliste()
 void valgMeny()
 {
 	// Leser brukerens ›nske/valg.
-	char kommando = ' '; 
+	char kommando = ' ';  bool lestResutat = false;
 
 	while (kommando != 'Q')
 	{
 		kommando = rIO.lesInnTilStor("\n\nHovedkommando: ");
 		switch (kommando)
 		{
-		case 'S': visSpiller();				  break;
-		case 'I': visIdrett();				  break;
-		case 'N': nySID();					  break;
-		case 'F': fjernSID();				  break;
-		case 'L': skrivTerminliste();		  break;
-        case 'K': resultatAvKamper();         break; 
-		case 'T': idrettene.skrivTabell();	  break;
-		case 'R': idrettene.lesResultat();	  break;
-		case 'D': skrivSpillerePaaLag();	  break;
-        case 'E': redigerSpillere();          break;
-		case 'C': idrettene.finnToppScorer(); break;
-		default: skrivMeny();				  break; //Skriver meny
+		case 'S': visSpiller();				break;
+		case 'I': visIdrett();				break;
+		case 'N': nySID();					break;
+		case 'F': fjernSID();				break;
+		case 'L': skrivTerminliste();		break;
+        case 'K': if (lestResutat) { resultatAvKamper(); }
+				   else { std::cout << "Maa lese Resultat.DTA først\n"; }	break;
+		case 'T': if (lestResutat) { idrettene.skrivTabell(); }
+				  else { std::cout << "Maa lese Resultat.DTA først\n"; }	break;
+		case 'R': lestResutat = !idrettene.lesResultat();					break;
+		case 'D': skrivSpillerePaaLag();									break;
+        case 'E': redigerSpillere();										break;
+		case 'C': if (lestResutat) { idrettene.finnToppScorer(); }
+				   else { std::cout << "Maa lese Resultat.DTA først\n"; }	break;
+		case 'Q': break; //Vi vill ikke skrive ut menyen når vi trykker 'Q'
+		default: skrivMeny();break; //Skriver meny
 		}
 	};
 }

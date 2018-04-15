@@ -23,7 +23,7 @@ public:
 	void fjernSpillerNr(int n);
 	void fjernIdrett();
 	void skrivTabell();
-	void lesResultat();
+	bool lesResultat();
 	void finnToppScorer();
 	~Idrettene();
 };

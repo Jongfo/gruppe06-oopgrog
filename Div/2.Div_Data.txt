@@ -1,0 +1,9 @@
+2
+Alta
+En Plass I Alta
+3
+3 2 1
+Flekkeroey
+En Plass paa Flekkeroeya
+4
+9 4 3 6
