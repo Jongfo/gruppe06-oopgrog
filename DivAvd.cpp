@@ -662,8 +662,8 @@ void DivAvd::finnTopScorer() {
 			std::ofstream topScorerFil(filPlass);
 			// skriver idrett navn først i fila.
 			topScorerFil << "Divisjon: " << text << '\n';
-
 			skrivScorerTilFil(topScorerFil, alleSpillere, spillerPos);
+			std::cout << "Filen " << filNavn << " har blitt laget\n";
 			delete[] filPlass; 
 		}
 		//Skriver topscorer til skjerm
@@ -692,6 +692,7 @@ void DivAvd::finnTopScorer() {
 				// skriver idrett navn først i fila.
 				topScorerFil << "Divisjon: " << text << '\n';
 				skrivScorerTilFil(topScorerFil, alleSpillere, spillerPos);
+				std::cout << "Filen " << filNavn << " har blitt laget\n";
 				delete[] filPlass; 	delete[] filNavn;
 			}
 			else {//Til Skjerm
