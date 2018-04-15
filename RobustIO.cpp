@@ -128,7 +128,7 @@ int RobustIO::lesTall(const char* t, const int MIN, const int MAX,
 			std::cin.clear();
 		}
 		std::cin.ignore();
-	} while ((tall < MIN || tall > MAX) || (avbrudd && tall != avbruddsNr));
+	} while ((tall < MIN || tall > MAX) && (!avbrudd || tall != avbruddsNr));
 	return tall;
 }
 
