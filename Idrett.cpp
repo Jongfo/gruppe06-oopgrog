@@ -31,10 +31,10 @@ Idrett::Idrett(std::ifstream&inn, char* navn) : TextElement(navn)
 	for (int i = 0; i < antDiv; i++) {
 		char* divNavn;  rIO.lesCharPointerFraFil(inn, divNavn);
 		//Finner hvor filen ligger
-		char* filPlass = rIO.finnPlassOgLeggeFil(navn, divNavn, "Div/");
+		char* filPlass; rIO.lesCharPointerFraFil(inn, filPlass);
 		std::ifstream innDiv(filPlass);//Åpner filen
 		if (innDiv) {
-			divisjoner->add((TextElement*)new DivAvd(innDiv, divNavn));
+			divisjoner->add((TextElement*)new DivAvd(innDiv, divNavn, filPlass));
 		}
 		else {
 			std::cout <<"FINNER IKKE: " << filPlass << '\n';
@@ -57,12 +57,11 @@ void Idrett::skrivTilFil(std::ofstream& idrettFil)
 
 		DivAvd* divisjon = (DivAvd*)divisjoner->removeNo(i);
 		idrettFil << divisjon->hentNavn() << '\n';
-
+		idrettFil << divisjon->getDivFilPos() << '\n';
 		//Finner ut hvor filen skal legges
-		char* filPlass = rIO.finnPlassOgLeggeFil(text, divisjon->hentNavn(), "Div/");
-		std::ofstream divAvdFil(filPlass); //Legger file der
+		std::ofstream divAvdFil(divisjon->getDivFilPos()); //Legger file der
 
-		divisjon->skrivTilFil(divAvdFil);
+		divisjon->skrivTilFil();
 		divisjoner->add((TextElement*)divisjon);
 	}
 }
@@ -88,7 +87,8 @@ void Idrett::nyDivisjon()
 				char lok[MAXTEKST] = "gruppe06-ooprog/Div/";  strcat(lok, filPlass);
 				std::ifstream nyDiv(lok);
 				if (nyDiv) {
-					divisjoner->add((TextElement*)new DivAvd(nyDiv, t));
+					filPlass = new char[strlen(lok) + 1]; strcpy(filPlass, lok);
+					divisjoner->add((TextElement*)new DivAvd(nyDiv, t, filPlass));
 					fantPlass = true; std::cout << "Lest fra filen" << filPlass << '\n';
 				}
 				else {
