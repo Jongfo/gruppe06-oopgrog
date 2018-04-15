@@ -188,7 +188,7 @@ void DivAvd::skrivTerminliste()
 	}
 
 	std::ostream stream(nullptr);
-	std::ofstream fil;
+	//std::ofstream fil;
 	int kolonneStorrelse = 5;		// størrelsen på ei kolonne
 
 	// sett kolonnestorleik til største lagnamn
@@ -221,8 +221,18 @@ void DivAvd::skrivTerminliste()
 			filPlassering[strlen(filPlassering)] = terminlisteFil[i];
 			filPlassering[strlen(filPlassering) + 1] = '\0';
 		}
-		fil = std::ofstream(filPlassering);
-		stream.rdbuf(fil.rdbuf());
+		bool lagFil = false;
+		for (int i = 0; i < antLag; i++) {
+			for (int j = 0; j < antLag; j++) {
+				if (resultat[i][j] != nullptr) {
+					lagFil = true;
+				}
+			}
+		}
+		if (lagFil) {
+			std::ofstream fil(filPlassering);
+			stream.rdbuf(fil.rdbuf());
+		}
 	}
 
 	if (terminlisteFil != nullptr && strlen(filnavn) == 0)
@@ -364,6 +374,9 @@ char* DivAvd::lesResultat(std::ifstream& fil, bool& feil)
 	hjemmeLagIndeks = finnLagIndeks(hjemmeLag);
 	borteLagIndeks  = finnLagIndeks(borteLag);
 
+	delete[] hjemmeLag;
+	delete[] borteLag;
+
 	while (fil.good())
 	{
 		// Lag finst ikkje
@@ -372,16 +385,15 @@ char* DivAvd::lesResultat(std::ifstream& fil, bool& feil)
 			if (hjemmeLagIndeks == -1)
 			{
 				std::cout << "Ugyldig lag '"
-						  << hjemmeLag << "'.\n";
+						  << lag[hjemmeLagIndeks]->getNavn() << "'.\n";
 			}
 
 			if (borteLagIndeks == -1)
 			{
 				std::cout << "Ugyldig lag '"
-						  << borteLag << "'.\n";
+						  << lag[borteLagIndeks]->getNavn() << "'.\n";
 			}
-			delete[] hjemmeLag;
-			delete[] borteLag;
+
 			delete[] dato;
 
 			feil = true;
@@ -389,40 +401,36 @@ char* DivAvd::lesResultat(std::ifstream& fil, bool& feil)
 			l2[0] = '\0';
 			return l2;
 		}
-		// laga har ikkje spelt mot kvarandre denne dagen
-		if (!harSpilt(lag[hjemmeLagIndeks], lag[borteLagIndeks], dato))
-		{
-			std::cout << hjemmeLag << " - "
-					  << borteLag
-					  << " har ikke spilt " << dato << '\n';
-
-			delete[] hjemmeLag;
-			delete[] borteLag;
-			delete[] dato;
-
-			
-			feil = true;
-			l2 = new char[1];
-			l2[0] = '\0';
-			return l2;
-		}
-
 
 		// allereie lese resultat for denne kampen
 		if (resultat[hjemmeLagIndeks][borteLagIndeks] != nullptr)
 		{
 			std::cout << "Allerede lest resultat for "
-				<< hjemmeLag << " - "
-				<< borteLag << '\n';
+				<< lag[hjemmeLagIndeks]->getNavn() << " - "
+				<< lag[borteLagIndeks]->getNavn() << '\n';
 
-			// les gjennom til neste
-			Resultat(fil, dato);
+			delete[] dato;
+			feil = true;
+			l2 = new char[1];
+			l2[0] = '\0';
+			return l2;
 		}
-		else
+
+		// laga har ikkje spelt mot kvarandre denne dagen
+		if (!harSpilt(lag[hjemmeLagIndeks], lag[borteLagIndeks], dato))
 		{
-			// les inn resultat for denne kampen
-			resultat[hjemmeLagIndeks][borteLagIndeks] = new Resultat(fil, dato);
+			std::cout << lag[hjemmeLagIndeks]->getNavn() << " - "
+					  << lag[borteLagIndeks]->getNavn()
+					  << " har ikke spilt " << dato << '\n';
+			delete[] dato;
+			feil = true;
+			l2 = new char[1];
+			l2[0] = '\0';
+			return l2;
 		}
+
+		// les inn resultat for denne kampen
+		resultat[hjemmeLagIndeks][borteLagIndeks] = new Resultat(fil, dato);
 
 		// dei to neste linjene i fila
 		rIO.lesCharPointerFraFil(fil, l1);
@@ -452,31 +460,22 @@ char* DivAvd::lesResultat(std::ifstream& fil, bool& feil)
 			dato = new char[strlen(l1) + 1];
 			strcpy(dato, l1);
 
-			delete[] hjemmeLag;
-			hjemmeLag = new char[strlen(l1) + 1];
-			strcpy(hjemmeLag, l2);
-
 			hjemmeLagIndeks = finnLagIndeks(l2);
 			rIO.lesCharPointerFraFil(fil, borteLag);
+			borteLagIndeks = finnLagIndeks(borteLag);
+			delete[] borteLag;
 		}
 
 		// dersom 1 ikkje er dato, og 2 ikkje er dato,
 		// er 1 lag1 2 lag2
 		else if (!rIO.okDato(l1) && !rIO.okDato(l2))
 		{
-			delete[] hjemmeLag;
-			delete[] borteLag;
-			hjemmeLag = new char[strlen(l1) + 1];
-			borteLag = new char[strlen(l2) + 1];
-			strcpy(hjemmeLag, l1);
-			strcpy(borteLag, l2);
+			hjemmeLagIndeks = finnLagIndeks(l1);
+			borteLagIndeks = finnLagIndeks(l2);
 		}
 
 		delete[] l1;
 		delete[] l2;
-
-		hjemmeLagIndeks = finnLagIndeks(hjemmeLag);
-		borteLagIndeks = finnLagIndeks(borteLag);
 	}
 }
 

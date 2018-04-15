@@ -267,11 +267,11 @@ void skrivTerminliste()
 	{
 		DivAvd* divisjon = idrett->getDivAvd();
 		if (divisjon != nullptr)
-		{
+		{	
 			divisjon->skrivTerminliste();
 		}
 		else {
-		std::cout << "Fant ikke divisjonen";
+		std::cout << "Fant ikke divisjonen\n";
 		}
 	}
 	else {
