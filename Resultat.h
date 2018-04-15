@@ -23,14 +23,6 @@ public:
 	int getHjemmemaal();
 	int getBortemaal();
 	bool getNormalTid();
-	void besteSpillereHjemmeScor(int spiller[]) {
-		for (int i = 0; i < hjemmemaal; i++) {
-			spiller[hjemmescorere[i]-1]++;//Minus 1 fordi spiller nr 1 ligger i index 0
-		}
-	}
-	void besteSpillereBorteScor(int spiller[]) {
-		for (int i = 0; i < bortemaal; i++) {
-			spiller[bortescorere[i]-1]++;//Minus 1 fordi spiller nr 1 ligger i index 0
-		}
-	}
+	void besteSpillereHjemmeScor(int spiller[]);
+	void besteSpillereBorteScor(int spiller[]);
 };

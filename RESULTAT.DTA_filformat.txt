@@ -27,8 +27,12 @@
 <int bortescorere[0]> <int bortescorere[1]> ... <int bortescorere[bortemaal-1]>
 
 
-<char* idrett>		// idrett2
+<char* idrett>		// idrett2 
 ...
+
+//PRAKTISK INFO
+1 newline indikerer ny Divisjon inne i idretten
+2 newline indikerer en ny Idrett
 
 // EKSEMPEL:
 Fotball

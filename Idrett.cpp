@@ -81,8 +81,9 @@ void Idrett::nyDivisjon()
 		if (!divisjoner->inList(t))
 		{
 			//Finne en fil å lese data fra!
-			char* filPlass; bool fantPlass = false; bool utAvLoop = false;
+			bool fantPlass = false; bool utAvLoop = false;
 			do {
+				char* filPlass;
 				rIO.lesInnICharPointer("Hva heter filen til Divisjonen? (husk fil type '.dta'/'.txt')", filPlass);
 				char lok[MAXTEKST] = "gruppe06-ooprog/Div/";  strcat(lok, filPlass);
 				std::ifstream nyDiv(lok);
@@ -90,11 +91,9 @@ void Idrett::nyDivisjon()
 					divisjoner->add((TextElement*)new DivAvd(nyDiv, t));
 					fantPlass = true; std::cout << "Lest fra filen" << filPlass << '\n';
 				}
-				else if (!strcmp(filPlass, "q")|| !strcmp(filPlass, "Q")) {
-					utAvLoop = true; delete[] filPlass;
-				}
 				else {
-					std::cout << "Fant ikke filen (Q for aa avslutte)\n";
+					std::cout << "Fant ikke filen, skrive in paa nytt?\n";
+					utAvLoop = !rIO.yn(); delete[] filPlass;
 				}
 			} while (!fantPlass && !utAvLoop );
 		}

@@ -299,13 +299,13 @@ char* RobustIO::finnPlassOgLeggeFil(char* customname, const char* id, const char
 }
 bool RobustIO::yn() {
 	char konfirmation;
+	std::cout << " (y/n): ";
 	do {
 		if (std::cin.fail()) {
 			std::cin.clear();
 			std::cin.ignore();
 		}
-		std::cout << " (y/n): ";
-		std::cin >> konfirmation;
+		std::cin >> konfirmation; std::cin.ignore();
 		konfirmation = toupper(konfirmation);
 	} while (std::cin.fail() || (konfirmation != 'Y' && konfirmation != 'N') );
 	if (konfirmation == 'Y') {

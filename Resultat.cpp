@@ -122,3 +122,13 @@ int  Resultat::getBortemaal() {
 bool Resultat::getNormalTid() {
 	return normalTid;
 }
+void  Resultat::besteSpillereHjemmeScor(int spiller[]) {
+	for (int i = 0; i < hjemmemaal; i++) {
+		spiller[hjemmescorere[i] - 1]++;//Minus 1 fordi spiller nr 1 ligger i index 0
+	}
+}
+void  Resultat::besteSpillereBorteScor(int spiller[]) {
+	for (int i = 0; i < bortemaal; i++) {
+		spiller[bortescorere[i] - 1]++;//Minus 1 fordi spiller nr 1 ligger i index 0
+	}
+}

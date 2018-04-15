@@ -295,6 +295,7 @@ void valgMeny()
 		case 'D': skrivSpillerePaaLag();	  break;
         case 'E': redigerSpillere();          break;
 		case 'C': idrettene.finnToppScorer(); break;
+		case 'Q': break; //Vi vill ikke skrive ut menyen når vi trykker 'Q'
 		default: skrivMeny();				  break; //Skriver meny
 		}
 	};
