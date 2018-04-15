@@ -41,5 +41,8 @@ public:
 	void skrivScorerTilSkjerm(int s[], int pos[]);
 	void finnBesteSpillere(int s[]);
 	void finnBesteSpillereiLag(int s[], int lagNr);
+	char* getTerminlisteFil() {
+		return terminlisteFil;
+	}
 	~DivAvd();
 };
