@@ -31,7 +31,7 @@ char* RobustIO::lesNyttNavn(const char* t)
 	do
 	{
 		lesInnICharPointer(t, nyttNavn);
-		if (!okNavn(nyttNavn))
+		if (!okNavn(nyttNavn) || strlen(nyttNavn) < 1)
 		{
 			std::cout << "Ugyldig navn\n";
 			delete[] nyttNavn;
@@ -48,7 +48,7 @@ char* RobustIO::lesNyAdr(const char* t)
 	do
 	{
 		lesInnICharPointer(t, nyAdr);
-		if (!okAdr(nyAdr))
+		if (!okAdr(nyAdr) || strlen(nyAdr) < 1)
 		{
 			std::cout << "Ugyldig adresse\n";
 			delete[] nyAdr;

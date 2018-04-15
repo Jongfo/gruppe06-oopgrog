@@ -55,7 +55,8 @@ void Spillere::skrivTilFil()
 
 void Spillere::nySpiller()
 {
-	spillere->add(new Spiller(++sisteNr));
+	std::cout << "Spilleren faar nummeret " << ++sisteNr << '\n';
+	spillere->add(new Spiller(sisteNr));
 }
 
 // fjernar ein spelar fraa lista
