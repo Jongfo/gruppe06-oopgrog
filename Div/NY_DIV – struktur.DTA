@@ -5,3 +5,15 @@ int antall_spillere_på_lag
 <Liste med spiller nr>
 <gjenta fra line 2>
 <namn på terminlistefil>
+
+Eksempel:
+2
+Lag001
+Adresseo001
+2
+1 2
+Lag002
+Adresse002
+2
+3 4
+terminlistefil.DTA
