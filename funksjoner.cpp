@@ -270,6 +270,12 @@ void skrivTerminliste()
 		{
 			divisjon->skrivTerminliste();
 		}
+		else {
+		std::cout << "Fant ikke divisjonen";
+		}
+	}
+	else {
+		std::cout << "Fant ikke idrett\n";
 	}
 }
 

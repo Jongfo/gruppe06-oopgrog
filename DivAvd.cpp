@@ -201,7 +201,7 @@ void DivAvd::skrivTerminliste()
 	}
 
 	char* filnavn;
-	rIO.lesInnICharPointer("Filnavn:", filnavn);
+	rIO.lesInnICharPointer("Filnavn (Blank for skjerm):", filnavn);
 
 	if (strlen(filnavn) == 0)
 	{
