@@ -364,6 +364,8 @@ char* DivAvd::lesResultat(std::ifstream& fil, bool& feil)
 	hjemmeLagIndeks = finnLagIndeks(hjemmeLag);
 	borteLagIndeks  = finnLagIndeks(borteLag);
 
+	delete[] hjemmeLag;
+	delete[] borteLag;
 
 	while (fil.good())
 	{
@@ -372,16 +374,16 @@ char* DivAvd::lesResultat(std::ifstream& fil, bool& feil)
 		{
 			if (hjemmeLagIndeks == -1)
 			{
-				std::cout << "Ugyldig lag '" << hjemmeLag << "'.\n";
+				std::cout << "Ugyldig lag '"
+						  << lag[hjemmeLagIndeks]->getNavn() << "'.\n";
 			}
 
 			if (borteLagIndeks == -1)
 			{
-				std::cout << "Ugyldig lag '" << borteLag << "'.\n";
+				std::cout << "Ugyldig lag '"
+						  << lag[borteLagIndeks]->getNavn() << "'.\n";
 			}
 
-			delete[] hjemmeLag;
-			delete[] borteLag;
 			delete[] dato;
 
 			feil = true;
@@ -407,10 +409,9 @@ char* DivAvd::lesResultat(std::ifstream& fil, bool& feil)
 		// laga har ikkje spelt mot kvarandre denne dagen
 		if (!harSpilt(lag[hjemmeLagIndeks], lag[borteLagIndeks], dato))
 		{
-			std::cout << hjemmeLagIndeks << " - " << borteLagIndeks
+			std::cout << lag[hjemmeLagIndeks]->getNavn() << " - "
+					  << lag[borteLagIndeks]->getNavn()
 					  << " har ikke spilt " << dato << '\n';
-			delete[] hjemmeLag;
-			delete[] borteLag;
 			delete[] dato;
 			feil = true;
 			l2 = new char[1];
