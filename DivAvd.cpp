@@ -210,69 +210,42 @@ void DivAvd::skrivTerminliste()
 	}
 	else
 	{
-		// skriv til fil
-		bool lagFil = false;
-		for (int i = 0; i < antLag; i++) {
-			for (int j = 0; j < antLag; j++) {
-				if (resultat[i][j] != nullptr) {
-					lagFil = true;
-				}
-			}
-		}
-		if (lagFil) {
-			std::ofstream fil(filPlassering);
-			stream.rdbuf(fil.rdbuf());
-		}
+		std::ofstream fil(filPlassering);
+		stream.rdbuf(fil.rdbuf());
 	}
 
-	if (strlen(filnavn) == 0)
+	for (int i = 0; i <= kolonneStorrelse; i++)
 	{
-		std::ifstream innfil(filPlassering);
-		char buffer[MAXTEKST];
-		while (innfil.good())
-		{
-			innfil.getline(buffer, MAXTEKST);
-			stream << buffer << '\n';
-		}
+		stream << ' ';
 	}
-	else if (!(antLag > 1 && resultat[0][1] == nullptr))
+
+	// skriv namn på toppen
+	for (int i = 0; i < antLag; i++)
 	{
-		for (int i = 0; i <= kolonneStorrelse; i++)
-		{
-			stream << ' ';
-		}
+		stream << std::setw(kolonneStorrelse) << lag[i]->getNavn() << ' ';
+	}
 
-		// skriv namn på toppen
-		for (int i = 0; i < antLag; i++)
-		{
-			stream << std::setw(kolonneStorrelse) << lag[i]->getNavn() << ' ';
-		}
+	stream << '\n';
 
-		stream << '\n';
-
-		// skriv datoane
-		for (int i = 0; i < antLag; i++)
+	// skriv datoane
+	for (int i = 0; i < antLag; i++)
+	{
+		stream << std::setw(kolonneStorrelse) << lag[i]->getNavn() << ' ';
+		for (int j = 0; j < antLag; j++)
 		{
-			stream << std::setw(kolonneStorrelse) << lag[i]->getNavn() << ' ';
-			for (int j = 0; j < antLag; j++)
+			stream << std::setw(kolonneStorrelse);
+			if (i != j)
 			{
-				stream << std::setw(kolonneStorrelse);
-				if (i != j)
-				{
-					stream << resultat[i][j]->kortDato() << ' ';
-				}
-				else
-				{
-					stream << "----- ";
-				}
+				stream << resultat[i][j]->kortDato() << ' ';
 			}
-			stream << '\n';
+			else
+			{
+				stream << "----- ";
+			}
 		}
+		stream << '\n';
 	}
-	else
-	{
-		std::cout << "Kunne ikke skrive ut tabell.\n";
-	}
+
 	delete[] filnavn;
 }
 
