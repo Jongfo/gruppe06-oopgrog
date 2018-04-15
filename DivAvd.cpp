@@ -197,9 +197,9 @@ void DivAvd::skrivTabellTilFil(std::ofstream &utfil, char* tabell)
 void DivAvd::skrivTerminliste()
 {
 	char filPlassering[MAXTEKST] = "gruppe06-ooprog/TerminListe/";
+	std::ofstream fil;
 
 	std::ostream stream(nullptr);
-	//std::ofstream fil;
 	int kolonneStorrelse = 5;		// størrelsen på ei kolonne
 
 	// sett kolonnestorleik til største lagnamn
@@ -221,8 +221,13 @@ void DivAvd::skrivTerminliste()
 	}
 	else
 	{
-		std::ofstream fil(filPlassering);
+		for (int i = 0; i <= strlen(filnavn); i++)
+		{
+			filPlassering[strlen(filPlassering)] = filnavn[i];
+		}
+		fil = std::ofstream(filPlassering);
 		stream.rdbuf(fil.rdbuf());
+		std::cout << "Skreiv terminliste til " << filPlassering << '\n';
 	}
 
 	for (int i = 0; i <= kolonneStorrelse; i++)
