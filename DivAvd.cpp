@@ -337,9 +337,6 @@ char* DivAvd::lesResultat(std::ifstream& fil, bool& feil)
 	hjemmeLagIndeks = finnLagIndeks(hjemmeLag);
 	borteLagIndeks  = finnLagIndeks(borteLag);
 
-	delete[] hjemmeLag;
-	delete[] borteLag;
-
 	while (fil.good())
 	{
 		// Lag finst ikkje
@@ -348,31 +345,19 @@ char* DivAvd::lesResultat(std::ifstream& fil, bool& feil)
 			if (hjemmeLagIndeks == -1)
 			{
 				std::cout << "Ugyldig lag '"
-						  << lag[hjemmeLagIndeks]->getNavn() << "'.\n";
+						  << hjemmeLag << "'.\n";
 			}
 
 			if (borteLagIndeks == -1)
 			{
 				std::cout << "Ugyldig lag '"
-						  << lag[borteLagIndeks]->getNavn() << "'.\n";
+						  << borteLag << "'.\n";
 			}
 
+			delete[] borteLag;
+			delete[] hjemmeLag;
 			delete[] dato;
 
-			feil = true;
-			l2 = new char[1];
-			l2[0] = '\0';
-			return l2;
-		}
-
-		// allereie lese resultat for denne kampen
-		if (resultat[hjemmeLagIndeks][borteLagIndeks]->getHjemmemaal() != -1)
-		{
-			std::cout << "Allerede lest resultat for "
-				<< lag[hjemmeLagIndeks]->getNavn() << " - "
-				<< lag[borteLagIndeks]->getNavn() << '\n';
-
-			delete[] dato;
 			feil = true;
 			l2 = new char[1];
 			l2[0] = '\0';
@@ -382,9 +367,12 @@ char* DivAvd::lesResultat(std::ifstream& fil, bool& feil)
 		// laga har ikkje spelt mot kvarandre denne dagen
 		if (strcmp(dato, resultat[hjemmeLagIndeks][borteLagIndeks]->langDato()))
 		{
-			std::cout << lag[hjemmeLagIndeks]->getNavn() << " - "
-					  << lag[borteLagIndeks]->getNavn()
+			std::cout << hjemmeLag << " - "
+					  << borteLag
 					  << " har ikke spilt " << dato << '\n';
+
+			delete[] borteLag;
+			delete[] hjemmeLag;
 			delete[] dato;
 			feil = true;
 			l2 = new char[1];
@@ -392,8 +380,22 @@ char* DivAvd::lesResultat(std::ifstream& fil, bool& feil)
 			return l2;
 		}
 
-		// les inn resultat for denne kampen
-		resultat[hjemmeLagIndeks][borteLagIndeks] = new Resultat(fil, dato);
+
+
+		// allereie lese resultat for denne kampen
+		if (resultat[hjemmeLagIndeks][borteLagIndeks]->getHjemmemaal() != -1)
+		{
+			std::cout << "Allerede lest resultat for "
+				<< hjemmeLag << " - "
+				<< borteLag << '\n';
+
+			Resultat(fil, dato); // hopp til neste
+		}
+		else
+		{
+			// les inn resultat for denne kampen
+			resultat[hjemmeLagIndeks][borteLagIndeks] = new Resultat(fil, dato);
+		}
 
 		// dei to neste linjene i fila
 		rIO.lesCharPointerFraFil(fil, l1);
@@ -403,6 +405,9 @@ char* DivAvd::lesResultat(std::ifstream& fil, bool& feil)
 		// ny idrett
 		if ((strlen(l1) < 1 && strlen(l2) < 1) || !fil.good())
 		{
+			delete[] borteLag;
+			delete[] hjemmeLag;
+			delete[] dato;
 			delete[] l1;
 			return l2;
 		}
@@ -411,6 +416,9 @@ char* DivAvd::lesResultat(std::ifstream& fil, bool& feil)
 		// ny divisjon
 		else if (strlen(l1) < 1 && strlen(l2) > 0)
 		{
+			delete[] borteLag;
+			delete[] hjemmeLag;
+			delete[] dato;
 			delete[] l1;
 			return l2;
 		}
@@ -423,18 +431,29 @@ char* DivAvd::lesResultat(std::ifstream& fil, bool& feil)
 			dato = new char[strlen(l1) + 1];
 			strcpy(dato, l1);
 
-			hjemmeLagIndeks = finnLagIndeks(l2);
+			delete[] hjemmeLag;
+			hjemmeLag = new char[strlen(l2) + 1];
+			strcpy(hjemmeLag, l2);
+			hjemmeLagIndeks = finnLagIndeks(hjemmeLag);
+
+			delete[] borteLag;
 			rIO.lesCharPointerFraFil(fil, borteLag);
 			borteLagIndeks = finnLagIndeks(borteLag);
-			delete[] borteLag;
 		}
 
 		// dersom 1 ikkje er dato, og 2 ikkje er dato,
 		// er 1 lag1 2 lag2
 		else if (!rIO.okDato(l1) && !rIO.okDato(l2))
 		{
-			hjemmeLagIndeks = finnLagIndeks(l1);
-			borteLagIndeks = finnLagIndeks(l2);
+			delete[] hjemmeLag;
+			hjemmeLag = new char[strlen(l1) + 1];
+			strcpy(hjemmeLag, l1);
+			hjemmeLagIndeks = finnLagIndeks(hjemmeLag);
+
+			delete[] borteLag;
+			borteLag = new char[strlen(l2) + 1];
+			strcpy(borteLag, l2);
+			borteLagIndeks = finnLagIndeks(borteLag);
 		}
 
 		delete[] l1;
